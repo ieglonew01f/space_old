@@ -1,9 +1,10 @@
 import React from 'react';
+import Layout from '../components/layout/Layout'
 
 export default class IndexComponent extends React.Component {
   render() {
     return (
-      <h1>Hi, I'm IndexComponent!</h1>
+      <Layout/>
     );
   }
 }

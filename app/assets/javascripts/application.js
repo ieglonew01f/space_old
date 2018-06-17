@@ -10,6 +10,51 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require turbolinks
 //= require_tree .
+//= require web.font.loader.js
+  
+//= require js/jquery-3.2.1.js
+//= require js/jquery.appear.js
+//= require js/jquery.mousewheel.js
+//= require js/perfect-scrollbar.js
+//= require js/jquery.matchHeight.js
+//= require js/svgxuse.js
+//= require js/imagesloaded.pkgd.js
+//= require js/Headroom.js
+//= require js/velocity.js
+//= require js/ScrollMagic.js
+//= require js/jquery.waypoints.js
+//= require js/jquery.countTo.js
+//= require js/popper.min.js
+//= require js/material.min.js
+//= require js/bootstrap-select.js
+//= require js/smooth-scroll.js
+//= require js/selectize.js
+//= require js/swiper.jquery.js
+//= require js/moment.js
+//= require js/daterangepicker.js
+//= require js/simplecalendar.js
+//= require js/fullcalendar.js
+//= require js/isotope.pkgd.js
+//= require js/ajax-pagination.js
+//= require js/Chart.js
+//= require js/chartjs-plugin-deferred.js
+//= require js/circle-progress.js
+//= require js/loader.js
+//= require js/run-chart.js
+//= require js/jquery.magnific-popup.js
+//= require js/jquery.gifplayer.js
+//= require js/mediaelement-and-player.js
+//= require js/mediaelement-playlist-plugin.min.js
+//= require js/base-init.js
+//= require js/ajax-pagination.js
+//= require fonts/fontawesome-all.js
+
+//= require dist/js/bootstrap.bundle.js
+
+WebFont.load({
+    google: {
+      families: ['Roboto:300,400,500,700:latin']
+    }
+});
+

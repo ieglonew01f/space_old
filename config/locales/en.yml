@@ -30,4 +30,51 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  common:
+    label:
+      product_name: "College Trends"
+      social_network: "Social Network"
+      first_name: "First Name"
+      last_name: "Last Name"
+      email: "Your Email"
+      password: "Your Password"
+      birthday: "Your Birthday"
+      gender: "Your Gender"
+      tnc: "Terms and Conditions"
+      male: "Male"
+      female: "Female"
+      others: "Others"
+      sign_up: "Complete Registration!"
+      remember_me: "Remember Me"
+      login: "Login"
+      login_facebook: "Login with Facebook"
+      top_search: "Search here people or pages..."
+      settings: "Settings"
+      messages: "Messages"
+      notifications: "Notifications"
+      mark_all_read: "Mark all as read"
+      view_all_messages: "View All Messages"
+      view_all_notifications: "View All Notifications"
+      profile_settings: "Profile Settings"
+      log_out: "Log Out"
+      chat_settings: "Chat Settings"
+      custom_status: "Custom Status"
+      about: "About"
+    message:
+      forgot_password: "Forgot my Password"
+  index:
+    message:
+      intro: "Share your thoughts, write blog posts, show your favourite music via Stopify, earn badges and much more!"
+      welcome: "Social Network connecting colleges across the world"
+      register: "Register to CollegeTrends"
+      login: "Login to your account"
+    label:
+  session_nav:
+    label:
+      news_feed: "Newsfeed"
+      find_friends: "Find Friends"
+      friend_request: "FRIEND REQUESTS"
+      check_all_events: "Check all your Events"
+
+
+

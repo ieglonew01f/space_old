@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Space</title>
+    <title>CollegeTrends - Social Networking</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag 'application', media: 'all'%>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <%= stylesheet_link_tag 'application'%>
     <%= javascript_include_tag 'application'%>
     <%= javascript_pack_tag 'application' %>
+    <%= yield :pagecss %>
   </head>
 
-  <body>
+  <body class="landing-page">
     <%= yield %>
   </body>
 </html>

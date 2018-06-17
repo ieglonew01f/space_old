@@ -7,11 +7,11 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import React from 'react';
-import { render } from 'react-dom';
-import IndexComponent from '../components/IndexComponent';
+// import React from 'react';
+// import { render } from 'react-dom';
+// import IndexComponent from '../components/IndexComponent';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const container = document.body.appendChild(document.createElement('div'));
-  render(<IndexComponent/>, container);
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   const container = document.body.appendChild(document.createElement('div'));
+//   render(<IndexComponent/>, container);
+// });

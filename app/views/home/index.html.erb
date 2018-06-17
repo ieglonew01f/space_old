@@ -1,1 +1,17 @@
+<%= render "common/session_nav" %>
 
+<div class="header-spacer"></div>
+
+<div class="container">
+    <div class="row">
+        <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+            <div class="ui-block">
+                <%= render "common/post_it" %>
+            </div>
+            <div id="newsfeed-items-grid">
+
+            </div>
+            <a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid"><svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+        </main>
+    </div>
+</div>
