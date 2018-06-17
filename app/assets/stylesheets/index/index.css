@@ -1,0 +1,7 @@
+.landing-page .content-bg-wrap:before {
+    background-color: rgba(123, 90, 195, 0.95);
+}
+
+.registration-login-form {
+    margin-top: 50px;
+}
