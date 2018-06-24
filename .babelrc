@@ -11,6 +11,9 @@
         "useBuiltIns": true
       }
     ],
+    "react",
+    "es2015",
+    "stage-0",
     "react"
   ],
   "plugins": [
@@ -21,6 +24,7 @@
       {
         "spec": true
       }
-    ]
+    ],
+    "transform-decorators-legacy"
   ]
 }

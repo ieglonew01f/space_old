@@ -75,6 +75,6 @@ en:
       find_friends: "Find Friends"
       friend_request: "FRIEND REQUESTS"
       check_all_events: "Check all your Events"
-
-
-
+  api:
+    errors:
+      500: "Looks like something went wrong while processing your request, please try again after sometime."

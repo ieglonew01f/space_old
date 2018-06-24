@@ -5,10 +5,12 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   # validates_acceptance_of :terms
-  
-  validates   :email, :first_name, :last_name, presence: true
-  validates   :email, uniqueness: true
-  validates   :first_name, :last_name, length: { maximum: 35 }
+
+  validates :email, :first_name, :last_name, presence: true
+  validates :email, uniqueness: true
+  validates :first_name, :last_name, length: { maximum: 35 }
+
+  has_many :posts
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
