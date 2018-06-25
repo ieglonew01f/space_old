@@ -1,6 +1,7 @@
 export default function reducer(state={
     posts: [],
     fetching: false,
+    posting: false,
     fetched: false,
     error: null,
   }, action) {
@@ -21,16 +22,15 @@ export default function reducer(state={
         }
       }
       case "ADD_POST": {
-        return {...state, fetching: true}
+        return {...state, posting: true}
       }
       case "ADD_POST_REJECTED": {
-        return {...state, fetching: false, error: action.payload}
+        return {...state, posting: false, error: action.payload}
       }
       case "ADD_POST_FULFILLED": {
         return {
           ...state,
-          fetching: false,
-          fetched: true,
+          posting: false,
           posts: [action.payload.data, ...state.posts],
         }
       }

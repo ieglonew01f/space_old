@@ -1,6 +1,7 @@
 import React from "react";
 import Posts from "./common/Posts";
 import LoadMoreButton from "./common/LoadMoreButton";
+import PostSubmitButton from "./common/PostSubmitButton";
 import ReactDOM from "react-dom";
 
 import { connect } from "react-redux";
@@ -8,7 +9,8 @@ import { fetchPosts, addPost } from "../actions/postsActions";
 
 @connect((store) => {
   return {
-    posts: store.posts.posts
+    posts: store.posts.posts,
+    posting: store.posts.posting
   };
 })
 
@@ -37,7 +39,7 @@ export default class LayoutComponent extends React.Component {
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts, posting } = this.props;
 
     return (
       <div className="row">
@@ -62,7 +64,7 @@ export default class LayoutComponent extends React.Component {
                                     <textarea className="form-control" placeholder="Share what you are thinking here..." value={this.state.postText} onChange={event => this.onChange(event)}></textarea>
                                 </div>
                                 <div className="add-options-message">
-                                    <button className="btn btn-primary btn-md-2" onClick={event => this.postStatus(event)}>Post Status</button>
+                                  <PostSubmitButton posting={posting} postStatus={event => this.postStatus(event)}/>
                                 </div>
                             </form>
                         </div>
