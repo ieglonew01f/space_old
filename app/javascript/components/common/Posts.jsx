@@ -3,10 +3,16 @@ import { render } from 'react-dom';
 
 import { connect } from "react-redux";
 import { deletePost } from "../../actions/postsActions";
+import { fetchComments } from "../../actions/commentsActions";
+
+import PostMeta from "./PostMeta";
+import PostAuthor from "./PostAuthor";
+import Comments from "./Comments";
 
 @connect((store) => {
   return {
-    posts: store.posts.posts
+    posts: store.posts.posts,
+    comments: store.comments.comments
   };
 })
 
@@ -15,8 +21,13 @@ export default class Posts extends React.Component {
     this.props.dispatch(deletePost(post_id));
   }
 
+  fetchComments(e, post_id) {
+    e.preventDefault();
+    this.props.dispatch(fetchComments(post_id));
+  }
+
   render() {
-    const posts = this.props.posts;
+    const {posts, comments} = this.props;
 
     return <ul>
       {
@@ -25,14 +36,7 @@ export default class Posts extends React.Component {
             <article className="hentry post video">
               <div className="post__author author vcard inline-items">
                 <img src="/img/avatar7-sm.jpg" alt="author"/>
-                <div className="author-date">
-                  <a className="h6 post__author-name fn" href="#">Marina Valentine</a>
-                  <div className="post__date">
-                    <time className="published" dateTime="2004-07-24T18:18">
-                      March 4 at 2:05pm
-                    </time>
-                  </div>
-                </div>
+                <PostAuthor post={post}/>
                 <div className="more"><svg className="olymp-three-dots-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                   <ul className="more-dropdown">
                     <li>
@@ -51,6 +55,7 @@ export default class Posts extends React.Component {
                 </div>
               </div>
               <p>{post.post_text}</p>
+              <PostMeta parsedLink={JSON.parse(post.post_meta)}/>
               <div className="post-additional-info inline-items">
                 <a href="#" className="post-add-icon inline-items">
                   <svg className="olymp-heart-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
@@ -88,7 +93,7 @@ export default class Posts extends React.Component {
                   <br/>18 more liked this
                 </div>
                 <div className="comments-shared">
-                  <a href="#" className="post-add-icon inline-items">
+                  <a href="#" className="post-add-icon inline-items" onClick={event => this.fetchComments(event, post.id)}>
                     <svg className="olymp-speech-balloon-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
                     <span>0</span>
                   </a>
@@ -98,12 +103,11 @@ export default class Posts extends React.Component {
                   </a>
                 </div>
               </div>
-
               <div className="control-block-button post-control-button">
                 <a href="#" className="btn btn-control">
                   <svg className="olymp-like-post-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
                 </a>
-                <a href="#" className="btn btn-control">
+                <a href="#" className="btn btn-control" onClick={event => this.fetchComments(event, post.id)}>
                   <svg className="olymp-comments-post-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
                 </a>
                 <a href="#" className="btn btn-control">
@@ -111,6 +115,7 @@ export default class Posts extends React.Component {
                 </a>
               </div>
             </article>
+            <Comments post={post} comments={comments}/>
           </div>
         )
       }

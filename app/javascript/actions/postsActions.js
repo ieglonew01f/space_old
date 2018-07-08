@@ -21,13 +21,15 @@ export function fetchPosts() {
   }
 }
 
-export function addPost(post_text) {
+export function addPost(post_text, post_type, post_meta) {
   return function(dispatch) {
     dispatch({type: "ADD_POST"});
 
     axios
       .post('/posts', {
         post_text: post_text,
+        post_type: post_type,
+        post_meta: JSON.stringify(post_meta),
         authenticity_token: AUTH_TOKEN
       })
       .then((response) => {

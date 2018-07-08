@@ -8,7 +8,13 @@ Rails.application.routes.draw do
     get '/users/sign_out', to: 'devise/sessions#destroy', as: :sign_out
   end
 
-  resources :posts
+  resources :posts do
+    collection do
+      post 'parseLink'
+    end
+
+    resources :comments
+  end
 
   resources :home do
     collection do

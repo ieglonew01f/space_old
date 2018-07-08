@@ -1,25 +1,35 @@
+//Base
 import React from "react";
-import Posts from "./common/Posts";
-import LoadMoreButton from "./common/LoadMoreButton";
-import PostSubmitButton from "./common/PostSubmitButton";
 import ReactDOM from "react-dom";
 
+//Functionals
 import { connect } from "react-redux";
 import { fetchPosts, addPost } from "../actions/postsActions";
+import { isLink, parseLink } from "../utils/Utils";
+
+//UI
+import Posts from "./common/Posts";
+import PostMeta from "./common/PostMeta";
+import LoadMoreButton from "./common/LoadMoreButton";
+import PostSubmitButton from "./common/PostSubmitButton";
 
 @connect((store) => {
   return {
     posts: store.posts.posts,
-    posting: store.posts.posting
+    posting: store.posts.posting,
+    parsedLink: store.posts.post_link_data
   };
 })
 
 export default class LayoutComponent extends React.Component {
   constructor(props) {
     super(props);
+
+    //this default state
     this.state = {
       postText: '',
-      posts: []
+      postType: 1,
+      postMeta: this.props.parsedLink
     }
   }
 
@@ -34,12 +44,29 @@ export default class LayoutComponent extends React.Component {
   postStatus(e) {
     e.preventDefault();
 
-    this.props.dispatch(addPost(this.state.postText));
-    this.setState({ postText: '' });
+    //if its a link post?
+    if (this.props.parsedLink) {
+      this.state.postType = 2;
+    }
+
+    this.props.dispatch(addPost(this.state.postText, this.state.postType, this.props.parsedLink));
+
+    //reset
+    this.setState({ postText: '', postType: 1 });
+  }
+
+  onPasteLink(e) {
+    setTimeout(this.getPostText.bind(this), 100);
+  }
+
+  getPostText() {
+    if (isLink(this.state.postText)) {
+      this.props.dispatch(parseLink(this.state.postText));
+    }
   }
 
   render() {
-    const { posts, posting } = this.props;
+    const { posts, posting, parsedLink } = this.props;
 
     return (
       <div className="row">
@@ -61,8 +88,9 @@ export default class LayoutComponent extends React.Component {
                                     <img src="/img/author-page.jpg" alt="author"/>
                                 </div>
                                 <div className="form-group with-icon label-floating is-empty">
-                                    <textarea className="form-control" placeholder="Share what you are thinking here..." value={this.state.postText} onChange={event => this.onChange(event)}></textarea>
+                                    <textarea className="form-control" placeholder="Share what you are thinking here..." value={this.state.postText} onChange={event => this.onChange(event)} onPaste={event => this.onPasteLink(event)}></textarea>
                                 </div>
+                                <PostMeta parsedLink={parsedLink}/>
                                 <div className="add-options-message">
                                   <PostSubmitButton posting={posting} postStatus={event => this.postStatus(event)}/>
                                 </div>

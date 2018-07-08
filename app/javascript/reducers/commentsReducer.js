@@ -1,5 +1,5 @@
 export default function reducer(state={
-    posts: [],
+    comments: [],
     fetching: false,
     posting: false,
     fetched: false,
@@ -7,59 +7,45 @@ export default function reducer(state={
   }, action) {
 
     switch (action.type) {
-      case "PARSE_POST_LINK": {
+      case "FETCH_COMMENTS": {
         return {...state, fetching: true}
       }
-      case "PARSE_POST_LINK_REJECTED": {
+      case "FETCH_COMMENTS_REJECTED": {
         return {...state, fetching: false, error: action.payload}
       }
-      case "PARSE_POST_LINK_FULFILLED": {
+      case "FETCH_COMMENTS_FULFILLED": {
         return {
           ...state,
           fetching: false,
           fetched: true,
-          post_link_data: action.payload.data,
+          comments: action.payload.data,
         }
       }
-      case "FETCH_POSTS": {
-        return {...state, fetching: true}
-      }
-      case "FETCH_POSTS_REJECTED": {
-        return {...state, fetching: false, error: action.payload}
-      }
-      case "FETCH_POSTS_FULFILLED": {
-        return {
-          ...state,
-          fetching: false,
-          fetched: true,
-          posts: action.payload.data,
-        }
-      }
-      case "ADD_POST": {
+      case "ADD_COMMENT": {
         return {...state, posting: true}
       }
-      case "ADD_POST_REJECTED": {
+      case "ADD_COMMENT_REJECTED": {
         return {...state, posting: false, error: action.payload}
       }
-      case "ADD_POST_FULFILLED": {
+      case "ADD_COMMENT_FULFILLED": {
         return {
           ...state,
           posting: false,
-          posts: [action.payload.data, ...state.posts],
+          comments: [action.payload.data, ...state.comments],
         }
       }
-      case "DELETE_POST": {
+      case "DELETE_COMMENT": {
         return {...state, fetching: true}
       }
-      case "DELETE_POST_REJECTED": {
+      case "DELETE_COMMENT_REJECTED": {
         return {...state, fetching: false, error: action.payload}
       }
-      case "DELETE_POST_FULFILLED": {
+      case "DELETE_COMMENT_FULFILLED": {
         return {
           ...state,
           fetching: false,
           fetched: true,
-          posts: state.posts.filter(post => post.id !== action.payload.data.id),
+          comments: state.comments.filter(post => post.id !== action.payload.data.id),
         }
       }
       // case "UPDATE_TWEET": {

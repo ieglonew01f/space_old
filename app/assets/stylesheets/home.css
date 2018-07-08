@@ -1,4 +1,9 @@
-.post-button-loader img {
+.post-button-loader img,
+.comment-button-loader img {
   width: 10px;
   margin-right: 5px;
+}
+
+.hidden {
+  display: none;
 }
