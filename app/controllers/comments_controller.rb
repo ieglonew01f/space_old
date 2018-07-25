@@ -1,11 +1,18 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  include ActionView::Helpers::DateHelper
+
   def index
     post_id = params[:post_id]
     return if post_id.nil?
 
-    comments = Post.find(42).comments.all.order(created_at: :desc)
+    comments = Post.find(post_id).comments.all.order(created_at: :desc)
+
+    comments.each do |comment|
+      comment.user_details = comment.user
+      comment.created_at = time_ago_in_words(comment.created_at)
+    end
 
     if comments
       success_json(200, "Success", comments)
@@ -26,6 +33,8 @@ class CommentsController < ApplicationController
     comment.post_id = post_id
 
     if comment.save
+      comment.user_details = comment.user
+      comment.created_at = time_ago_in_words(comment.created_at)
       success_json(200, "Commented successfully", comment)
     else
       error_json(422, 422, I18n.t("errors.500"))

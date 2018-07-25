@@ -2,8 +2,14 @@ import { combineReducers } from "redux"
 
 import posts from "./postsReducer"
 import comments from "./commentsReducer"
+import likes from "./likesReducer.js"
+import suggestions from "./usersReducer.js"
+import activities from "./activitiesReducer.js"
 
 export default combineReducers({
   posts,
-  comments
+  comments,
+  likes,
+  suggestions,
+  activities
 })

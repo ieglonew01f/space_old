@@ -1,7 +1,17 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+
+  include ActionView::Helpers::DateHelper
+
   def index
     posts = Post.all.order(created_at: :desc)
+
+    posts.each do |post|
+      post.likes_count = post.likes.count
+      post.comments_count = post.comments.count
+      post.user_details = post.user
+      post.created_at = time_ago_in_words(post.created_at)
+    end
 
     if posts
       success_json(200, "Success", posts)
@@ -24,6 +34,11 @@ class PostsController < ApplicationController
     post.post_meta = post_meta
 
     if post.save
+      post.likes_count = post.likes.count
+      post.comments_count = post.comments.count
+      post.user_details = post.user
+      post.created_at = time_ago_in_words(post.created_at)
+
       success_json(200, "Posted successfully", post)
     else
       error_json(422, 422, I18n.t("en.errors.500"))

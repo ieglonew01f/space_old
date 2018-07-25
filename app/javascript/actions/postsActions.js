@@ -40,6 +40,7 @@ export function addPost(post_text, post_type, post_meta) {
       });
   }
 }
+
 export function deletePost(id) {
   return function(dispatch) {
     dispatch({type: "DELETE_POST"});
@@ -56,6 +57,44 @@ export function deletePost(id) {
       })
       .catch((err) => {
         dispatch({type: "DELETE_POST_REJECTED", payload: err})
+      });
+  }
+}
+
+export function likePost(post_id) {
+  return function(dispatch) {
+    dispatch({type: "LIKE_POST"});
+
+    axios
+      .post("/posts/" + post_id + "/likes", {
+        post_id: post_id,
+        authenticity_token: AUTH_TOKEN
+      })
+      .then((response) => {
+        dispatch({type: "LIKE_POST_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "LIKE_POST_REJECTED", payload: err})
+      });
+  }
+}
+
+export function fetchLikes(post_id) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_LIKES"});
+
+    axios
+      .get("/posts/" + post_id + "/likes", {
+        params: {
+          post_id: post_id,
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_LIKES_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_LIKES_REJECTED", payload: err})
       });
   }
 }

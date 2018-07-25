@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 //Functionals
 import { connect } from "react-redux";
 import { fetchPosts, addPost } from "../actions/postsActions";
+import { fetchActivities, fetchSuggestions } from "../actions/pageActions";
 import { isLink, parseLink } from "../utils/Utils";
 
 //UI
@@ -12,12 +13,17 @@ import Posts from "./common/Posts";
 import PostMeta from "./common/PostMeta";
 import LoadMoreButton from "./common/LoadMoreButton";
 import PostSubmitButton from "./common/PostSubmitButton";
+import ActivityFeed from "./common/ActivityFeed";
+import BirthdayAlert from "./common/BirthdayAlert";
+import FollowSuggestions from "./common/FollowSuggestions";
 
 @connect((store) => {
   return {
     posts: store.posts.posts,
     posting: store.posts.posting,
-    parsedLink: store.posts.post_link_data
+    parsedLink: store.posts.post_link_data,
+    activities: store.activities.activities,
+    suggestions: store.suggestions.suggestions
   };
 })
 
@@ -35,6 +41,8 @@ export default class LayoutComponent extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchActivities());
+    this.props.dispatch(fetchSuggestions());
   }
 
   onChange (e) {
@@ -66,7 +74,7 @@ export default class LayoutComponent extends React.Component {
   }
 
   render() {
-    const { posts, posting, parsedLink } = this.props;
+    const { posts, posting, parsedLink, activities, suggestions } = this.props;
 
     return (
       <div className="row">
@@ -84,8 +92,8 @@ export default class LayoutComponent extends React.Component {
                     <div className="tab-content">
                         <div className="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
                             <form>
-                                <div className="author-thumb">
-                                    <img src="/img/author-page.jpg" alt="author"/>
+                                <div className="author-thumb status-div">
+                                    <img src={window.current_user.profile_picture} alt="author"/>
                                 </div>
                                 <div className="form-group with-icon label-floating is-empty">
                                     <textarea className="form-control" placeholder="Share what you are thinking here..." value={this.state.postText} onChange={event => this.onChange(event)} onPaste={event => this.onPasteLink(event)}></textarea>
@@ -104,6 +112,11 @@ export default class LayoutComponent extends React.Component {
               </div>
               <LoadMoreButton/>
           </main>
+          <aside className="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
+            <BirthdayAlert/>
+            <ActivityFeed activities={activities}/>
+            <FollowSuggestions suggestions={suggestions}/>
+          </aside>
       </div>
     );
   }

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, length: { maximum: 35 }
 
   has_many :posts
+  has_many :followers
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

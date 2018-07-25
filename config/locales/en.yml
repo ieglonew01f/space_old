@@ -78,3 +78,10 @@ en:
   api:
     errors:
       500: "Looks like something went wrong while processing your request, please try again after sometime."
+  activity:
+    post:
+      create: "has shared"
+    like:
+      create: "has liked"
+    commented:
+      create: "has commented on"

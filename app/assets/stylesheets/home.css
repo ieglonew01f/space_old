@@ -7,3 +7,16 @@
 .hidden {
   display: none;
 }
+
+.author-thumb.status-div img {
+  background: #26547C;
+}
+
+.author-thumb img {
+  background: #26547C;
+  width: 36px;
+}
+
+.post__author img {
+  background: #26547C;
+}

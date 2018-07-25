@@ -46,26 +46,18 @@ export default class Comments extends React.Component {
           <ul className="comments-list">
             {
               comments.map((comment, i) =>
-                <Comment key={i} comment={comment}/>
+                <Comment key={comment.id} comment={comment}/>
               )
             }
           </ul>
-          <a href="#" className="more-comments">View more comments <span>+</span></a>
         </div>
         <div className="comments-action">
           <form className="comment-form inline-items">
             <div className="post__author author vcard inline-items">
-              <img src="/img/author-page.jpg" alt="author"/>
+              <img src={window.current_user.profile_picture} alt="author"/>
               <div className="form-group with-icon-right is-empty">
                 <textarea className="form-control" placeholder="" value={this.state.commentText} onChange={event => this.onChange(event)}></textarea>
-                <div className="add-options-message">
-                  <a href="#" className="options-message" data-toggle="modal" data-target="#update-header-photo">
-                    <svg className="olymp-camera-icon">
-                      <use xlinkHref="/svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
-                    </svg>
-                  </a>
-                </div>
-              <span className="material-input"></span></div>
+              </div>
             </div>
             <CommentSubmitButton post={post} posting={posting} postComment={event => this.postComment(event)}/>
             <button className="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>

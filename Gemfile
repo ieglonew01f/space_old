@@ -31,6 +31,10 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'coffee-rails', '~> 4.2'
 
+gem 'gon'
+
+gem 'public_activity'
+
 # Login stuff
 gem 'devise'
 gem 'omniauth-facebook'

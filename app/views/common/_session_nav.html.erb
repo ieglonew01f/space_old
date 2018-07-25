@@ -349,7 +349,7 @@
 
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="/img/author-page.jpg" class="avatar">
+					<img alt="author" src="<%= current_user.profile_picture %>" class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -374,7 +374,7 @@
 									</a>
 								</li> -->
 								<li>
-									<a href="#">
+									<a href="/users/sign_out">
 										<svg class="olymp-logout-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-logout-icon"></use></svg>
 
 										<span><%= t('common.label.log_out') %></span>
@@ -458,5 +458,15 @@
 	</div>
 
 </header>
+
+<script type="text/javascript">
+	window.current_user = {
+		'first_name': '<%= current_user.first_name %>',
+		'last_name': '<%= current_user.last_name %>',
+		'username': '<%= current_user.username %>',
+		'gender': '<%= current_user.gender %>',
+		'profile_picture': '<%= current_user.profile_picture %>'
+	}
+</script>
 
 <!-- ... end Header-BP -->
