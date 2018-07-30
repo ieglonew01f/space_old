@@ -1,0 +1,56 @@
+.ui-block
+  .ui-block-title
+    %h6.title Personal Information
+  .ui-block-content
+    / Personal Information Form
+    %form{"accept-charset" => "UTF-8", :action => "/account/update", :method => "post"}
+      = hidden_field_tag :authenticity_token, form_authenticity_token
+      .row
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label First Name
+            %input.form-control{:placeholder => "", :name => "user[first_name]", :type => "text", :value => current_user.first_name}/
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Your Email
+            %input.form-control.disabled{"disabled" => "disabled", :placeholder => "", :type => "email", :value => current_user.email}/
+            %span.material-input
+          .form-group.date-time-picker.label-floating
+            %label.control-label Your Birthday
+            %input{:name => "datetimepicker", :name => "user[birthday]", :value => current_user.birthday}/
+            %span.input-group-addon
+              %svg.olymp-month-calendar-icon.icon
+                %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-month-calendar-icon"}
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label Last Name
+            %input.form-control{:placeholder => "", :name => "user[last_name]", :type => "text", :value => current_user.last_name}/
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Where are you living right now ?
+            %input.form-control{:placeholder => "", :name => "user[location]",  :type => "text", :value => current_user.location}/
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Your Home Town
+            %input.form-control{:placeholder => "", :name => "user[home_town]",  :type => "text", :value => current_user.home_town}/
+            %span.material-input
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label Write a little description about you
+            %textarea.form-control{:placeholder => "", :name => "user[about]"}
+              = current_user.about
+            %span.material-input
+        .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+          .form-group.with-icon.label-floating
+            %label.control-label Your Facebook Account
+            %input.form-control{:type => "text", :value => current_user.facebook, :name => "user[facebook]"}/
+            %i.fab.fa-facebook-f.c-facebook
+            %span.material-input
+          .form-group.with-icon.label-floating
+            %label.control-label Your Twitter Account
+            %input.form-control{:type => "text", :name => "user[twitter]", :value => current_user.twitter}/
+            %i.fab.fa-twitter.c-twitter
+            %span.material-input
+        .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+          %button.btn.btn-primary.btn-lg.full-width{:type => "submit"} Update Settings
+    / ... end Personal Information Form

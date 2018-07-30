@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'coffee-rails', '~> 4.2'
-
+gem 'haml'
 gem 'gon'
 
 gem 'public_activity'

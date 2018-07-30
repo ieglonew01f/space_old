@@ -1,0 +1,26 @@
+.ui-block
+  .ui-block-title
+    %h6.title Change Password
+  .ui-block-content
+    / Change Password Form
+    %form{"accept-charset" => "UTF-8", :action => "/account/update_password", :method => "post"}
+      = hidden_field_tag :authenticity_token, form_authenticity_token
+      .row
+        .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label Confirm Current Password
+            %input.form-control{:placeholder => "", :name => "user[old_password]", :type => "password"}/
+            %span.material-input
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating.is-empty
+            %label.control-label Your New Password
+            %input.form-control{:placeholder => "", :name => "user[new_password]", :type => "password"}/
+            %span.material-input
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating.is-empty
+            %label.control-label Confirm New Password
+            %input.form-control{:placeholder => "", :name => "user[comfirm_password]", :type => "password"}/
+            %span.material-input
+        .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+          %button.btn.btn-primary.btn-lg.full-width Change Password
+    / ... end Change Password Form

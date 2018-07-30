@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   get 'home/index'
   get 'profile/:username' => 'profile#index'
+  get 'account/settings/profile' => 'profile#profile_settings'
+  get 'account/settings/hobbies' => 'profile#hobbies_settings'
+  get 'account/settings/education' => 'profile#education_settings'
+  get 'account/settings' => 'profile#account_settings'
+
+  post 'account/update' => 'profile#update'
+  post 'account/update_password' => 'profile#update_password'
 
   root to: 'index#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}

@@ -1,0 +1,29 @@
+.ui-block
+  .ui-block-title
+    %h6.title Your Education History
+  .ui-block-content
+    / Education History Form
+    %form{"accept-charset" => "UTF-8", :action => "/account/update", :method => "post"}
+      = hidden_field_tag :authenticity_token, form_authenticity_token
+      .row
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label College
+            %input.form-control.disabled{:placeholder => "", :type => "text", :value => current_user.college, "disabled" => "disabled"}/
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Location
+            %input.form-control.disabled{:placeholder => "", :type => "text", :value => current_user.college_location, "disabled" => "disabled"}/
+            %span.material-input
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label Batch of
+            %input.form-control.disabled{:placeholder => "", :type => "text", :value => current_user.college_batch, "disabled" => "disabled"}/
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Course
+            %input.form-control{:placeholder => "", :name => "user[course]", :type => "text", :value => current_user.course}/
+            %span.material-input
+        .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+          %button.btn.btn-primary.btn-lg.full-width{:type => "submit"} Update Settings
+    / ... end Education History Form

@@ -1,0 +1,17 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "home.css"
+- content_for :pagejs do
+  -# = javascript_pack_tag 'profile'
+= render "common/session_nav"
+
+.header-spacer.header-spacer-small
+.main-header
+  = render :partial => "profile/partials/settings_header"
+.container
+  .row
+    .col.col-xl-3.order-xl-1.col-lg-3.order-lg-1.col-md-12.order-md-2.col-sm-12.responsive-display-none
+      = render :partial => "profile/partials/settings_menu"
+    .col.col-xl-9.order-xl-2.col-lg-9.order-lg-2.col-md-12.order-md-1.col-sm-12.col-12
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
+      = render :partial => "profile/partials/"+ setting +"_settings", locals: {setting: setting}

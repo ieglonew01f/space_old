@@ -1,0 +1,22 @@
+.ui-block
+  .your-profile
+    .ui-block-title.ui-block-title-small
+      %h6.title Your PROFILE
+    #accordion{"aria-multiselectable" => "true", :role => "tablist"}
+      .card
+        #headingOne.card-header{:role => "tab"}
+          %h6.mb-0
+            %a{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+              Profile Settings
+              %svg.olymp-dropdown-arrow-icon
+                %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"}
+        #collapseOne.collapse.show{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+          %ul.your-profile-menu
+            %li
+              %a{:href => "/account/settings/profile"} Personal Information
+            %li
+              %a{:href => "/account/settings/hobbies"} Hobbies and Interests
+            %li
+              %a{:href => "/account/settings/education"} Education and Employement
+    .ui-block-title
+      %a.h6.title{:href => "/account/settings"} Account Settings

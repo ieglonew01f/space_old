@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180728101402) do
+ActiveRecord::Schema.define(version: 20180730160019) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
@@ -86,6 +86,20 @@ ActiveRecord::Schema.define(version: 20180728101402) do
     t.text "about"
     t.string "provider"
     t.string "uid"
+    t.string "facebook"
+    t.string "twitter"
+    t.text "hobbies"
+    t.text "fav_writers"
+    t.text "fav_books"
+    t.text "fav_music"
+    t.text "fav_tv"
+    t.text "fav_movies"
+    t.text "fav_games"
+    t.text "other_intrests"
+    t.text "college"
+    t.text "course"
+    t.text "college_location"
+    t.text "college_batch"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

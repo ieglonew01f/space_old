@@ -1,0 +1,52 @@
+.ui-block
+  .ui-block-title
+    %h6.title Hobbies and Interests
+  .ui-block-content
+    / Form Hobbies and Interests
+    %form{"accept-charset" => "UTF-8", :action => "/account/update", :method => "post"}
+      = hidden_field_tag :authenticity_token, form_authenticity_token
+      .row
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label Hobbies
+            %textarea.form-control{:placeholder => "", :name => "user[hobbies]"}
+              = current_user.hobbies
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Favourite TV Shows
+            %textarea.form-control{:placeholder => "", :name => "user[fav_tv]"}
+              = current_user.fav_tv
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Favourite Movies
+            %textarea.form-control{:placeholder => "", :name => "user[fav_movies]"}
+              = current_user.fav_movies
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Favourite Games
+            %textarea.form-control{:placeholder => "", :name => "user[fav_games]"}
+              = current_user.fav_games
+            %span.material-input
+        .col.col-lg-6.col-md-6.col-sm-12.col-12
+          .form-group.label-floating
+            %label.control-label Favourite Music Bands / Artists
+            %textarea.form-control{:placeholder => "", :name => "user[fav_music]"}
+              = current_user.fav_music
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Favourite Books
+            %textarea.form-control{:placeholder => "", :name => "user[fav_books]"}
+              = current_user.fav_books
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Favourite Writers
+            %textarea.form-control{:placeholder => "", :name => "user[fav_writers]"}
+              = current_user.fav_writers
+            %span.material-input
+          .form-group.label-floating
+            %label.control-label Other Interests
+            %textarea.form-control{:placeholder => "", :name => "user[other_intrests]"}
+              = current_user.other_intrests
+            %span.material-input
+        .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+          %button.btn.btn-primary.btn-lg.full-width{:type => "submit"} Update Settings
