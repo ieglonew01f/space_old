@@ -11,7 +11,6 @@ import { fetchActivities } from "../actions/pageActions";
 import Posts from "./common/Posts";
 import LoadMoreButton from "./common/LoadMoreButton";
 import AboutComponent from "./profile/AboutComponent"
-import BannerComponent from "./profile/BannerComponent"
 import FollowersComponent from "./profile/FollowersComponent"
 import ActivityFeed from "./common/ActivityFeed";
 
@@ -42,30 +41,19 @@ export default class LayoutComponent extends React.Component {
     const { posts, posting, activities } = this.props;
 
     return (
-      <div className="out">
-        <div className="container">
-          <div className="row">
-        		<div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-              <BannerComponent/>
-            </div>
-          </div>
+      <div className="row">
+    		<div className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
+          <AboutComponent/>
+          <FollowersComponent/>
         </div>
-        <div className="container">
-          <div className="row">
-        		<div className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
-              <AboutComponent/>
-              <FollowersComponent/>
-            </div>
-            <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-              <div id="newsfeed-items-grid">
-                <Posts posts={posts} />
-              </div>
-              <LoadMoreButton/>
-            </div>
-            <div className="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
-              <ActivityFeed activities={activities}/>
-            </div>
+        <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+          <div id="newsfeed-items-grid">
+            <Posts posts={posts} />
           </div>
+          <LoadMoreButton/>
+        </div>
+        <div className="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
+          <ActivityFeed activities={activities}/>
         </div>
       </div>
     )

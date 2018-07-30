@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
   get 'profile/:username' => 'profile#index'
+  get 'profile/:username/about' => 'profile#about'
   get 'account/settings/profile' => 'profile#profile_settings'
   get 'account/settings/hobbies' => 'profile#hobbies_settings'
   get 'account/settings/education' => 'profile#education_settings'

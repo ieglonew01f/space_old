@@ -7,8 +7,20 @@ class ProfileController < ApplicationController
     #todo redirect if username not found
     #redirect -> 404
 
-    profile_user = User.find_by_username(username).as_json
-    gon.push(profile_user)
+    profile_user = User.find_by_username(username)
+    gon.push(profile_user.as_json)
+    @user = profile_user
+  end
+
+  def about
+    username = params[:username]
+
+    #todo redirect if username not found
+    #redirect -> 404
+
+    profile_user = User.find_by_username(username)
+    gon.push(profile_user.as_json)
+    @user = profile_user
   end
 
   def update

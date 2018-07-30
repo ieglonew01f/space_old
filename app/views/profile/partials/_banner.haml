@@ -1,0 +1,32 @@
+.ui-block
+  .top-header
+    .top-header-thumb
+      %img{:alt => "nature", :src => "/img/top-header1.jpg"}/
+    .profile-section
+      .row
+        .col.col-lg-5.col-md-5.col-sm-12.col-12
+          %ul.profile-menu
+            %li
+              %a{:href => "/profile/#{@user.username}", :class => "#{'active' if tag == 'timeline'}"} Timeline
+            %li
+              %a{:href => "/profile/#{@user.username}/about", :class => "#{'active' if tag == 'about'}"} About
+            %li
+              %a{:href => "/profile/#{@user.username}/followers", :class => "#{'active' if tag == 'followers'}"} Followers
+        .col.col-lg-5.ml-auto.col-md-5.col-sm-12.col-12
+          %ul.profile-menu
+            %li
+              %a{:href => "/profile/#{@user.username}/photos", :class => "#{'active' if tag == 'photos'}"} Photos
+            %li
+              %a{:href => "/profile/#{@user.username}/videos", :class => "#{'active' if tag == 'videos'}"} Videos
+      .control-block-button
+        %a.btn.btn-control.bg-blue{:href => "#"}
+          %svg.olymp-happy-face-icon
+            %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-happy-face-icon"}
+    .top-header-author
+      %a.author-thumb{:href => "02-ProfilePage.html"}
+        %img{:alt => "author", :src => "{gon.profile_picture}"}/
+      .author-content
+        %a.h4.author-name{:href => "02-ProfilePage.html"}
+          = @user.first_name + " " + @user.last_name
+        .country
+          = @user.location

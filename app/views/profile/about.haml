@@ -1,0 +1,85 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "home.css"
+= render "common/session_nav"
+.header-spacer
+.container
+  .row
+    .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+      = render :partial => "profile/partials/banner", locals: {tag: "about"}
+#container.container
+  .row
+    .col.col-xl-4.order-xl-1.col-lg-4.order-lg-1.col-md-12.order-md-2.col-sm-12.col-12
+      .ui-block
+        .ui-block-title
+          %h6.title Personal Info
+        .ui-block-content
+          %ul.widget.w-personal-info
+            %li
+              %span.title About Me:
+              %span.text
+                = @user.about
+            %li
+              %span.title Birthday:
+              %span.text
+                = @user.birthday
+            %li
+              %span.title Lives in:
+              %span.text
+                = @user.location
+            %li
+              %span.title Gender:
+              - if @user.gender == "1"
+                %span.text Male
+              - if @user.gender == "0"
+                %span.text Female
+          .widget.w-socials
+            %h6.title Other Social Networks:
+            %a.social-item.bg-facebook{:href => "#{@user.facebook}"}
+              %i.fab.fa-facebook-f
+              Facebook
+            %a.social-item.bg-twitter{:href => "#{@user.twitter}"}
+              %i.fab.fa-twitter
+              Twitter
+    .col.col-xl-8.order-xl-2.col-lg-8.order-lg-2.col-md-12.order-md-1.col-sm-12.col-12
+      .ui-block
+        .ui-block-title
+          %h6.title Hobbies and Interests
+        .ui-block-content
+          .row
+            .col.col-lg-6.col-md-6.col-sm-12.col-12
+              / W-Personal-Info
+              %ul.widget.w-personal-info.item-block
+                %li
+                  %span.title Hobbies:
+                  %span.text
+                    = @user.hobbies
+                %li
+                  %span.title Favourite TV Shows:
+                  %span.text
+                    = @user.fav_tv
+                %li
+                  %span.title Favourite Movies:
+                  %span.text
+                    = @user.fav_movies
+                %li
+                  %span.title Favourite Games:
+                  %span.text
+                    = @user.fav_games
+            .col.col-lg-6.col-md-6.col-sm-12.col-12
+              %ul.widget.w-personal-info.item-block
+                %li
+                  %span.title Favourite Music Bands / Artists:
+                  %span.text
+                    = @user.fav_music
+                %li
+                  %span.title Favourite Books:
+                  %span.text
+                    = @user.fav_books
+                %li
+                  %span.title Favourite Writers:
+                  %span.text
+                    = @user.fav_writers
+                %li
+                  %span.title Other Interests:
+                  %span.text
+                    = @user.other_intrests
