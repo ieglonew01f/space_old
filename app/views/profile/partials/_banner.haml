@@ -24,7 +24,7 @@
             %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-happy-face-icon"}
     .top-header-author
       %a.author-thumb{:href => "02-ProfilePage.html"}
-        %img{:alt => "author", :src => "{gon.profile_picture}"}/
+        %img{:alt => "author", :src => "#{@user.profile_picture}"}/
       .author-content
         %a.h4.author-name{:href => "02-ProfilePage.html"}
           = @user.first_name + " " + @user.last_name
