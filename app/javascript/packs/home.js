@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import LayoutComponent from '../components/Layout';
+import HomeComponent from '../components/HomeComponent';
 
 import { Provider } from "react-redux"
 import store from "./store"
@@ -8,6 +8,6 @@ import store from "./store"
 document.addEventListener('DOMContentLoaded', () => {
   render(
     <Provider store={store}>
-       <LayoutComponent/>
+       <HomeComponent/>
     </Provider>, document.getElementById('container'));
 });

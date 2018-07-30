@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180722155614) do
+ActiveRecord::Schema.define(version: 20180728101402) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20180722155614) do
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "post_text"
+    t.text "post_text"
     t.integer "post_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

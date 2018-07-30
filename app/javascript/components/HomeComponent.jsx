@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 //Functionals
 import { connect } from "react-redux";
 import { fetchPosts, addPost } from "../actions/postsActions";
-import { fetchActivities, fetchSuggestions } from "../actions/pageActions";
+import { fetchActivities, fetchSuggestions, fetchForecast } from "../actions/pageActions";
 import { isLink, parseLink } from "../utils/Utils";
 
 //UI
@@ -16,6 +16,7 @@ import PostSubmitButton from "./common/PostSubmitButton";
 import ActivityFeed from "./common/ActivityFeed";
 import BirthdayAlert from "./common/BirthdayAlert";
 import FollowSuggestions from "./common/FollowSuggestions";
+import Weather from "./common/Weather";
 
 @connect((store) => {
   return {
@@ -23,7 +24,8 @@ import FollowSuggestions from "./common/FollowSuggestions";
     posting: store.posts.posting,
     parsedLink: store.posts.post_link_data,
     activities: store.activities.activities,
-    suggestions: store.suggestions.suggestions
+    suggestions: store.suggestions.suggestions,
+    forecast: store.forecast.forecast
   };
 })
 
@@ -43,6 +45,7 @@ export default class LayoutComponent extends React.Component {
     this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchActivities());
     this.props.dispatch(fetchSuggestions());
+    this.props.dispatch(fetchForecast());
   }
 
   onChange (e) {
@@ -74,10 +77,13 @@ export default class LayoutComponent extends React.Component {
   }
 
   render() {
-    const { posts, posting, parsedLink, activities, suggestions } = this.props;
+    const { posts, posting, parsedLink, activities, suggestions, forecast } = this.props;
 
     return (
       <div className="row">
+          <aside className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
+            <Weather forecast={forecast}/>
+          </aside>
           <main className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
               <div className="ui-block">
                 <div className="news-feed-form">

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>CollegeTrends - Social Networking</title>
+    <%= Gon::Base.render_data %>
     <%= csrf_meta_tags %>
 
     <!-- Required meta tags always come first -->
@@ -11,12 +12,11 @@
 
     <%= stylesheet_link_tag 'application'%>
     <%= javascript_include_tag 'application'%>
-    <%= javascript_pack_tag 'client' %>
     <%= yield :pagecss %>
+    <%= yield :pagejs %>
   </head>
 
   <body class="landing-page">
     <%= yield %>
-    <%= yield :pagejs %>
   </body>
 </html>

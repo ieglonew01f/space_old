@@ -4,7 +4,11 @@ class PostsController < ApplicationController
   include ActionView::Helpers::DateHelper
 
   def index
-    posts = Post.all.order(created_at: :desc)
+    if !params[:user_id].nil?
+      posts = Post.where("user_id = ?", params[:user_id]).all.order(created_at: :desc)
+    else
+      posts = Post.all.order(created_at: :desc)
+    end
 
     posts.each do |post|
       post.likes_count = post.likes.count

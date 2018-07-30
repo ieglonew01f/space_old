@@ -1,9 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { connect } from "react-redux";
+
+import { followUser } from "../../actions/userActions";
+
+@connect((store) => {
+  return {
+    suggestions: store.suggestions.suggestions
+  };
+})
 
 export default class FollowSuggestions extends React.Component {
+  constructor(props) {
+    super(props);
+
+    //this default state
+    this.state = {
+
+    }
+  }
+
+  follow(e, id) {
+    this.props.dispatch(followUser(id));
+  }
+
   render() {
-    const { suggestions } = this.props;
+    const { suggestions, followed } = this.props;
 
     return(
       <div className="ui-block">
@@ -22,7 +44,7 @@ export default class FollowSuggestions extends React.Component {
     							<span className="chat-message-item">{suggestion.location}</span>
     						</div>
     						<span className="notification-icon">
-    							<a href="#" className="accept-request">
+    							<a href="javascript:void(0)" onClick={event => this.follow(event, suggestion.id)} className="accept-request">
     								<span className="icon-add without-text">
     									<svg className="olymp-happy-face-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
     								</span>

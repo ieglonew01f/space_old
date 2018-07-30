@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     collection do
       get 'get_suggestions'
     end
+
+    resources :posts
+    resources :activities
+    resource :follow
   end
 
   resources :posts do

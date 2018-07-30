@@ -2,12 +2,19 @@ import axios from "axios";
 
 const AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
 
-export function fetchPosts() {
+export function fetchPosts(id) {
   return function(dispatch) {
     dispatch({type: "FETCH_POSTS"});
 
+    var url = '/posts';
+
+    //user post
+    if (id) {
+      url = '/users/' + id + '/posts'
+    }
+
     axios
-      .get("/posts", {
+      .get(url, {
         params: {
           authenticity_token: AUTH_TOKEN
         }

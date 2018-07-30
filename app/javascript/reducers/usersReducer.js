@@ -2,7 +2,7 @@ export default function reducer(state={
     fetching: false,
     fetched: false,
     error: null,
-    suggestions: [],
+    suggestions: []
   }, action) {
     switch (action.type) {
       case "FETCH_SUGGESTIONS": {
@@ -16,10 +16,23 @@ export default function reducer(state={
           ...state,
           fetching: false,
           fetched: true,
-          suggestions: action.payload.data,
+          suggestions: action.payload.data
+        }
+      }
+      case "FOLLOW_USER": {
+        return {...state, fetching: true}
+      }
+      case "FOLLOW_USER_REJECTED": {
+        return {...state, fetching: false, error: action.payload}
+      }
+      case "FOLLOW_USER_FULFILLED": {
+        return {
+          ...state,
+          fetching: false,
+          fetched: true,
+          suggestions: action.payload.data
         }
       }
     }
-
     return state
 }

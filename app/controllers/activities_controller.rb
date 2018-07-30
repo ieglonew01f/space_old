@@ -1,22 +1,19 @@
-module NotificationsHelper
-  def get_notifications
+class ActivitiesController < ApplicationController
+  def index
     activities = PublicActivity::Activity.all
 
-    @parsed_notifications = []
+    parsed_activities = []
 
     activities.each do |activity|
+      if (activity.owner_id != params[:user_id].to_i)
+        next
+      end
+
       object = activity.trackable_type.constantize
       object_id = activity.trackable_id
 
       object_owner = object.find(object_id.to_i).user
       object_type = "post"
-
-      # if the activity object owner
-      # is not the current user
-      # then skip to next activity
-      if (object_owner.id.to_i != current_user.id)
-        next
-      end
 
       activity_owner = User.find(activity.owner_id)
 
@@ -25,16 +22,25 @@ module NotificationsHelper
         object_owner = Post.find(post_id).user
       end
 
+      # do not show self activities
+      # like commenting on you own post
+      # liking your own post
       if (object_owner.id == activity.owner_id)
         next
       end
 
-      @parsed_notifications << {
+      parsed_activities << {
         :object_owner => object_owner,
         :activity_owner => activity_owner,
         :object_type => object_type,
         :message => I18n.t("activity.#{activity.key}")
       }
+    end
+
+    if activities
+      success_json(200, "Success", parsed_activities)
+    else
+      error_json(422, 422, I18n.t("errors.500"))
     end
   end
 end
