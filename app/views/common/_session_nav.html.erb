@@ -256,7 +256,7 @@
 
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="<%= current_user.profile_picture %>" class="avatar">
+					<img alt="author" src="<%= current_user.profile_picture.thumb.url %>" class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -266,7 +266,7 @@
 
 							<ul class="account-settings">
 								<li>
-									<a href="/account/settings">
+									<a href="/account/settings/profile">
 										<svg class="olymp-menu-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
 										<span><%= t('common.label.profile_settings') %></span>
 									</a>

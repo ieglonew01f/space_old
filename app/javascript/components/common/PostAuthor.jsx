@@ -6,11 +6,11 @@ export default class PostAuthor extends React.Component {
     const { post } = this.props;
 
     var postTypeText = null,
-        postMeta = JSON.parse(post.post_meta);
+        postLinks = JSON.parse(post.post_link);
 
     //check if parsed link is a video
-    if (postMeta) {
-      if (postMeta.is_video) {
+    if (postLinks) {
+      if (postLinks.is_video) {
         postTypeText = " shared a video"
       }
       else {

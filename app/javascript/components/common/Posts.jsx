@@ -6,6 +6,7 @@ import { likePost, deletePost } from "../../actions/postsActions";
 import { fetchComments } from "../../actions/commentsActions";
 
 import PostMeta from "./PostMeta";
+import PostImage from "./PostImage"
 import PostAuthor from "./PostAuthor";
 import Comments from "./Comments";
 
@@ -41,7 +42,7 @@ export default class Posts extends React.Component {
           <div key={i} data-post-id={post.id} className="ui-block">
             <article className="hentry post video">
               <div className="post__author author vcard inline-items">
-                <img src={post.user_details.profile_picture} alt="author"/>
+                <img src={post.user_details.profile_picture.thumb.url} alt="author"/>
                 <PostAuthor post={post}/>
                 <div className="more"><svg className="olymp-three-dots-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                   <ul className="more-dropdown">
@@ -52,7 +53,8 @@ export default class Posts extends React.Component {
                 </div>
               </div>
               <p>{post.post_text}</p>
-              <PostMeta parsedLink={JSON.parse(post.post_meta)}/>
+              <PostImage post={post}/>
+              <PostMeta parsedLink={JSON.parse(post.post_link)}/>
               <div className="post-additional-info inline-items">
                 <span className="post-add-icon inline-items">
                   <svg className="olymp-heart-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>

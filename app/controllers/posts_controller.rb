@@ -15,6 +15,7 @@ class PostsController < ApplicationController
       post.comments_count = post.comments.count
       post.user_details = post.user
       post.created_at = time_ago_in_words(post.created_at)
+      post.post_image = post.post_meta[0].try(:post_meta).try(:url)
     end
 
     if posts
@@ -27,7 +28,8 @@ class PostsController < ApplicationController
   def create
     post_text = params[:post_text]
     post_type = params[:post_type] || 1
-    post_meta = params[:post_meta]
+    post_link = params[:post_link]
+    post_meta_id = params[:post_meta_id]
 
     return if post_text.nil?
 
@@ -35,13 +37,20 @@ class PostsController < ApplicationController
     post.post_text = post_text
     post.user_id = current_user.id
     post.post_type = post_type
-    post.post_meta = post_meta
+    post.post_link = post_link
+    post.post_meta_id = post_meta_id
 
     if post.save
       post.likes_count = post.likes.count
       post.comments_count = post.comments.count
       post.user_details = post.user
       post.created_at = time_ago_in_words(post.created_at)
+
+      pm = PostMetum.find(post_meta_id)
+      pm.post_id = post.id
+      pm.save
+
+      post.post_image = post.post_meta[0].try(:post_meta).try(:url)
 
       success_json(200, "Posted successfully", post)
     else
@@ -58,7 +67,19 @@ class PostsController < ApplicationController
     if post
       success_json(200, "Deleted successfully", post)
     else
-      error_json(422, 422, I18n.t("en.errors.500"))
+      error_json(422, 422, I18n.t("errors.500"))
+    end
+  end
+
+  def upload_photos
+    meta = PostMetum.new
+    meta.post_meta = params[:images]
+    meta.user_id = current_user.id
+
+    if meta.save!
+      success_json(200, "post meta updated", meta)
+    else
+      error_json(422, 422, I18n.t("errors.500"))
     end
   end
 

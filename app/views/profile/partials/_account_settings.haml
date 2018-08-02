@@ -1,5 +1,24 @@
 .ui-block
   .ui-block-title
+    %h6.title Profile Picture and Banner
+  .ui-block-content
+    = form_for @user do |f|
+      .profile-picture
+        .in
+          %h5 Add a profile picture to help others recognize you better
+        = image_tag(@user.profile_picture) if @user.profile_picture?
+        = f.file_field :profile_picture
+      .banner-picture
+        %p
+          %label
+            %h5 Upload a banner of your choice
+          = image_tag(@user.banner) if @user.banner?
+          = f.file_field :banner
+      = f.submit :as => "button", :class => "btn btn-primary btn-lg full-width", :value => "Upload"
+
+
+.ui-block
+  .ui-block-title
     %h6.title Change Password
   .ui-block-content
     / Change Password Form

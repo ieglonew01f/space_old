@@ -1,0 +1,39 @@
+.fixed-sidebar
+  #sidebar-left.fixed-sidebar-left.sidebar--small
+    %a.logo{:href => "/home"}
+      .img-wrap
+        %img{:alt => "Olympus", :src => "/img/logo.png"}/
+    .mCustomScrollbar.ps.ps--theme_default.ps--active-x{"data-mcs-theme" => "dark", "data-ps-id" => "9ebb2f27-b2e4-2d8f-1646-ff7c042d4461"}
+      %ul.left-menu
+        %li
+          %a{:href => "/profile/#{current_user.username}"}
+            %svg.olymp-happy-faces-icon.left-menu-icon{"data-original-title" => "PROFILE PAGE", "data-placement" => "right", "data-toggle" => "tooltip"}
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-happy-faces-icon"}
+        %li
+          %a{:href => "/home"}
+            %svg.olymp-newsfeed-icon.left-menu-icon{"data-original-title" => "NEWSFEED", "data-placement" => "right", "data-toggle" => "tooltip"}
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-newsfeed-icon"}
+        %li
+          %a.js-sidebar-open{:href => "/account/settings/profile"}
+            %svg.olymp-menu-icon.left-menu-icon{"data-original-title" => "PROFILE SETTINGS", "data-placement" => "right", "data-toggle" => "tooltip"}
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-menu-icon"}
+  #sidebar-left-1.fixed-sidebar-left.sidebar--large
+    %a.logo{:href => "02-ProfilePage.html"}
+      .img-wrap
+        %img{:alt => "Olympus", :src => "img/logo.png"}/
+      .title-block
+        %h6.logo-title olympus
+    .mCustomScrollbar.ps.ps--theme_default.ps--active-y{"data-mcs-theme" => "dark", "data-ps-id" => "181221e1-d9d0-7003-c66d-24c6c85f58e3"}
+      %ul.left-menu
+        %li
+          %a{:href => "/profile/#{current_user.username}"}
+            %svg.olymp-happy-faces-icon.left-menu-icon{"data-original-title" => "PROFILE PAGE", "data-placement" => "right", "data-toggle" => "tooltip"}
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-happy-faces-icon"}
+        %li
+          %a{:href => "/home"}
+            %svg.olymp-newsfeed-icon.left-menu-icon{"data-original-title" => "NEWSFEED", "data-placement" => "right", "data-toggle" => "tooltip"}
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-newsfeed-icon"}
+        %li
+          %a.js-sidebar-open{:href => "/account/settings/profile"}
+            %svg.olymp-menu-icon.left-menu-icon{"data-original-title" => "PROFILE SETTINGS", "data-placement" => "right", "data-toggle" => "tooltip"}
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-menu-icon"}

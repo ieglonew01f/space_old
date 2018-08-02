@@ -10,7 +10,7 @@ export function fetchPosts(id) {
 
     //user post
     if (id) {
-      url = '/users/' + id + '/posts'
+      url = '/users/' + id + '/posts';
     }
 
     axios
@@ -28,7 +28,7 @@ export function fetchPosts(id) {
   }
 }
 
-export function addPost(post_text, post_type, post_meta) {
+export function addPost(post_text, post_type, post_link, post_meta_id) {
   return function(dispatch) {
     dispatch({type: "ADD_POST"});
 
@@ -36,7 +36,8 @@ export function addPost(post_text, post_type, post_meta) {
       .post('/posts', {
         post_text: post_text,
         post_type: post_type,
-        post_meta: JSON.stringify(post_meta),
+        post_link: JSON.stringify(post_link),
+        post_meta_id: post_meta_id,
         authenticity_token: AUTH_TOKEN
       })
       .then((response) => {

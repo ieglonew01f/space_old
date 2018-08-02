@@ -1,0 +1,10 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "home.css"
+= render "common/session_nav"
+= render "common/session_left_nav"
+.header-spacer
+.container
+  .row
+    .col.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+      = render :partial => "profile/partials/banner", locals: {tag: "followers"}
+#container.container

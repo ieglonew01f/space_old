@@ -8,4 +8,13 @@ class UsersController < ApplicationController
       error_json(422, 422, I18n.t("en.errors.500"))
     end
   end
+
+  def update
+    user = User.find(current_user.id)
+    user.profile_picture = params[:user][:profile_picture]
+    user.banner = params[:user][:banner]
+    user.save!
+
+    redirect_back fallback_location: root_path
+  end
 end

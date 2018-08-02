@@ -12,7 +12,7 @@
 //
 //= require_tree .
 //= require web.font.loader.js
-  
+
 //= require js/jquery-3.2.1.js
 //= require js/jquery.appear.js
 //= require js/jquery.mousewheel.js
@@ -49,7 +49,7 @@
 //= require js/base-init.js
 //= require js/ajax-pagination.js
 //= require fonts/fontawesome-all.js
-
+//= require jquery.form.min.js
 //= require dist/js/bootstrap.bundle.js
 
 WebFont.load({
@@ -57,4 +57,3 @@ WebFont.load({
       families: ['Roboto:300,400,500,700:latin']
     }
 });
-

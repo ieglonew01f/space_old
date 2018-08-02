@@ -15,8 +15,20 @@
 .author-thumb img {
   background: #26547C;
   width: 36px;
+  height: 36px;
 }
 
 .post__author img {
   background: #26547C;
+}
+
+.image-profile-main {
+  width: 124px !important;
+  height: 124px !important;
+}
+
+.post-image-upload-preview img {
+  margin-left: 15px;
+  border-radius: 3px;
+  border: 2px solid #39a9ff;
 }

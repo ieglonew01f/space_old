@@ -23,6 +23,17 @@ class ProfileController < ApplicationController
     @user = profile_user
   end
 
+  def followers
+    username = params[:username]
+
+    #todo redirect if username not found
+    #redirect -> 404
+
+    profile_user = User.find_by_username(username)
+    gon.push(profile_user.as_json)
+    @user = profile_user
+  end
+
   def update
     user = User.find(current_user.id)
 
@@ -48,6 +59,7 @@ class ProfileController < ApplicationController
   end
 
   def account_settings
+    @user = User.find(current_user.id)
     render "profile/settings.haml", locals: {setting: "account"}
   end
 

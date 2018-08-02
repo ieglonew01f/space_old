@@ -37,7 +37,8 @@ export default class LayoutComponent extends React.Component {
     this.state = {
       postText: '',
       postType: 1,
-      postMeta: this.props.parsedLink
+      postMeta: this.props.parsedLink,
+      post_images_id: null
     }
   }
 
@@ -46,6 +47,23 @@ export default class LayoutComponent extends React.Component {
     this.props.dispatch(fetchActivities());
     this.props.dispatch(fetchSuggestions());
     this.props.dispatch(fetchForecast());
+
+    $('#post-image-form').ajaxForm({
+        beforeSend: function() { //before sending form
+            console.log('progress');
+        },
+        uploadProgress: function(event, position, total, percentComplete) { //on progress
+            console.log(percentComplete);
+        },
+        complete: function(response) { // on complete
+          var data = JSON.parse(response.responseText).data
+          $('.post-image-upload-preview').html($('<img/>').attr('src', data.post_meta.thumb.url));
+          $('.post-image-upload-preview').attr('data-post-image-id', data.id);
+        }
+    });
+
+    const AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
+    $('#authenticity_token').val(AUTH_TOKEN);
   }
 
   onChange (e) {
@@ -60,10 +78,12 @@ export default class LayoutComponent extends React.Component {
       this.state.postType = 2;
     }
 
-    this.props.dispatch(addPost(this.state.postText, this.state.postType, this.props.parsedLink));
+    this.props.dispatch(addPost(this.state.postText, this.state.postType, this.props.parsedLink, $('.post-image-upload-preview').attr('data-post-image-id')));
 
     //reset
     this.setState({ postText: '', postType: 1 });
+    $('.post-image-upload-preview').html('');
+    $('.post-image-upload-preview').attr('data-post-image-id', '');
   }
 
   onPasteLink(e) {
@@ -74,6 +94,15 @@ export default class LayoutComponent extends React.Component {
     if (isLink(this.state.postText)) {
       this.props.dispatch(parseLink(this.state.postText));
     }
+  }
+
+  clickUploadImagePost(e) {
+    $("#post-image-file").trigger('click');
+  }
+
+  addPhotoPost(e) {
+    //process photo and show in ui
+    $('#post-image-form').submit();
   }
 
   render() {
@@ -106,8 +135,18 @@ export default class LayoutComponent extends React.Component {
                                 </div>
                                 <PostMeta parsedLink={parsedLink}/>
                                 <div className="add-options-message">
+                                  <a onClick={event => this.clickUploadImagePost(event)} href="javascript:void(0)" className="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
+                										<svg className="olymp-camera-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
+                									</a>
+                                  <span className="post-image-upload-preview">
+
+                                  </span>
                                   <PostSubmitButton posting={posting} postStatus={event => this.postStatus(event)}/>
                                 </div>
+                            </form>
+                            <form id="post-image-form" onChange={event => this.addPhotoPost(event)} encType="multipart/form-data" action="/posts/upload_photos" acceptCharset="UTF-8" method="post">
+                              <input hidden="true" type="file" id="post-image-file" name="images"/>
+                              <input type="hidden" name="authenticity_token" id="authenticity_token"/>
                             </form>
                         </div>
                     </div>

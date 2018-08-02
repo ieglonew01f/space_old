@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :posts
   has_many :followers
 
+  mount_uploader :profile_picture, AvatarUploader
+  mount_uploader :banner, BannerUploader
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 
