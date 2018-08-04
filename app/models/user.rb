@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, length: { maximum: 35 }
 
   has_many :posts
-  has_many :followers
+  has_many :followers, foreign_key: "followed_id"
 
   mount_uploader :profile_picture, AvatarUploader
   mount_uploader :banner, BannerUploader

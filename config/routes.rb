@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'profile/:username' => 'profile#index'
   get 'profile/:username/about' => 'profile#about'
+  get 'profile/:username/videos' => 'profile#videos'
   get 'profile/:username/followers' => 'profile#followers'
   get 'account/settings/profile' => 'profile#profile_settings'
   get 'account/settings/hobbies' => 'profile#hobbies_settings'
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
     resources :posts
     resources :activities
     resource :follow
+    resource :followers
+    resource :videos
   end
 
   resources :posts do

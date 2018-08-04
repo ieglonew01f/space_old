@@ -19,6 +19,20 @@ export default function reducer(state={
           suggestions: action.payload.data
         }
       }
+      case "FETCH_FOLLOWERS": {
+        return {...state, fetching: true}
+      }
+      case "FETCH_FOLLOWERS_REJECTED": {
+        return {...state, fetching: false, error: action.payload}
+      }
+      case "FETCH_FOLLOWERS_FULFILLED": {
+        return {
+          ...state,
+          fetching: false,
+          fetched: true,
+          suggestions: action.payload.data
+        }
+      }
       case "FOLLOW_USER": {
         return {...state, fetching: true}
       }

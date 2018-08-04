@@ -46,6 +46,44 @@ export function fetchSuggestions() {
   }
 }
 
+export function fetchFollowers(id) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_FOLLOWERS"});
+
+    axios
+      .get("/users/" + id + "/followers", {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_FOLLOWERS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_FOLLOWERS_REJECTED", payload: err})
+      });
+  }
+};
+
+export function fetchVideos(id) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_VIDEOS"});
+
+    axios
+      .get("/users/" + id + "/videos", {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_VIDEOS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_VIDEOS_REJECTED", payload: err})
+      });
+  }
+};
+
 export function fetchForecast(id) {
   return function(dispatch) {
     dispatch({type: "FETCH_FORECAST"});
