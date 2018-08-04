@@ -15,6 +15,9 @@ export default class Weather extends React.Component {
     else if (str.toLowerCase().includes("rain")) {
       return "/svg-icons/sprites/icons-weather.svg#olymp-weather-rain-icon";
     }
+    else if (str.toLowerCase().includes("breezy")) {
+      return "/svg-icons/sprites/icons-weather.svg#olymp-weather-wind-icon-header";
+    }
   }
 
   render() {
