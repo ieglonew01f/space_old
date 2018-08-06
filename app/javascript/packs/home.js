@@ -9,5 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   render(
     <Provider store={store}>
        <HomeComponent/>
-    </Provider>, document.getElementById('container'));
+    </Provider>, document.getElementById('container')
+  );
 });

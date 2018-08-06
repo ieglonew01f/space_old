@@ -8,6 +8,11 @@
   display: none;
 }
 
+.popup-chat-responsive {
+  bottom: 0 !important;
+  top: auto !important;
+}
+
 .author-thumb.status-div img {
   background: #26547C;
 }

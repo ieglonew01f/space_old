@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   get 'home/index'
   get 'profile/:username' => 'profile#index'
   get 'profile/:username/about' => 'profile#about'
@@ -28,10 +30,13 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get 'get_suggestions'
+      get 'get_friends'
     end
 
     resources :posts
     resources :activities
+    resources :chats, only:[:index, :create, :show]
+
     resource :follow
     resource :followers
     resource :videos
@@ -46,6 +51,8 @@ Rails.application.routes.draw do
     resources :comments
     resources :likes
   end
+
+  resources :messages, only:[:create]
 
   resources :home do
     collection do

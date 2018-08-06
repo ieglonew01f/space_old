@@ -44,7 +44,7 @@ gem 'public_activity'
 gem 'devise'
 gem 'omniauth-facebook'
 
-# gem 'jquery-rails'
+gem 'jquery-rails'
 # gem 'popper_js', '~> 1.12.9'
 # gem 'bootstrap', '~> 4.0.0'
 

@@ -9,6 +9,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_friends
+    u = User.all
+
+    if u
+      success_json(200, "Success", u)
+    else
+      error_json(422, 422, I18n.t("errors.500"))
+    end
+  end
+
   def update
     user = User.find(current_user.id)
     user.profile_picture = params[:user][:profile_picture]

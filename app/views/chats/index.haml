@@ -1,0 +1,33 @@
+%div
+  %h5 Chat with Someone
+  %p
+    %textarea.message
+    %button.send-message
+      Send Message
+    %input#message_chat_id{:hidden => true, :value => @chat.id}
+
+  .messages-list
+    %ul.list-unstyled
+
+:javascript
+
+  App.messages = App.cable.subscriptions.create({
+      channel: 'MessagesChannel',
+      chat_id: parseInt($("#message_chat_id").val())
+  }, {
+      received: function(data) {
+          $('.messages-list').find('ul').append($('<li/>').text(data.message));
+      }
+  });
+
+  $('.send-message').on('click', function(){
+    $.post("/messages",
+    {
+        content: $('.message').val(),
+        chat_id: $("#message_chat_id").val(),
+        authenticity_token: $('meta[name=csrf-token]').attr('content')
+    },
+    function(data, status){
+      console.log(data)
+    });
+  });
