@@ -8,9 +8,58 @@
   display: none;
 }
 
+.popup-chat-responsive ul {
+  max-height: 250px !important;
+  overflow-y: scroll !important;
+}
+
 .popup-chat-responsive {
-  bottom: 0 !important;
+  bottom: -100px !important;
   top: auto !important;
+}
+
+.popup-chat .chat-message-field li.outgoing .author-thumb {
+  float: right !important;
+}
+
+.popup-chat .chat-message-field li.outgoing .notification-event {
+  float: right !important;
+  padding-left: 0 !important;
+  padding-right: 10px !important;
+}
+
+.popup-chat .chat-message-field li.outgoing .chat-message-item {
+  float: right !important;
+}
+
+.popup-chat .chat-message-field li.outgoing .chat-message-item {
+  background-color: #7c5ac2 !important;
+  color: #fff !important;
+}
+
+
+
+
+
+
+.popup-chat .chat-message-field li.incoming .author-thumb {
+  float: left !important;
+}
+
+.popup-chat .chat-message-field li.incoming .notification-event {
+  float: left !important;
+  padding-left: 0 !important;
+  padding-right: 10px !important;
+}
+
+.popup-chat .chat-message-field li.incoming .chat-message-item {
+  float: left !important;
+}
+
+.popup-chat .chat-message-field li.incoming .chat-message-item {
+  background-color: #f0f4f9 !important;
+  color: inherit;
+  margin-left: 20px;
 }
 
 .author-thumb.status-div img {

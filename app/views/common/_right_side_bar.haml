@@ -25,7 +25,7 @@
         %span.icon-status.online
         %h6.title {{name}}
         .more
-          %svg.olymp-little-delete.js-chat-open
+          %svg.olymp-little-delete.js-chat-open.close-chat
             %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-little-delete"}
       .modal-body
         .mCustomScrollbar
@@ -34,27 +34,23 @@
 
         %form.need-validation
           .form-group.label-floating.is-empty
-            %label.control-label Press enter to post...
-            %textarea.form-control{:placeholder => ""}
+            %label.control-label Press enter to send ...
+            %textarea.form-control.text-chat-message{:placeholder => ""}
             .add-options-message
               %a.options-message{:href => "#"}
                 %svg.olymp-computer-icon
                   %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-computer-icon"}
 
 %script#chat-incoming{:type => "text/x-handlebars-template"}
-  %li
+  %li.incoming
     .author-thumb
       %img.mCS_img_loaded{:alt => "author", :src => "/img/avatar14-sm.jpg"}/
     .notification-event
       %span.chat-message-item {{message}}
-      %span.notification-date
-        %time.entry-date.updated{:datetime => "2004-07-24T18:18"} Yesterday at 8:10pm
 
 %script#chat-outgoing{:type => "text/x-handlebars-template"}
-  %li
+  %li.outgoing
     .author-thumb
       %img.mCS_img_loaded{:alt => "author", :src => "/img/author-page.jpg"}/
     .notification-event
       %span.chat-message-item {{message}}
-      %span.notification-date
-        %time.entry-date.updated{:datetime => "2004-07-24T18:18"} Yesterday at 8:29pm
