@@ -48,19 +48,21 @@ export default class LayoutComponent extends React.Component {
     this.props.dispatch(fetchSuggestions());
     this.props.dispatch(fetchForecast());
 
-    $('#post-image-form').ajaxForm({
-        beforeSend: function() { //before sending form
-            console.log('progress');
-        },
-        uploadProgress: function(event, position, total, percentComplete) { //on progress
-            console.log(percentComplete);
-        },
-        complete: function(response) { // on complete
-          var data = JSON.parse(response.responseText).data
-          $('.post-image-upload-preview').html($('<img/>').attr('src', data.post_meta.thumb.url));
-          $('.post-image-upload-preview').attr('data-post-image-id', data.id);
-        }
-    });
+    setTimeout(function(){
+      $('#post-image-form').ajaxForm({
+          beforeSend: function() { //before sending form
+              console.log('progress');
+          },
+          uploadProgress: function(event, position, total, percentComplete) { //on progress
+              console.log(percentComplete);
+          },
+          complete: function(response) { // on complete
+            var data = JSON.parse(response.responseText).data
+            $('.post-image-upload-preview').html($('<img/>').attr('src', data.post_meta.thumb.url));
+            $('.post-image-upload-preview').attr('data-post-image-id', data.id);
+          }
+      });
+    }, 1000);
 
     const AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
     $('#authenticity_token').val(AUTH_TOKEN);
