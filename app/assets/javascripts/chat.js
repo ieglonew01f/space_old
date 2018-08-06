@@ -4,6 +4,9 @@ $(document).ready(function() {
   var chat_incoming_template = Handlebars.compile($('#chat-incoming').html());
   var chat_outgoing_template = Handlebars.compile($('#chat-outgoing').html());
 
+  //init websocket
+  init_web_socket_connections();
+
   //Load all chat users on the right sidebar
   load_online_users();
 
@@ -29,8 +32,9 @@ $(document).ready(function() {
         if (!message) return;
 
         var chat_id = $(this).parents('.popup-chat-responsive').attr('data-chat-id');
+            for_id = $(this).parents('.popup-chat-responsive').attr('data-user-id');
 
-        send_message(message, chat_id);
+        send_message(message, chat_id, for_id);
 
         //cleanup
         $(this).val('');
@@ -42,13 +46,14 @@ $(document).ready(function() {
     $(this).parents('.ui-block.popup-chat.popup-chat-responsive').remove();
   });
 
-  function open_chat_window(user_id, name) {
+  function open_chat_window(user_id, name, chat_id) {
     var source = $('#chat-pop-up').html(),
         chat_window_template = Handlebars.compile(source);
 
     $('.fixed-sidebar.right').append(chat_window_template({
       name: name,
-      user_id: user_id
+      user_id: user_id,
+      chat_id: chat_id
     }));
   };
 
@@ -93,55 +98,34 @@ $(document).ready(function() {
 
         $('.popup-chat-responsive').attr('data-chat-id', chat.id);
 
-        render_messages(messages, chat.id);
-
-        //open websocket subscription
-        App.messages = App.cable.subscriptions.create({
-          channel: 'MessagesChannel',
-          chat_id: parseInt(chat.id)
-        },{
-          received: function(data) {
-            console.log(data)
-            //do not render if current_user is the sender
-            if (parseInt(gon.id) === parseInt(data.by_id)) return;
-
-            $('.popup-chat-responsive[data-chat-id="' + chat.id + '"]')
-              .find('ul.notification-list.chat-message')
-              .append(
-                chat_incoming_template({
-                  message: data.message
-                })
-              );
-
-            scroll_chat();
-          }
-        });
+        render_messages(messages, chat.id, user.profile_picture.thumb.url);
       }
     });
   }
 
-  function render_messages(messages, chat_id) {
+  function render_messages(messages, chat_id, profile_picture) {
     if (!messages || messages.length === 0) return;
 
     var messages_html = [];
 
     $.each(messages, function(i, m) {
-      //incomming message
+      var template = chat_incoming_template,
+          this_profile_picture = profile_picture;
+
+
+      //outgoing message
       //if message user is not current_user
       if (parseInt(gon.id, 10) === parseInt(m.user_id, 10)) {
-        messages_html.push(
-          chat_outgoing_template({
-            message: m.content
-          })
-        )
+        template = chat_outgoing_template,
+        this_profile_picture = gon.profile_picture.thumb.url;
       }
-      else {
-        messages_html.push(
-          chat_incoming_template({
-            message: m.content
-          })
-        )
-      }
+
+      messages_html.push(
+        template({
+          message: m.content,
+          profile_picture: this_profile_picture
+        })
+      )
     });
 
     $('.popup-chat-responsive[data-chat-id="' + chat_id + '"]')
@@ -151,7 +135,7 @@ $(document).ready(function() {
     scroll_chat();
   };
 
-  function send_message(message, chat_id) {
+  function send_message(message, chat_id, for_id) {
     $.ajax({
       url: "/messages",
       cache: false,
@@ -159,14 +143,16 @@ $(document).ready(function() {
       data: {
         authenticity_token: AUTH_TOKEN,
         content: message,
-        chat_id: chat_id
+        chat_id: chat_id,
+        for_id: for_id
       },
       beforeSend: function() {
         $('.popup-chat-responsive[data-chat-id="' + chat_id + '"]')
           .find('ul.notification-list.chat-message')
           .append(
             chat_outgoing_template({
-              message: message
+              message: message,
+              profile_picture: gon.profile_picture.thumb.url
             })
           );
 
@@ -181,5 +167,44 @@ $(document).ready(function() {
   function scroll_chat() {
     var elem = $('.popup-chat-responsive').find('ul.notification-list.chat-message');
     elem.scrollTop(elem[0].scrollHeight);
+  }
+
+  function init_web_socket_connections() {
+    //open websocket subscription
+    App.messages = App.cable.subscriptions.create({
+      channel: 'MessagesChannel',
+      for_user_id: parseInt(gon.id)
+    },{
+      received: function(data) {
+        console.log(data);
+
+        //do not render if current_user is the sender
+        if (parseInt(gon.id) === parseInt(data.by_id)) return;
+
+        var chat_window = $('.popup-chat-responsive[data-chat-id="' + data.chat_id + '"]');
+
+        //check if chat window is already open
+        if (chat_window.length === 0) {
+          open_chat_window(data.by_id, data.name, data.chat_id);
+          append_incomming_message(data.chat_id, data.message, data.profile_picture);
+        }
+        else {
+          append_incomming_message(data.chat_id, data.message, data.profile_picture);
+        }
+      }
+    });
+  }
+
+  function append_incomming_message(chat_id, message, profile_picture) {
+    $('.popup-chat-responsive[data-chat-id="' + chat_id + '"]')
+      .find('ul.notification-list.chat-message')
+      .append(
+        chat_incoming_template({
+          message: message,
+          profile_picture: profile_picture
+        })
+      );
+
+    scroll_chat();
   }
 });

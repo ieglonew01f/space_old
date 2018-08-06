@@ -7,10 +7,13 @@ class MessagesController < ApplicationController
 
     if message.save
       #broadcasting out to messages channel including the chat_id so messages are broadcasted to specific chat only
-      ActionCable.server.broadcast( "messages_#{params[:chat_id]}",
+      ActionCable.server.broadcast( "messages_#{params[:for_id]}",
         message: message.content,
         chat_id: message.chat_id,
-        by_id: current_user.id
+        by_id: current_user.id,
+        for_id: params[:for_id].to_i,
+        name: current_user.first_name + ' ' + current_user.last_name,
+        profile_picture: current_user.profile_picture.thumb.url
       )
     else
       redirect_to chats_path

@@ -10,6 +10,7 @@
 
 .popup-chat-responsive ul {
   max-height: 250px !important;
+  min-height: 250px !important;
   overflow-y: scroll !important;
 }
 
@@ -36,11 +37,6 @@
   background-color: #7c5ac2 !important;
   color: #fff !important;
 }
-
-
-
-
-
 
 .popup-chat .chat-message-field li.incoming .author-thumb {
   float: left !important;

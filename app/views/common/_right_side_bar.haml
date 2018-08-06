@@ -44,13 +44,13 @@
 %script#chat-incoming{:type => "text/x-handlebars-template"}
   %li.incoming
     .author-thumb
-      %img.mCS_img_loaded{:alt => "author", :src => "/img/avatar14-sm.jpg"}/
+      %img.mCS_img_loaded{:alt => "author", :src => "{{profile_picture}}"}/
     .notification-event
       %span.chat-message-item {{message}}
 
 %script#chat-outgoing{:type => "text/x-handlebars-template"}
   %li.outgoing
     .author-thumb
-      %img.mCS_img_loaded{:alt => "author", :src => "/img/author-page.jpg"}/
+      %img.mCS_img_loaded{:alt => "author", :src => "{{profile_picture}}"}/
     .notification-event
       %span.chat-message-item {{message}}
