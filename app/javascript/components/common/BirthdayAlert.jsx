@@ -15,7 +15,7 @@ export default class BirthdayAlert extends React.Component {
         		</div>
         		<span>Today is</span>
         		<a href="#" className="h4 title">Marina Valentine’s Birthday!</a>
-        		<p>Leave her a message with your best wishes on her profile page!</p>
+        		<p>Leave a message with your best wishes on her profile page!</p>
         	</div>
         </div>
       </div>

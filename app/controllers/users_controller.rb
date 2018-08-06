@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def get_friends
-    u = User.all
+    u = User.where('id != ?', current_user.id)
 
     if u
       success_json(200, "Success", u)
