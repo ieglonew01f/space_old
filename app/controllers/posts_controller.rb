@@ -58,6 +58,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    post_id = params[:id]
+    post = Post.find(post_id)
+    post.likes_count = post.likes.count
+    post.comments_count = post.comments.count
+    post.user_details = post.user
+    post.created_at = time_ago_in_words(post.created_at)
+    post.post_image = post.post_meta[0].try(:post_meta).try(:url)
+    
+    gon.push({:post => post.as_json})
+  end
+
   def destroy
     post_id = params[:post_id]
     return if post_id.nil?

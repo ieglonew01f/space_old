@@ -16,6 +16,18 @@
         .ui-block-content
           %ul.widget.w-personal-info
             %li
+              %span.title College:
+              %span.text
+                = @user.college
+            %li
+              %span.title Discipline:
+              %span.text
+                = @user.course
+            %li
+              %span.title Batch:
+              %span.text
+                = @user.college_batch
+            %li
               %span.title About Me:
               %span.text
                 = @user.about

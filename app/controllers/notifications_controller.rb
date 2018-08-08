@@ -26,6 +26,7 @@ class NotificationsController < ApplicationController
         :object_owner => object_owner,
         :activity_owner => activity_owner,
         :object_type => object_type,
+        :object_id => post_id.to_i,
         :message => I18n.t("activity.#{activity.key}")
       }
     end

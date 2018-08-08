@@ -13,7 +13,6 @@ import Comments from "./Comments";
 @connect((store) => {
   return {
     likes: store.likes.likes,
-    posts: store.posts.posts,
     comments: store.comments.comments
   };
 })
@@ -35,7 +34,7 @@ export default class Posts extends React.Component {
 
   render() {
     const {posts, comments} = this.props;
-
+    console.log(posts)
     return <ul>
       {
         posts.map((post, i) =>

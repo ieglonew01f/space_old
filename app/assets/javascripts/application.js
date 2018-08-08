@@ -11,6 +11,9 @@
 // about supported directives.
 //
 //= require js/jquery-3.2.1.js
+//= require_tree .
+
+
 //= require js/jquery.appear.js
 //= require js/jquery.mousewheel.js
 //= require js/perfect-scrollbar.js
@@ -50,8 +53,6 @@
 //= require dist/js/bootstrap.bundle.js
 //= require web.font.loader.js
 //= require handlebars.js
-
-//= require_tree .
 //= require chat.js
 
 WebFont.load({

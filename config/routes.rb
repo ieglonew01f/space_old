@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   # mount ActionCable.server => '/cable'
 
   get 'home/index'
@@ -33,6 +31,7 @@ Rails.application.routes.draw do
     collection do
       get 'get_suggestions'
       get 'get_friends'
+      get 'get_all_users'
     end
 
     resources :posts
@@ -43,6 +42,8 @@ Rails.application.routes.draw do
     resource :followers
     resource :videos
   end
+
+  resources :search, only:[:results]
 
   resources :posts do
     collection do

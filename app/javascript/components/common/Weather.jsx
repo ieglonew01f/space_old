@@ -12,7 +12,7 @@ export default class Weather extends React.Component {
     else if (str.toLowerCase().includes("sunny")) {
       return "/svg-icons/sprites/icons-weather.svg#olymp-weather-sunny-icon";
     }
-    else if (str.toLowerCase().includes("rain")) {
+    else if (str.toLowerCase().includes("rain") || str.toLowerCase().includes("showers")) {
       return "/svg-icons/sprites/icons-weather.svg#olymp-weather-rain-icon";
     }
     else if (str.toLowerCase().includes("breezy")) {

@@ -13,6 +13,18 @@ export default class AboutComponent extends React.Component {
 				</div>
 				<div className="ui-block-content">
 					<ul className="widget w-personal-info item-block">
+            <li>
+              <span className="title">College:</span>
+              <span className="text">{gon.college}</span>
+            </li>
+            <li>
+              <span className="title">Discipline:</span>
+              <span className="text">{gon.course}</span>
+            </li>
+            <li>
+              <span className="title">Batch:</span>
+              <span className="text">{gon.college_batch + " " + gon.college}</span>
+            </li>
 						<li>
 							<span className="title">About Me:</span>
 							<span className="text">{gon.about}</span>

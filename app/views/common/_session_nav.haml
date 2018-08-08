@@ -1,0 +1,323 @@
+- content_for :pagejs do
+  = javascript_pack_tag 'search'
+
+%body
+  %header#site-header.header
+    .page-title
+      %h6= t('session_nav.label.news_feed')
+    .header-content-wrapper
+      #search-bar
+      / <a href="#" class="link-find-friend">Find Friends</a>
+      .control-block
+        /
+          <div class="control-icon more has-items">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          <div class="label-avatar bg-blue">6</div>
+
+          <div class="more-dropdown more-with-triangle triangle-top-center">
+          <div class="ui-block-title ui-block-title-small">
+          <h6 class="title"><haml_loud> t(&#39;session_nav.label.find_friends&#39;) </haml_loud></h6>
+          <a href="#"><haml_loud> t(&#39;session_nav.label.find_friends&#39;) </haml_loud></a>
+          <a href="#"><haml_loud> t(&#39;common.label.settings&#39;) </haml_loud></a>
+          </div>
+
+          <div class="mCustomScrollbar" data-mcs-theme="dark">
+          <ul class="notification-list friend-requests">
+          <li>
+          <div class="author-thumb">
+          <img src="/img/avatar55-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">Tamara Romanoff</a>
+          <span class="chat-message-item">Mutual Friend: Sarah Hetfield</span>
+          </div>
+          <span class="notification-icon">
+          <a href="#" class="accept-request">
+          <span class="icon-add without-text">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+          </a>
+
+          <a href="#" class="accept-request request-del">
+          <span class="icon-minus">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+          </a>
+
+          </span>
+
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+
+          <li>
+          <div class="author-thumb">
+          <img src="/img/avatar56-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">Tony Stevens</a>
+          <span class="chat-message-item">4 Friends in Common</span>
+          </div>
+          <span class="notification-icon">
+          <a href="#" class="accept-request">
+          <span class="icon-add without-text">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+          </a>
+
+          <a href="#" class="accept-request request-del">
+          <span class="icon-minus">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+          </a>
+
+          </span>
+
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+
+          <li class="accepted">
+          <div class="author-thumb">
+          <img src="/img/avatar57-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          You and <a href="#" class="h6 notification-friend">Mary Jane Stark</a> just became friends. Write on <a href="#" class="notification-link">her wall</a>.
+          </div>
+          <span class="notification-icon">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          <svg class="olymp-little-delete"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-little-delete"></use></svg>
+          </div>
+          </li>
+
+          <li>
+          <div class="author-thumb">
+          <img src="/img/avatar58-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">Stagg Clothing</a>
+          <span class="chat-message-item">9 Friends in Common</span>
+          </div>
+          <span class="notification-icon">
+          <a href="#" class="accept-request">
+          <span class="icon-add without-text">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+          </a>
+
+          <a href="#" class="accept-request request-del">
+          <span class="icon-minus">
+          <svg class="olymp-happy-face-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+          </span>
+          </a>
+
+          </span>
+
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+
+          </ul>
+          </div>
+
+          <a href="#" class="view-all bg-blue"><haml_loud> t(&#39;session_nav.label.check_all_events&#39;) </haml_loud></a>
+          </div>
+          </div>
+        /
+          <div class="control-icon more has-items">
+          <svg class="olymp-chat---messages-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
+          <div class="label-avatar bg-purple">2</div>
+
+          <div class="more-dropdown more-with-triangle triangle-top-center">
+          <div class="ui-block-title ui-block-title-small">
+          <h6 class="title"><haml_loud> t(&#39;common.label.messages&#39;) </haml_loud></h6>
+          <a href="#"><haml_loud> t(&#39;common.label.mark_all_read&#39;) </haml_loud></a>
+          <a href="#"><haml_loud> t(&#39;common.label.settings&#39;) </haml_loud></a>
+          </div>
+
+          <div class="mCustomScrollbar" data-mcs-theme="dark">
+          <ul class="notification-list chat-message">
+          <li class="message-unread">
+          <div class="author-thumb">
+          <img src="/img/avatar59-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">Diana Jameson</a>
+          <span class="chat-message-item">Hi James! It’s Diana, I just wanted to let you know that we have to reschedule...</span>
+          <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">4 hours ago</time></span>
+          </div>
+          <span class="notification-icon">
+          <svg class="olymp-chat---messages-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
+          </span>
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+
+          <li>
+          <div class="author-thumb">
+          <img src="/img/avatar60-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">Jake Parker</a>
+          <span class="chat-message-item">Great, I’ll see you tomorrow!.</span>
+          <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">4 hours ago</time></span>
+          </div>
+          <span class="notification-icon">
+          <svg class="olymp-chat---messages-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
+          </span>
+
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+          <li>
+          <div class="author-thumb">
+          <img src="/img/avatar61-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">Elaine Dreyfuss</a>
+          <span class="chat-message-item">We’ll have to check that at the office and see if the client is on board with...</span>
+          <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Yesterday at 9:56pm</time></span>
+          </div>
+          <span class="notification-icon">
+          <svg class="olymp-chat---messages-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
+          </span>
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+
+          <li class="chat-group">
+          <div class="author-thumb">
+          <img src="/img/avatar11-sm.jpg" alt="author">
+          <img src="/img/avatar12-sm.jpg" alt="author">
+          <img src="/img/avatar13-sm.jpg" alt="author">
+          <img src="/img/avatar10-sm.jpg" alt="author">
+          </div>
+          <div class="notification-event">
+          <a href="#" class="h6 notification-friend">You, Faye, Ed &amp; Jet +3</a>
+          <span class="last-message-author">Ed:</span>
+          <span class="chat-message-item">Yeah! Seems fine by me!</span>
+          <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">March 16th at 10:23am</time></span>
+          </div>
+          <span class="notification-icon">
+          <svg class="olymp-chat---messages-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
+          </span>
+          <div class="more">
+          <svg class="olymp-three-dots-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+          </div>
+          </li>
+          </ul>
+          </div>
+
+          <a href="#" class="view-all bg-purple"><haml_loud> t(&#39;common.label.view_all_messages&#39;) </haml_loud></a>
+          </div>
+          </div>
+        /
+          <div class="control-icon more has-items">
+          <svg class="olymp-thunder-icon"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-thunder-icon"></use></svg>
+
+          <div class="label-avatar bg-primary"></div>
+
+          <div class="more-dropdown more-with-triangle triangle-top-center">
+          <div class="ui-block-title ui-block-title-small">
+          <h6 class="title"><haml_loud> t(&#39;common.label.notifications&#39;) </haml_loud></h6>
+          <a href="#"><haml_loud> t(&#39;common.label.mark_all_read&#39;) </haml_loud></a>
+          <a href="#"><haml_loud> t(&#39;common.label.settings&#39;) </haml_loud></a>
+          </div>
+
+          <div class="mCustomScrollbar" data-mcs-theme="dark">
+          <ul class="notification-list">
+
+          </ul>
+          </div>
+
+          <a href="#" class="view-all bg-primary"><haml_loud> t(&#39;common.label.view_all_notifications&#39;) </haml_loud></a>
+          </div>
+          </div>
+        .author-page.author.vcard.inline-items.more
+          .author-thumb
+            %img.avatar{:alt => "author", :src => "#{current_user.profile_picture.thumb.url}"}/
+            %span.icon-status.online
+            .more-dropdown.more-with-triangle
+              .mCustomScrollbar{"data-mcs-theme" => "dark"}
+                .ui-block-title.ui-block-title-small
+                  %h6.title Your Account
+                %ul.account-settings
+                  %li
+                    %a{:href => "/account/settings/profile"}
+                      %svg.olymp-menu-icon
+                        %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-menu-icon"}
+                      %span= t('common.label.profile_settings')
+                  /
+                    <li>
+                    <a href="36-FavPage-SettingsAndCreatePopup.html">
+                    <svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="/svg-icons/sprites/icons.svg#olymp-star-icon"></use></svg>
+
+                    <span>Create Fav Page</span>
+                    </a>
+                    </li>
+                  %li
+                    %a{:href => "/users/sign_out"}
+                      %svg.olymp-logout-icon
+                        %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-logout-icon"}
+                      %span= t('common.label.log_out')
+                .ui-block-title.ui-block-title-small
+                  %h6.title= t('common.label.chat_settings')
+                %ul.chat-settings
+                  %li
+                    %a{:href => "#"}
+                      %span.icon-status.online
+                      %span Online
+                  %li
+                    %a{:href => "#"}
+                      %span.icon-status.away
+                      %span Away
+                  %li
+                    %a{:href => "#"}
+                      %span.icon-status.disconected
+                      %span Disconnected
+                  %li
+                    %a{:href => "#"}
+                      %span.icon-status.status-invisible
+                      %span Invisible
+                .ui-block-title.ui-block-title-small
+                  %h6.title= t('common.label.custom_status')
+                %form.form-group.with-button.custom-status
+                  %input.form-control{:placeholder => "", :type => "text", :value => "Space Cowboy"}/
+                  %button.bg-purple
+                    %svg.olymp-check-icon
+                      %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-check-icon"}
+                .ui-block-title.ui-block-title-small
+                  %h6.title= t('common.label.others')
+                %ul
+                  %li
+                    %a{:href => "#"}
+                      %span= t('common.label.tnc')
+                  %li
+                    %a{:href => "#"}
+                      %span= t('common.label.about')
+          %a.author-name.fn{:href => "02-ProfilePage.html"}
+            .author-title
+              = current_user.first_name
+              = current_user.last_name
+              %svg.olymp-dropdown-arrow-icon
+                %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"}
+            %span.author-subtitle SW DEVELOPER
+  :javascript
+    window.current_user = {
+    	'first_name': '#{current_user.first_name}',
+    	'last_name': '#{current_user.last_name}',
+    	'username': '#{current_user.username}',
+    	'gender': '#{current_user.gender}',
+    	'profile_picture': '#{current_user.profile_picture}'
+    }
+  / ... end Header-BP

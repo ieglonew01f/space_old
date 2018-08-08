@@ -62,7 +62,7 @@ export default class LayoutComponent extends React.Component {
           profileElement = <div className="row">
         		<div className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
               <AboutComponent/>
-              <FollowersComponent/>
+              <FollowersComponent followers={suggestions}/>
             </div>
             <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
               <div id="newsfeed-items-grid">
