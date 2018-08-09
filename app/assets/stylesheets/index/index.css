@@ -5,3 +5,11 @@
 .registration-login-form {
     margin-top: 50px;
 }
+
+select[name="user[college]"] {
+  height: 58px !important;
+}
+
+select[name="user[college_batch]"] {
+  height: 58px !important;
+}
