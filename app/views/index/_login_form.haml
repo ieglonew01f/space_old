@@ -1,0 +1,90 @@
+/ Login-Registration Form
+.registration-login-form
+  / Nav tabs
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.nav-item
+      %a.nav-link.active{"data-toggle" => "tab", :href => "#home", :role => "tab"}
+        %svg.olymp-login-icon
+          %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-login-icon"}
+    %li.nav-item
+      %a.nav-link{"data-toggle" => "tab", :href => "#profile", :role => "tab"}
+        %svg.olymp-register-icon
+          %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-register-icon"}
+  / Tab panes
+  .tab-content
+    #home.tab-pane.active{"data-mh" => "log-tab", :role => "tabpanel"}
+      .title.h6= t('index.message.register')
+      %form.content{"accept-charset" => "UTF-8", :action => "/users", :method => "post"}
+        %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
+        .row
+          .col.col-12.col-xl-6.col-lg-6.col-md-6.col-sm-12
+            .form-group.label-floating.is-empty
+              %label.control-label= t('common.label.first_name')
+              %input.form-control{:name => "user[first_name]", :placeholder => "", :type => "text"}/
+          .col.col-12.col-xl-6.col-lg-6.col-md-6.col-sm-12
+            .form-group.label-floating.is-empty
+              %label.control-label= t('common.label.last_name')
+              %input.form-control{:name => "user[last_name]", :placeholder => "", :type => "text"}/
+          .col.col-12.col-xl-12.col-lg-12.col-md-12.col-sm-12
+            .form-group
+              %label.control-label College
+              %select.form-control{:name => "user[college]"}
+                - @college_list.each do |college|
+                  %option{:value => "#{college}"}
+                    = college
+            .form-group
+              %label.control-label Batch of
+              = select_year(Date.today.year, {:start_year => Date.today.year, :end_year => 1990}, {:class => "form-control", :name => "user[college_batch]"})
+            .form-group.label-floating.is-empty
+              %label.control-label Course
+              %input.form-control{:name => "user[course]", :type => "text"}/
+            .form-group.label-floating.is-empty
+              %label.control-label= t('common.label.email')
+              %input.form-control{:name => "user[email]", :placeholder => "", :type => "email"}/
+            .form-group.label-floating.is-empty
+              %label.control-label= t('common.label.password')
+              %input.form-control{:name => "user[password]", :placeholder => "", :type => "password"}/
+            .form-group.date-time-picker.label-floating
+              %label.control-label= t('common.label.birthday')
+              %input{:name => "user[birthday]", :value => "10/24/1984"}/
+              %span.input-group-addon
+                %svg.olymp-calendar-icon
+                  %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-calendar-icon"}
+            .form-group.label-floating.is-select
+              %label.control-label= t('common.label.gender')
+              %select.selectpicker.form-control{:name => "user[gender]"}
+                %option{:value => "1"}= t('common.label.male')
+                %option{:value => "0"}= t('common.label.female')
+            .remember
+              .checkbox
+                %label
+                  %input{:name => "user[terms]", :type => "checkbox"}/
+                  I accept the
+                  %a{:href => "#"}= t('common.label.tnc')
+                  of the website
+            %button.btn.btn-purple.btn-lg.full-width{:name => "commit", :type => "submit"}= t('common.label.sign_up')
+    #profile.tab-pane{"data-mh" => "log-tab", :role => "tabpanel"}
+      .title.h6= t('index.message.login')
+      %form.content{"accept-charset" => "UTF-8", :action => "/users/sign_in", :method => "post"}
+        %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
+        .row
+          .col.col-12.col-xl-12.col-lg-12.col-md-12.col-sm-12
+            .form-group.label-floating.is-empty
+              %label.control-label= t('common.label.email')
+              %input.form-control{:name => "user[email]", :placeholder => "", :type => "email"}/
+            .form-group.label-floating.is-empty
+              %label.control-label= t('common.label.password')
+              %input.form-control{:name => "user[password]", :placeholder => "", :type => "password"}/
+            .remember
+              .checkbox
+                %label
+                  %input{:name => "user[remember_me]", :type => "hidden", :value => "0"}/
+                  %input{:name => "user[remember_me]", :type => "checkbox", :value => "1"}/
+                  = t('common.label.remember_me')
+              %a.forgot{:href => "#"}= t('common.message.forgot_password')
+            %button.btn.btn-lg.btn-primary.full-width{:name => "commit", :type => "submit"}= t('common.label.login')
+            .or
+            %a.btn.btn-lg.bg-facebook.full-width.btn-icon-left{:href => user_facebook_omniauth_authorize_path}
+              %i.fab.fa-facebook-f{"aria-hidden" => "true"}
+              = t('common.label.login_facebook')
+/ ... end Login-Registration Form
