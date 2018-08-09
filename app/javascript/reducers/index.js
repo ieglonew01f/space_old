@@ -7,6 +7,7 @@ import suggestions from "./usersReducer.js"
 import activities from "./activitiesReducer.js"
 import forecast from "./forecastsReducer.js"
 import videos from "./videosReducer.js"
+import results from "./searchReducer.js"
 
 export default combineReducers({
   posts,
@@ -15,5 +16,6 @@ export default combineReducers({
   suggestions,
   activities,
   forecast,
-  videos
+  videos,
+  results
 })

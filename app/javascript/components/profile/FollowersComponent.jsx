@@ -15,7 +15,7 @@ export default class FollowersComponent extends React.Component {
 					<ul className="widget w-faved-page js-zoom-gallery">
             {
               followers.map((f, i) =>
-                <li>
+                <li key={i}>
                   <a href={"/profile/" + f.user.username} title={f.user.first_name + " " + f.user.last_name}>
                     <img src={f.user.profile_picture.thumb.url} alt="author"/>
                   </a>

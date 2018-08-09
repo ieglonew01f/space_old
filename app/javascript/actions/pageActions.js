@@ -2,6 +2,24 @@ import axios from "axios";
 
 const AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
 
+export function fetchSearchResults(q) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_SEARCH_RESULTS"});
+
+    axios
+      .post("/search", {
+        query: q,
+        type: "users",
+        authenticity_token: AUTH_TOKEN
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_SEARCH_RESULTS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_SEARCH_RESULTS_REJECTED", payload: err})
+      });
+  }
+}
 export function fetchActivities(id) {
   return function(dispatch) {
     dispatch({type: "FETCH_ACTIVITIES"});

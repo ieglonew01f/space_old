@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post 'account/update' => 'profile#update'
   post 'account/update_password' => 'profile#update_password'
 
+  post '/search' => 'search#results'
+
   root to: 'index#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
 
@@ -42,8 +44,6 @@ Rails.application.routes.draw do
     resource :followers
     resource :videos
   end
-
-  resources :search, only:[:results]
 
   resources :posts do
     collection do
