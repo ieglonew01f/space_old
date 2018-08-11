@@ -12,7 +12,7 @@
           %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-register-icon"}
   / Tab panes
   .tab-content
-    #home.tab-pane.active{"data-mh" => "log-tab", :role => "tabpanel"}
+    #home.tab-pane{"data-mh" => "log-tab", :role => "tabpanel"}
       .title.h6= t('index.message.register')
       %form.content{"accept-charset" => "UTF-8", :action => "/users", :method => "post"}
         %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
@@ -63,7 +63,7 @@
                   %a{:href => "#"}= t('common.label.tnc')
                   of the website
             %button.btn.btn-purple.btn-lg.full-width{:name => "commit", :type => "submit"}= t('common.label.sign_up')
-    #profile.tab-pane{"data-mh" => "log-tab", :role => "tabpanel"}
+    #profile.tab-pane.active{"data-mh" => "log-tab", :role => "tabpanel"}
       .title.h6= t('index.message.login')
       %form.content{"accept-charset" => "UTF-8", :action => "/users/sign_in", :method => "post"}
         %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
