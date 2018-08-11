@@ -8,7 +8,14 @@ module NotificationsHelper
       object = activity.trackable_type.constantize
       object_id = activity.trackable_id
 
-      object_owner = object.find(object_id.to_i).user
+      object = object.where('id = ?', object_id.to_i).first
+
+      if (!object)
+        return
+      end
+
+      object_owner = object.try(:user)
+
       object_type = "post"
 
       # if the activity object owner

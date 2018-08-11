@@ -20,6 +20,7 @@ export function fetchSearchResults(q) {
       });
   }
 }
+
 export function fetchActivities(id) {
   return function(dispatch) {
     dispatch({type: "FETCH_ACTIVITIES"});
@@ -41,6 +42,25 @@ export function fetchActivities(id) {
       })
       .catch((err) => {
         dispatch({type: "FETCH_ACTIVITIES_REJECTED", payload: err})
+      });
+  }
+}
+
+export function fetchBirthdays() {
+  return function(dispatch) {
+    dispatch({type: "FETCH_BIRTHDAYS"});
+
+    axios
+      .get('/users/get_birthdays', {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_BIRTHDAYS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_BIRTHDAYS_REJECTED", payload: err})
       });
   }
 }

@@ -8,7 +8,14 @@ class NotificationsController < ApplicationController
       object = activity.trackable_type.constantize
       object_id = activity.trackable_id
 
-      object_owner = object.find(object_id.to_i).user
+      object = object.where('id = ?', object_id.to_i).first
+
+      if (!object)
+        success_json(200, "Success", parsed_activities)
+        return
+      end
+
+      object_owner = object.try(:user)
       object_type = "post"
 
       activity_owner = User.find(activity.owner_id)

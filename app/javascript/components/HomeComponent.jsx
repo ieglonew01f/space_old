@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 //Functionals
 import { connect } from "react-redux";
 import { fetchPosts, addPost } from "../actions/postsActions";
-import { fetchActivities, fetchSuggestions, fetchForecast } from "../actions/pageActions";
+import { fetchActivities, fetchSuggestions, fetchForecast, fetchBirthdays } from "../actions/pageActions";
 import { isLink, parseLink } from "../utils/Utils";
 
 //UI
@@ -25,7 +25,8 @@ import Weather from "./common/Weather";
     parsedLink: store.posts.post_link_data,
     activities: store.activities.activities,
     suggestions: store.suggestions.suggestions,
-    forecast: store.forecast.forecast
+    forecast: store.forecast.forecast,
+    birthdays: store.birthdays.birthdays
   };
 })
 
@@ -47,6 +48,7 @@ export default class LayoutComponent extends React.Component {
     this.props.dispatch(fetchActivities());
     this.props.dispatch(fetchSuggestions());
     this.props.dispatch(fetchForecast());
+    this.props.dispatch(fetchBirthdays());
 
     setTimeout(function(){
       $('#post-image-form').ajaxForm({
@@ -108,11 +110,12 @@ export default class LayoutComponent extends React.Component {
   }
 
   render() {
-    const { posts, posting, parsedLink, activities, suggestions, forecast } = this.props;
+    const { posts, posting, parsedLink, activities, suggestions, forecast, birthdays } = this.props;
 
     return (
       <div className="row">
           <aside className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
+            <BirthdayAlert birthdays={birthdays}/>
             <Weather forecast={forecast}/>
           </aside>
           <main className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">

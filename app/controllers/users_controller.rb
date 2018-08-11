@@ -9,6 +9,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_birthdays
+    birthday_user = User.where("birthday = ?", "#{'%02d' % Date.today.day}/#{'%02d' % Date.today.month}/#{Date.today.year}").first
+
+    if birthday_user
+      success_json(200, "Success", birthday_user)
+    else
+      error_json(422, 422, I18n.t("errors.500"))
+    end
+  end
+
   def get_suggestions
     suggestions = User.connection.select_all("SELECT * FROM users where id NOT IN (SELECT followed_id FROM followers WHERE user_id = #{current_user.id}) AND id != #{current_user.id}").to_hash
 

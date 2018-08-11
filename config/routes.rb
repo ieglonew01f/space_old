@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       get 'get_suggestions'
       get 'get_friends'
       get 'get_all_users'
+      get 'get_birthdays'
     end
 
     resources :posts
