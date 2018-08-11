@@ -1,0 +1,12 @@
+.container
+  .row
+    .col.col-xl-4.offset-md-4
+      .ui-block.login-standalone{:style => "margin-top:100px;"}
+        .ui-block-content
+          = devise_error_messages!
+          %h4 Forgot your password?
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+            .form-group
+              = f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Your email"
+              %span.material-input
+            = f.submit "Reset password", :class => "btn btn-blue btn-lg full-width"

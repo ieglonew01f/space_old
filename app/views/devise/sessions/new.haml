@@ -1,0 +1,26 @@
+.container
+  .row
+    .col.col-xl-4.offset-md-4
+      .ui-block.login-standalone{:style => "margin-top:100px;"}
+        .ui-block-content
+          %h3 Log in to your account
+          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            .form-group.label-floating.is-empty
+              %label.control-label Your Email
+              = f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control"
+              %span.material-input
+            .form-group.label-floating.is-empty
+              %label.control-label Your Password
+              = f.password_field :password, autocomplete: "off", class: "form-control"
+              %span.material-input
+            - if devise_mapping.rememberable?
+              .remember
+                .checkbox
+                  %label
+                    = f.check_box :remember_me
+                    Remember Me
+            = f.submit "Login", :class => "btn btn-primary btn-lg full-width"
+          .or
+          %a.btn.btn-lg.bg-facebook.full-width.btn-icon-left{:href => user_facebook_omniauth_authorize_path}
+            %i.fab.fa-facebook-f
+            Login with Facebook

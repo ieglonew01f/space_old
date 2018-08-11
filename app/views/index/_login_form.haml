@@ -81,7 +81,7 @@
                   %input{:name => "user[remember_me]", :type => "hidden", :value => "0"}/
                   %input{:name => "user[remember_me]", :type => "checkbox", :value => "1"}/
                   = t('common.label.remember_me')
-              %a.forgot{:href => "#"}= t('common.message.forgot_password')
+              %a.forgot{:href => "/users/password/new"}= t('common.message.forgot_password')
             %button.btn.btn-lg.btn-primary.full-width{:name => "commit", :type => "submit"}= t('common.label.login')
             .or
             %a.btn.btn-lg.bg-facebook.full-width.btn-icon-left{:href => user_facebook_omniauth_authorize_path}
