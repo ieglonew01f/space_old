@@ -54,6 +54,7 @@
 //= require web.font.loader.js
 //= require handlebars.js
 //= require chat.js
+//= require global.script.js
 
 WebFont.load({
     google: {

@@ -19,9 +19,16 @@
             %li
               %a{:href => "/profile/#{@user.username}/videos", :class => "#{'active' if tag == 'videos'}"} Videos
       .control-block-button
-        %a.btn.btn-control.bg-blue{:href => "#"}
-          %svg.olymp-happy-face-icon
-            %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-happy-face-icon"}
+        - if !@own_user
+          - if !@already_followed
+            %a.btn.btn-control.bg-blue.follow-user{:href => "javascript:void(0)", "data-placement" => "right", "data-original-title" => "Follow #{@user.first_name}", "data-toggle" => "tooltip", "data-user-id" => @user.id, "data-user" => @user.first_name}
+              %svg.olymp-plus-icon
+                %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-plus-icon"}
+          - else
+            %a.btn.btn-control.bg-blue.un-follow-user{:href => "javascript:void(0)", "data-placement" => "right", "data-original-title" => "Un Follow #{@user.first_name}", "data-toggle" => "tooltip", "data-user-id" => @user.id, "data-user" => @user.first_name}
+              %svg.olymp-happy-faces-icon
+                %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-happy-faces-icon"}
+
     .top-header-author
       %a.author-thumb{:href => "/"}
         %img.image-profile-main{:alt => "author", :src => "#{@user.profile_picture}"}/

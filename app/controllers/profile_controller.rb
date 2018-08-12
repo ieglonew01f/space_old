@@ -10,6 +10,8 @@ class ProfileController < ApplicationController
     profile_user = User.find_by_username(username)
     gon.push(profile_user.as_json)
     @user = profile_user
+
+    user_followed(profile_user)
   end
 
   def about
@@ -21,6 +23,8 @@ class ProfileController < ApplicationController
     profile_user = User.find_by_username(username)
     gon.push(profile_user.as_json)
     @user = profile_user
+
+    user_followed(profile_user)
   end
 
   def videos
@@ -33,6 +37,8 @@ class ProfileController < ApplicationController
     gon.push(profile_user.as_json)
     gon.push({'page_component': 'videos'});
     @user = profile_user
+
+    user_followed(profile_user)
   end
 
   def photos
@@ -45,6 +51,8 @@ class ProfileController < ApplicationController
     gon.push(profile_user.as_json)
     gon.push({'page_component': 'photos'});
     @user = profile_user
+
+    user_followed(profile_user)
   end
 
   def followers
@@ -57,6 +65,8 @@ class ProfileController < ApplicationController
     gon.push(profile_user.as_json)
     gon.push({'page_component': 'followers'});
     @user = profile_user
+
+    user_followed(profile_user)
   end
 
   def update
@@ -116,5 +126,11 @@ class ProfileController < ApplicationController
         :last_name, :location, :home_town, :birthday, :facebook, :twitter, :about,
         :hobbies, :fav_tv, :fav_movies, :fav_games, :fav_music, :fav_books, :fav_writers, :other_intrests,
         :course)
+    end
+
+    def user_followed(profile_user)
+      @own_user = true if current_user.id == profile_user.id
+      followed = Follower.where('followed_id = ? AND user_id = ?', profile_user.id, current_user.id)
+      @already_followed = true if followed.length != 0
     end
 end
