@@ -9,6 +9,7 @@ import forecast from "./forecastsReducer.js"
 import videos from "./videosReducer.js"
 import results from "./searchReducer.js"
 import birthdays from "./birthdaysReducer.js"
+import photos from "./photosReducer.js"
 
 export default combineReducers({
   posts,
@@ -19,5 +20,6 @@ export default combineReducers({
   forecast,
   videos,
   results,
-  birthdays
+  birthdays,
+  photos
 })

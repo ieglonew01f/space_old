@@ -9,14 +9,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_photos
+    photos = PostMetum.where('user_id = ? AND post_id != ?', params[:id], "")
+    success_json(200, "Success", photos)
+  end
+
   def get_birthdays
     birthday_user = User.where("birthday = ?", "#{'%02d' % Date.today.day}/#{'%02d' % Date.today.month}/#{Date.today.year}").first
 
-    if birthday_user
-      success_json(200, "Success", birthday_user)
-    else
-      error_json(422, 422, I18n.t("errors.500"))
-    end
+    success_json(200, "Success", birthday_user)
   end
 
   def get_suggestions

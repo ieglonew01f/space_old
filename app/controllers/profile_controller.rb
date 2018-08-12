@@ -35,6 +35,18 @@ class ProfileController < ApplicationController
     @user = profile_user
   end
 
+  def photos
+    username = params[:username]
+
+    #todo redirect if username not found
+    #redirect -> 404
+
+    profile_user = User.find_by_username(username)
+    gon.push(profile_user.as_json)
+    gon.push({'page_component': 'photos'});
+    @user = profile_user
+  end
+
   def followers
     username = params[:username]
 

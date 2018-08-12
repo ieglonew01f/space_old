@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 //Functionals
 import { connect } from "react-redux";
 import { fetchPosts, addPost } from "../actions/postsActions";
-import { fetchActivities, fetchFollowers, fetchVideos } from "../actions/pageActions";
+import { fetchActivities, fetchFollowers, fetchVideos, fetchPhotos } from "../actions/pageActions";
 
 //UI
 import Posts from "./common/Posts";
@@ -14,6 +14,7 @@ import AboutComponent from "./profile/AboutComponent"
 import FollowersDetailComponent from "./profile/FollowersDetailComponent";
 import FollowersComponent from "./profile/FollowersComponent";
 import VideosComponent from "./profile/VideosComponent";
+import PhotosComponent from "./profile/PhotosComponent";
 import ActivityFeed from "./common/ActivityFeed";
 
 @connect((store) => {
@@ -22,7 +23,8 @@ import ActivityFeed from "./common/ActivityFeed";
     posting: store.posts.posting,
     activities: store.activities.activities,
     suggestions: store.suggestions.suggestions,
-    videos: store.videos.videos
+    videos: store.videos.videos,
+    photos: store.photos.photos
   };
 })
 
@@ -41,10 +43,11 @@ export default class LayoutComponent extends React.Component {
     this.props.dispatch(fetchActivities(gon.id));
     this.props.dispatch(fetchFollowers(gon.id));
     this.props.dispatch(fetchVideos(gon.id));
+    this.props.dispatch(fetchPhotos(gon.id));
   }
 
   render() {
-    const { posts, posting, activities, suggestions, videos } = this.props;
+    const { posts, posting, activities, suggestions, videos, photos } = this.props;
     var profileElement = null;
 
     switch(gon.page_component) {
@@ -58,6 +61,11 @@ export default class LayoutComponent extends React.Component {
             <VideosComponent videos={videos}/>
           </div>
           break;
+          case 'photos':
+            profileElement = <div className="row">
+              <PhotosComponent photos={photos}/>
+            </div>
+            break;
         default:
           profileElement = <div className="row">
         		<div className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">

@@ -7,11 +7,14 @@ Rails.application.routes.draw do
   get 'profile/:username' => 'profile#index'
   get 'profile/:username/about' => 'profile#about'
   get 'profile/:username/videos' => 'profile#videos'
+  get 'profile/:username/photos' => 'profile#photos'
   get 'profile/:username/followers' => 'profile#followers'
   get 'account/settings/profile' => 'profile#profile_settings'
   get 'account/settings/hobbies' => 'profile#hobbies_settings'
   get 'account/settings/education' => 'profile#education_settings'
   get 'account/settings' => 'profile#account_settings'
+
+  get '/users/:id/photos' => 'users#get_photos'
 
   post 'account/update' => 'profile#update'
   post 'account/update_password' => 'profile#update_password'
