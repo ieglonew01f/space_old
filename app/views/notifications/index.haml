@@ -1,0 +1,31 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "home.css"
+
+= render "common/session_nav"
+= render "common/session_left_nav"
+= render "common/right_side_bar"
+
+.header-spacer
+.container
+  .row
+    .col.col-xl-6.order-xl-2.col-lg-6.order-lg-2.col-md-12.order-md-1.col-sm-12.col-12
+      .ui-block
+        .ui-block-title
+          %h6.title Notifications
+        / Notification List
+        %ul.notification-list
+          - @parsed_notifications.each do |n|
+            %li
+              .author-thumb
+                %img{:alt => "author", :src => "#{n[:activity_owner].profile_picture.thumb.url}"}/
+              .notification-event
+                %a.h6.notification-friend{:href => "/profile/#{n[:activity_owner].username}"}
+                  = "#{n[:activity_owner].first_name} #{n[:activity_owner].last_name}"
+                = "#{n[:message]} your"
+                %a.notification-link{:href => "/posts/#{n[:object_id]}"} post
+                %span.notification-date
+                  %time.entry-date.updated{:datetime => "2004-07-24T18:18"} 4 hours ago
+              %span.notification-icon
+                %svg.olymp-comments-post-icon
+                  %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-comments-post-icon"}
+          / ... end Notification List
