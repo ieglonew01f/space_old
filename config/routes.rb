@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :notifications do
     collection do
       get 'get_activities'
+      get 'get_notifications'
     end
   end
 

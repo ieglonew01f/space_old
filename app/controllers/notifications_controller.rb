@@ -1,4 +1,17 @@
 class NotificationsController < ApplicationController
+  include NotificationsHelper
+
+  def index
+    @parsed_notifications = get_notifs
+  end
+
+  # updated logix lewl
+  # get all activities that involve current_user
+  def get_notifications
+    parsed_notifications = get_notifs
+    success_json(200, "Success", parsed_notifications)
+  end
+
   def get_activities
     activities = PublicActivity::Activity.all
 
@@ -8,14 +21,13 @@ class NotificationsController < ApplicationController
       object = activity.trackable_type.constantize
       object_id = activity.trackable_id
 
-      object = object.where('id = ?', object_id.to_i).first
+      this_object = object.where('id = ?', object_id.to_i).first
 
-      if (!object)
-        success_json(200, "Success", parsed_activities)
-        return
+      if (this_object.nil?)
+        next
       end
 
-      object_owner = object.try(:user)
+      object_owner = this_object.try(:user)
       object_type = "post"
 
       activity_owner = User.find(activity.owner_id)

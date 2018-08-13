@@ -1,47 +1,49 @@
 module NotificationsHelper
-  def get_notifications
+  def get_notifs
     activities = PublicActivity::Activity.all
-
-    @parsed_notifications = []
+    parsed_activities = []
 
     activities.each do |activity|
-      object = activity.trackable_type.constantize
-      object_id = activity.trackable_id
-
-      object = object.where('id = ?', object_id.to_i).first
-
-      if (!object)
-        return
-      end
-
-      object_owner = object.try(:user)
-
-      object_type = "post"
-
-      # if the activity object owner
-      # is not the current user
-      # then skip to next activity
-      if (object_owner.id.to_i != current_user.id)
-        next
-      end
-
+      activity_object_class = activity.trackable_type.constantize
+      activity_object_id = activity.trackable_id
+      activity_object = activity_object_class.where('id = ?', activity_object_id.to_i).first
       activity_owner = User.find(activity.owner_id)
 
-      if activity.trackable_type == "Like" or activity.trackable_type == "Comment"
-        post_id = object.find(object_id.to_i).post_id
-        object_owner = Post.find(post_id).user
-      end
-
-      if (object_owner.id == activity.owner_id)
+      if (activity_object.nil?)
         next
       end
 
-      @parsed_notifications << {
-        :object_owner => object_owner,
+      # if activity is a like or a comment then find out the real
+      # target object which is a post
+      if (activity.trackable_type == "Like" or activity.trackable_type == "Comment")
+        post = Post.find(activity_object.try(:post_id))
+        activity_object_owner = post.try(:user)
+        activity_post_id = post.id
+      else
+        activity_post_id = activity_object.id
+        activity_object_owner = activity_object.try(:user)
+      end
+
+      if (activity_object_owner.nil?)
+        next
+      end
+
+      # skip to next itration
+      # if activity object owner is not current_user
+      if (activity_object_owner.id != current_user.id)
+        next
+      end
+
+      # if all good then parse activities
+      parsed_activities << {
+        :object_owner => activity_object_owner,
         :activity_owner => activity_owner,
-        :object_type => object_type,
+        :object_type => "post",
+        :object_id => activity_post_id.to_i,
         :message => I18n.t("activity.#{activity.key}")
       }
     end
+
+    return parsed_activities
   end
 end
