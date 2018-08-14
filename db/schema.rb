@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20180814150147) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.text "post_link"
-    t.json "images"
+    t.text "images"
     t.integer "post_meta_id"
   end
 
