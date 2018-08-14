@@ -1,5 +1,5 @@
 class AddImagesToPosts < ActiveRecord::Migration[5.1]
   def change
-    add_column :posts, :images, :json
+    add_column :posts, :images, :text
   end
 end
