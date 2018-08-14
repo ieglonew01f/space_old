@@ -1,6 +1,6 @@
 module NotificationsHelper
   def get_notifs
-    activities = PublicActivity::Activity.all
+    activities = PublicActivity::Activity.where('owner_id != ?', current_user.id)
     parsed_activities = []
 
     activities.each do |activity|
@@ -25,12 +25,6 @@ module NotificationsHelper
       end
 
       if (activity_object_owner.nil?)
-        next
-      end
-
-      # skip to next itration
-      # if activity object owner is not current_user
-      if (activity_object_owner.id != current_user.id)
         next
       end
 
