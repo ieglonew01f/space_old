@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   post '/search' => 'search#results'
 
+  post '/users/set_status' => 'users#set_status'
+
   root to: 'index#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
 

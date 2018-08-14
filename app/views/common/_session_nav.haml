@@ -75,8 +75,8 @@
                 .ui-block-title.ui-block-title-small
                   %h6.title= t('common.label.custom_status')
                 %form.form-group.with-button.custom-status
-                  %input.form-control{:placeholder => "", :type => "text", :value => "Space Cowboy"}/
-                  %button.bg-purple
+                  %input.form-control.status-input{:placeholder => "Space Ranger", :type => "text", :value => "#{current_user.status}"}/
+                  %button.bg-purple.add-status
                     %svg.olymp-check-icon
                       %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-check-icon"}
                 .ui-block-title.ui-block-title-small
@@ -94,7 +94,8 @@
               = current_user.last_name
               %svg.olymp-dropdown-arrow-icon
                 %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"}
-            %span.author-subtitle SW DEVELOPER
+            %span.author-subtitle.ui-user-status
+              = @current_user.status
 
 %script#notification-template{:type => "text/x-handlebars-template"}
   %li

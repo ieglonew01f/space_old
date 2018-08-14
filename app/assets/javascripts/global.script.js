@@ -1,5 +1,6 @@
 $(document).ready(function() {
   //events
+  //follow user
   $(document).on('click', '.follow-user', function() {
       var user_id = $(this).attr('data-user-id'),
           user = $(this).attr('data-user'),
@@ -25,6 +26,7 @@ $(document).ready(function() {
       });
   });
 
+  //unfollow user
   $(document).on('click', '.un-follow-user', function() {
       var user_id = $(this).attr('data-user-id'),
           user = $(this).attr('data-user'),
@@ -50,6 +52,7 @@ $(document).ready(function() {
       });
   });
 
+  //fetch notification
   (function fetchNotifications() {
     $.ajax({
       url: "/notifications/get_notifications",
@@ -75,4 +78,27 @@ $(document).ready(function() {
       }
     });
   })();
+
+  //set user status
+  $('.add-status').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var status = $('.status-input').val();
+
+      $('.ui-user-status').text(status);
+
+      $.ajax({
+        url: "/users/set_status",
+        cache: false,
+        type: "POST",
+        data: {
+          status: status
+        },
+        success: function(response) {
+
+        }
+      });
+  });
+
 });
