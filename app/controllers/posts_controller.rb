@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
 
-  include ActionView::Helpers::DateHelper
-
   def index
     if !params[:user_id].nil?
       posts = Post.where("user_id = ?", params[:user_id]).all.order(created_at: :desc)
@@ -14,7 +12,7 @@ class PostsController < ApplicationController
       post.likes_count = post.likes.count
       post.comments_count = post.comments.count
       post.user_details = post.user
-      post.created_at = time_ago_in_words(post.created_at)
+      post.timestamp = time_ago_in_words(post.created_at) + " ago"
       post.post_image = post.post_meta[0].try(:post_meta).try(:url)
     end
 
@@ -44,13 +42,15 @@ class PostsController < ApplicationController
       post.likes_count = post.likes.count
       post.comments_count = post.comments.count
       post.user_details = post.user
-      post.created_at = time_ago_in_words(post.created_at)
+      post.timestamp = time_ago_in_words(post.created_at) + " ago"
 
-      pm = PostMetum.find(post_meta_id)
-      pm.post_id = post.id
-      pm.save
+      pm = PostMetum.where('id = ?', post_meta_id).first
 
-      post.post_image = post.post_meta[0].try(:post_meta).try(:url)
+      if (!pm.nil?)
+        pm.post_id = post.id
+        pm.save
+        post.post_image = post.post_meta[0].try(:post_meta).try(:url)
+      end
 
       success_json(200, "Posted successfully", post)
     else
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
     post.user_details = post.user
     post.created_at = time_ago_in_words(post.created_at)
     post.post_image = post.post_meta[0].try(:post_meta).try(:url)
-    
+
     gon.push({:post => post.as_json})
   end
 

@@ -29,7 +29,7 @@
         .author-page.author.vcard.inline-items.more
           .author-thumb
             %img.avatar{:alt => "author", :src => "#{current_user.profile_picture.thumb.url}"}/
-            %span.icon-status.online
+            %span.icon-status.icon-chat-state{:class => "#{current_user.chat_state}"}
             .more-dropdown.more-with-triangle
               .mCustomScrollbar{"data-mcs-theme" => "dark"}
                 .ui-block-title.ui-block-title-small
@@ -57,19 +57,19 @@
                   %h6.title= t('common.label.chat_settings')
                 %ul.chat-settings
                   %li
-                    %a{:href => "#"}
+                    %a.set-chat-state{:href => "#", "data-state" => "online"}
                       %span.icon-status.online
                       %span Online
                   %li
-                    %a{:href => "#"}
+                    %a.set-chat-state{:href => "#", "data-state" => "away"}
                       %span.icon-status.away
                       %span Away
                   %li
-                    %a{:href => "#"}
+                    %a.set-chat-state{:href => "#", "data-state" => "disconected"}
                       %span.icon-status.disconected
                       %span Disconnected
                   %li
-                    %a{:href => "#"}
+                    %a.set-chat-state{:href => "#", "data-state" => "status-invisible"}
                       %span.icon-status.status-invisible
                       %span Invisible
                 .ui-block-title.ui-block-title-small
@@ -107,7 +107,7 @@
         {{message}} your
         %a.notification-link{:href => "/posts/{{object_id}}"} post
       %span.notification-date
-        %time.entry-date.updated{:datetime => "2004-07-24T18:18"} 4 hours ago
+        %time.entry-date.updated {{timestamp}}
     %span.notification-icon
       %svg.olymp-comments-post-icon
         %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-comments-post-icon"}

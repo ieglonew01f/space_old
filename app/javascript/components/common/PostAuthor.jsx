@@ -23,8 +23,8 @@ export default class PostAuthor extends React.Component {
         <a className="h6 post__author-name fn" href={"/profile/" + post.user_details.username}>{post.user_details.first_name + ' ' + post.user_details.last_name}</a>
         {postTypeText}
         <div className="post__date">
-          <time className="published" dateTime="2004-07-24T18:18">
-            March 4 at 2:05pm
+          <time className="published">
+            {post.timestamp}
           </time>
         </div>
       </div>

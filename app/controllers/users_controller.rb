@@ -21,6 +21,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_chat_state
+    user = User.find(current_user.id)
+    user.chat_state = params[:chat_state]
+
+    if user.save!
+      current_user.chat_state = user.chat_state
+      success_json(200, "Success", user)
+    else
+      error_json(422, 422, I18n.t("errors.500"))
+    end
+  end
+
   def get_photos
     photos = PostMetum.where('user_id = ? AND post_id != ?', params[:id], "")
     success_json(200, "Success", photos)

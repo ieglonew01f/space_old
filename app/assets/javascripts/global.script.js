@@ -70,7 +70,8 @@ $(document).ready(function() {
               activity_owner_picture: n.activity_owner.profile_picture.thumb.url,
               activity_owner_username: n.activity_owner.username,
               message: n.message,
-              object_id: n.object_id
+              object_id: n.object_id,
+              timestamp: n.timestamp
             }));
         });
 
@@ -97,6 +98,25 @@ $(document).ready(function() {
         },
         success: function(response) {
 
+        }
+      });
+  });
+
+  $('.set-chat-state').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var chat_state = $(this).attr('data-state');
+
+      $.ajax({
+        url: "/users/set_chat_state",
+        cache: false,
+        type: "POST",
+        data: {
+          chat_state: chat_state
+        },
+        success: function(response) {
+          $('.icon-chat-state').attr('class', 'icon-status icon-chat-state ' + chat_state);
         }
       });
   });

@@ -40,7 +40,8 @@ module NotificationsHelper
         :activity_owner => activity_owner,
         :object_type => "post",
         :object_id => activity_post_id.to_i,
-        :message => I18n.t("activity.#{activity.key}")
+        :message => I18n.t("activity.#{activity.key}"),
+        :timestamp => time_ago_in_words(activity.created_at) + " ago"
       }
     end
 

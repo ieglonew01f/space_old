@@ -19,7 +19,7 @@ export default class ActivityFeed extends React.Component {
                 </div>
                 <div className="notification-event">
                   <a href={"/profile/" + activity.activity_owner.username} className="h6 notification-friend">{activity.activity_owner.first_name} {activity.activity_owner.last_name}</a> {activity.message} {activity.object_owner.first_name} {activity.object_owner.last_name}’s <a href={"/posts/" + activity.object_id} className="notification-link">{activity.object_type}</a>.
-                  <span className="notification-date"><time className="entry-date updated">2 mins ago</time></span>
+                  <span className="notification-date"><time className="entry-date updated">{activity.timestamp}</time></span>
                 </div>
               </li>
             )
