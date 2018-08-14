@@ -17,5 +17,5 @@ test:
   database: space_test
 
 production:
-  <<: *default
-  database: space_production
+  encoding: utf8
+  pool: 15
