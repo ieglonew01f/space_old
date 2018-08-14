@@ -1,14 +1,10 @@
 class ActivitiesController < ApplicationController
   def index
-    activities = PublicActivity::Activity.all
+    activities = PublicActivity::Activity.where('owner_id = ?', params[:user_id])
 
     parsed_activities = []
 
     activities.each do |activity|
-      if (activity.owner_id != params[:user_id].to_i)
-        next
-      end
-
       object = activity.trackable_type.constantize
       object_id = activity.trackable_id
 
@@ -18,7 +14,7 @@ class ActivitiesController < ApplicationController
         next
       end
 
-      object_owner = object.try(:user)
+      object_owner = this_object.try(:user)
       object_type = "post"
 
       activity_owner = User.find(activity.owner_id)
@@ -28,18 +24,13 @@ class ActivitiesController < ApplicationController
         object_owner = Post.find(post_id).user
       end
 
-      # do not show self activities
-      # like commenting on you own post
-      # liking your own post
-      if (object_owner.id == activity.owner_id)
-        next
-      end
-
       parsed_activities << {
         :object_owner => object_owner,
         :activity_owner => activity_owner,
         :object_type => object_type,
-        :message => I18n.t("activity.#{activity.key}")
+        :object_id => post_id.to_i,
+        :message => I18n.t("activity.#{activity.key}"),
+        :timestamp => time_ago_in_words(activity.created_at) + " ago"
       }
     end
 
