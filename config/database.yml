@@ -1,11 +1,11 @@
 default: &default
   adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
   timeout: 5000
 
 development:
   <<: *default
+  username: root
   database: space_development
 
 # Warning: The database defined as "test" will be erased and
@@ -13,6 +13,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  username: root
   database: space_test
 
 production:

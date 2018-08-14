@@ -95,7 +95,7 @@
               %svg.olymp-dropdown-arrow-icon
                 %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"}
             %span.author-subtitle.ui-user-status
-              = @current_user.status
+              = current_user.status
 
 %script#notification-template{:type => "text/x-handlebars-template"}
   %li
