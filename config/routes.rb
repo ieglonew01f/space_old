@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'account/settings/education' => 'profile#education_settings'
   get 'account/settings' => 'profile#account_settings'
 
+  get '/dedications' => 'dedications#index'
+
   get '/users/:id/photos' => 'users#get_photos'
 
   post 'account/update' => 'profile#update'
@@ -49,7 +51,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :activities
     resources :chats, only:[:index, :create, :show]
-    resources :dedications, only:[:index, :create, :show]
+    resources :dedications, only:[:create]
 
     resource :follow
     resource :followers

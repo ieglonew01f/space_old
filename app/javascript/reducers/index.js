@@ -10,6 +10,7 @@ import videos from "./videosReducer.js"
 import results from "./searchReducer.js"
 import birthdays from "./birthdaysReducer.js"
 import photos from "./photosReducer.js"
+import dedications from "./dedicationsReducer.js"
 
 export default combineReducers({
   posts,
@@ -21,5 +22,6 @@ export default combineReducers({
   videos,
   results,
   birthdays,
-  photos
+  photos,
+  dedications
 })

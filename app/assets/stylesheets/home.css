@@ -8,6 +8,43 @@
   display: none;
 }
 
+.song-dedication-ui .ui-block-title .title {
+  margin-bottom: 0;
+  display: block;
+  vertical-align: middle;
+  height: 0;
+}
+
+.song-dedication-ui .c-green svg {
+  width: 20px;
+  height: 30px;
+  position: absolute;
+  z-index: 1;
+  right: 15px;
+  top: 15px;
+}
+
+.song-dedication-ui .composition {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-dedication-ui ol,
+.w-activity-feed.notification-list {
+  max-height: 324px;
+  overflow-y: scroll;
+}
+
+.song-dedication-ui .composition-name {
+  display: inline;
+}
+
+.song-dedication-ui .playlist-thumb img {
+  height: 34px;
+}
+
 #song-dedication-modal .olymp-check-icon {
   fill: #1dd760;
   height: 15px;

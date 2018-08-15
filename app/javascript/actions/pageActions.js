@@ -46,6 +46,25 @@ export function fetchActivities(id) {
   }
 }
 
+export function fetchDedications(id) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_DEDICATIONS"});
+
+    axios
+      .get("/dedications", {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_DEDICATIONS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_DEDICATIONS_REJECTED", payload: err})
+      });
+  }
+}
+
 export function fetchPhotos(id) {
   return function(dispatch) {
     dispatch({type: "FETCH_PHOTOS"});
