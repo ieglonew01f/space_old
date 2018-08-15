@@ -38,11 +38,17 @@ export default class Comments extends React.Component {
   }
 
   render() {
-    const { post, comments, posting } = this.props;
+    const { post, comments, posting, showComments } = this.props;
+
+    var toShowComments = false;
+
+    if (comments.length !== 0 && post.id == comments[0].post_id) {
+      toShowComments = true
+    }
 
     return (
-      <div className={comments.length === 0 ? 'hidden' : ''}>
-        <div className="comments-list-outer">
+      <div className={showComments[post.id] === true ? '' : 'hidden'}>
+        <div className={toShowComments ? 'comments-list-outer' : 'comments-list-outer hidden'}>
           <ul className="comments-list">
             {
               comments.map((comment, i) =>
@@ -60,7 +66,6 @@ export default class Comments extends React.Component {
               </div>
             </div>
             <CommentSubmitButton post={post} posting={posting} postComment={event => this.postComment(event)}/>
-            <button className="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>
           </form>
         </div>
       </div>

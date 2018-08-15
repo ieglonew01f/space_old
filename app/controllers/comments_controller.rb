@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 
     comments.each do |comment|
       comment.user_details = comment.user
-      comment.created_at = time_ago_in_words(comment.created_at)
+      comment.timestamp = time_ago_in_words(comment.created_at) + " ago"
     end
 
     if comments

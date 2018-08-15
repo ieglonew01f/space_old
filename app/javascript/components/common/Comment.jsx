@@ -7,12 +7,12 @@ export default class Comment extends React.Component {
     return(
       <li className="comment-item">
         <div className="post__author author vcard inline-items">
-          <img src={comment.user_details.profile_picture} alt="author"/>
+          <img src={comment.user_details.profile_picture.thumb.url} alt="author"/>
           <div className="author-date">
             <a className="h6 post__author-name fn" href="02-ProfilePage.html">{comment.user_details.first_name} {comment.user_details.last_name}</a>
             <div className="post__date">
-              <time className="published" dateTime="2004-07-24T18:18">
-                {comment.created_at}
+              <time className="published">
+                {comment.timestamp}
               </time>
             </div>
           </div>

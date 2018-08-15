@@ -21,7 +21,7 @@ export default class CommentSubmitButton extends React.Component {
     }
 
     return (
-      <button className="btn btn-md-2 btn-primary" onClick={this.postComment}>
+      <button className="btn btn-md-2 btn-blue" onClick={this.postComment}>
         {CommentSubmitSpan}
       </button>
     );

@@ -83,5 +83,5 @@ en:
       create: "has shared"
     like:
       create: "has liked"
-    commented:
+    comment:
       create: "has commented on"

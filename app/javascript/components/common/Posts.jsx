@@ -18,6 +18,15 @@ import Comments from "./Comments";
 })
 
 export default class Posts extends React.Component {
+  constructor(props) {
+    super(props);
+
+    //this default state
+    this.state = {
+      showComments: []
+    }
+  }
+
   deletePost(e, post_id) {
     this.props.dispatch(deletePost(post_id));
   }
@@ -25,6 +34,7 @@ export default class Posts extends React.Component {
   fetchComments(post_id, e) {
     e.preventDefault();
     this.props.dispatch(fetchComments(post_id));
+    this.state.showComments[post_id] = true;
   }
 
   likePost(post_id, e) {
@@ -34,6 +44,7 @@ export default class Posts extends React.Component {
 
   render() {
     const {posts, comments} = this.props;
+    const { showComments } = this.state;
 
     return <ul>
       {
@@ -75,7 +86,7 @@ export default class Posts extends React.Component {
                 </a>
               </div>
             </article>
-            <Comments post={post} comments={comments}/>
+            <Comments post={post} comments={comments} showComments={showComments}/>
           </div>
         )
       }
