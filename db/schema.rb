@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814150147) do
+ActiveRecord::Schema.define(version: 20180815133901) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -76,6 +76,17 @@ ActiveRecord::Schema.define(version: 20180814150147) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dedications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
+    t.integer "user_id"
+    t.string "privacy"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "link_meta"
+    t.integer "by_id"
+  end
+
   create_table "followers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "followed_id"
     t.integer "user_id"
@@ -113,7 +124,7 @@ ActiveRecord::Schema.define(version: 20180814150147) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.text "post_link"
-    t.text "images"
+    t.json "images"
     t.integer "post_meta_id"
   end
 

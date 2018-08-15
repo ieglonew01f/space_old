@@ -1,3 +1,4 @@
+//globals
 $(document).ready(function() {
   //events
   //follow user
@@ -121,4 +122,66 @@ $(document).ready(function() {
       });
   });
 
+  //dedicate a song
+  //paste link
+  $('.paste-song-dedication-link').on('paste', function() {
+    setTimeout(function() {
+      var post_link = $('.paste-song-dedication-link').val();
+
+      $.ajax({
+        url: "/posts/parseLink",
+        cache: false,
+        type: "POST",
+        data: {
+          post_link: post_link
+        },
+        success: function(response) {
+          var songDedicationTemplate = Handlebars.compile($('#song-dedication-template').html()),
+              link = response.data;
+
+              $('.parsed-link-storage').val(JSON.stringify(link));
+
+          $('#song-dedication-modal .preview').html(
+            songDedicationTemplate({
+              image: link.best_image,
+              description: link.description,
+              url: link.url,
+              title: link.title
+            })
+          );
+        }
+      });
+    }, 100);
+  });
+
+  //dedicate song link
+  $('#song-dedication-modal .dedicate').on('click', function() {
+    var content = $('.paste-song-message').val(),
+        meta = $('.parsed-link-storage').val();
+
+    $.ajax({
+      url: "/users/" + gon.id + "/dedications",
+      cache: false,
+      type: "POST",
+      data: {
+        content: content,
+        link_meta: meta
+      },
+      success: function(response) {
+        $('#song-dedication-modal .success-message').show();
+        $('#song-dedication-modal .actions').hide();
+        $('#song-dedication-modal .dedicate').hide();
+        $('.paste-song-dedication-link').val('');
+        $('#song-dedication-modal .preview').html('');
+        $('#song-dedication-modal .paste-song-message').val('');
+      }
+    });
+  });
+
+  //dedicate model on shown
+  $('#song-dedication-modal').on('hidden.bs.modal', function () {
+    $('#song-dedication-modal .success-message').hide();
+    $('#song-dedication-modal .actions').show();
+    $('#song-dedication-modal .dedicate').show();
+  });
 });

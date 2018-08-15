@@ -18,6 +18,16 @@
               %a{:href => "/profile/#{@user.username}/photos", :class => "#{'active' if tag == 'photos'}"} Photos
             %li
               %a{:href => "/profile/#{@user.username}/videos", :class => "#{'active' if tag == 'videos'}"} Videos
+            - if !@own_user
+              %li
+                .more
+                  %svg.olymp-three-dots-icon
+                    %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-three-dots-icon"}
+                  %ul.more-dropdown.more-with-triangle
+                    %li
+                      %a{:href => "javascript:;", "data-toggle"=>"modal", "data-target"=>"#song-dedication-modal"} Dedicate a song
+                    %li
+                      %a{:href => "javascript:;"} Share a confession
       .control-block-button
         - if !@own_user
           - if !@already_followed
@@ -38,3 +48,41 @@
         .country
           = @user.college
           = @user.location
+
+/ Modal
+#song-dedication-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title Dedicate a song
+      .modal-body
+        .success
+          %span.success-message.hidden
+            %svg.olymp-check-icon
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-check-icon"}
+            Your song has been successfully dedicated, please note that its upto their
+            discretion on wheater or not to make your song appear on their profile page.
+        .actions
+          %p
+            %input.form-control.paste-song-dedication-link{:placeholder => "Share a youtube link of the song you wish to dedicate."}
+            %input.parsed-link-storage{:type => "hidden"}
+          .preview
+          %p
+            %textarea.form-control.paste-song-message{:placeholder => "Add a personal message."}
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-blue.dedicate{:type => "button"} Dedicate
+
+/ Template
+%script#song-dedication-template{:type => "text/x-handlebars-template"}
+  .post-video
+    .video-thumb
+      %img{:alt => "photo", :src => "{{image}}"}/
+      %a.play-video{:href => "{{url}}", :target => "_blank"}
+        %svg.olymp-play-icon
+          %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-play-icon"}
+    .video-content
+      %a.h4.title{:href => "{{url}}", :target => "_blank"} {{title}}
+      %p
+        {{description}}
+      %a.link-site{:href => "{{url}}", :target => "_blank"} YOUTUBE.COM

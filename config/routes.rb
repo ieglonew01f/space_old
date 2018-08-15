@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :activities
     resources :chats, only:[:index, :create, :show]
+    resources :dedications, only:[:index, :create, :show]
 
     resource :follow
     resource :followers

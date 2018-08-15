@@ -8,6 +8,17 @@
   display: none;
 }
 
+#song-dedication-modal .olymp-check-icon {
+  fill: #1dd760;
+  height: 15px;
+  width: 15px;
+  margin-right: 3px;
+}
+
+#song-dedication-modal .success-message {
+  font-size: 15px;
+}
+
 .popup-chat-responsive ul {
   max-height: 250px !important;
   min-height: 250px !important;
