@@ -6,7 +6,7 @@ export default class Confessions extends React.Component {
     const { confessions } = this.props;
 
     return(
-      <div className={window.current_user.id == gon.id ? "ui-block": "ui-block hidden"}>
+      <div className={(window.current_user.id == gon.id && confessions.length != 0) ? "ui-block": "ui-block hidden"}>
         <div className="ui-block-title">
           <h6 className="title">Confessions</h6>
         </div>
