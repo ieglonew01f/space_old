@@ -27,7 +27,7 @@
                     %li
                       %a{:href => "javascript:;", "data-toggle"=>"modal", "data-target"=>"#song-dedication-modal"} Dedicate a song
                     %li
-                      %a{:href => "javascript:;"} Share a confession
+                      %a{:href => "javascript:;", "data-toggle"=>"modal", "data-target"=>"#confession-modal"} Share a confession
       .control-block-button
         - if !@own_user
           - if !@already_followed
@@ -49,7 +49,8 @@
           = @user.college
           = @user.location
 
-/ Modal
+/ Modals
+/ Song dedications
 #song-dedication-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
@@ -72,6 +73,27 @@
       .modal-footer
         %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
         %button.btn.btn-blue.dedicate{:type => "button"} Dedicate
+
+/ Confession
+#confession-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title Share a confession
+      .modal-body
+        .success
+          %span.success-message.hidden
+            %svg.olymp-check-icon
+              %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-check-icon"}
+            Your confession has been successfully sent, please note that its upto their
+            discretion on wheater or not to make your confession appear on their profile page.
+        .actions
+          %p
+            %textarea.form-control.message{:placeholder => "Write a confession ..."}
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-blue.confess{:type => "button"} Confess
+
 
 / Template
 %script#song-dedication-template{:type => "text/x-handlebars-template"}

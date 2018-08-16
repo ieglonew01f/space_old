@@ -178,10 +178,36 @@ $(document).ready(function() {
     });
   });
 
-  //dedicate model on shown
+  //dedicate model on hidden
   $('#song-dedication-modal').on('hidden.bs.modal', function () {
     $('#song-dedication-modal .success-message').hide();
     $('#song-dedication-modal .actions').show();
     $('#song-dedication-modal .dedicate').show();
+  });
+
+  //confession model on hidden
+  $('#confession-modal').on('hidden.bs.modal', function () {
+    $('#confession-modal .success-message').hide();
+    $('#confession-modal .actions').show();
+    $('#confession-modal .confess').show();
+  });
+
+  //share confession
+  $('#confession-modal .confess').on('click', function() {
+    var message = $('#confession-modal .message').val();
+
+    $.ajax({
+      url: "/users/" + gon.id + "/confessions",
+      cache: false,
+      type: "POST",
+      data: {
+        message: message
+      },
+      success: function(response) {
+        $('#confession-modal .success-message').show();
+        $('#confession-modal .actions').hide();
+        $('#confession-modal .confess').hide();
+      }
+    });
   });
 });

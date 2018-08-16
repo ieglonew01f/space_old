@@ -46,7 +46,7 @@ export function fetchActivities(id) {
   }
 }
 
-export function fetchDedications(id) {
+export function fetchDedications() {
   return function(dispatch) {
     dispatch({type: "FETCH_DEDICATIONS"});
 
@@ -61,6 +61,25 @@ export function fetchDedications(id) {
       })
       .catch((err) => {
         dispatch({type: "FETCH_DEDICATIONS_REJECTED", payload: err})
+      });
+  }
+}
+
+export function fetchConfessions() {
+  return function(dispatch) {
+    dispatch({type: "FETCH_CONFESSIONS"});
+
+    axios
+      .get("/confessions", {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_CONFESSIONS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_CONFESSIONS_REJECTED", payload: err})
       });
   }
 }

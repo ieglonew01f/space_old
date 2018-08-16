@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'account/settings' => 'profile#account_settings'
 
   get '/dedications' => 'dedications#index'
+  get '/confessions' => 'confessions#index'
 
   get '/users/:id/photos' => 'users#get_photos'
 
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
     resources :activities
     resources :chats, only:[:index, :create, :show]
     resources :dedications, only:[:create]
+    resources :confessions, only:[:create]
 
     resource :follow
     resource :followers

@@ -11,6 +11,7 @@ import results from "./searchReducer.js"
 import birthdays from "./birthdaysReducer.js"
 import photos from "./photosReducer.js"
 import dedications from "./dedicationsReducer.js"
+import confessions from "./confessionsReducer.js"
 
 export default combineReducers({
   posts,
@@ -23,5 +24,6 @@ export default combineReducers({
   results,
   birthdays,
   photos,
-  dedications
+  dedications,
+  confessions
 })

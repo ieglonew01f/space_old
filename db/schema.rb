@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815133901) do
+ActiveRecord::Schema.define(version: 20180816125204) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -76,8 +76,17 @@ ActiveRecord::Schema.define(version: 20180815133901) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "confessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "message"
+    t.integer "user_id"
+    t.integer "by_id"
+    t.string "privacy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "dedications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "type"
+    t.string "dedication_type"
     t.integer "user_id"
     t.string "privacy"
     t.text "content"

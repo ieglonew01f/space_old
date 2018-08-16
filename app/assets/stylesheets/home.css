@@ -45,14 +45,16 @@
   height: 34px;
 }
 
-#song-dedication-modal .olymp-check-icon {
+#song-dedication-modal .olymp-check-icon,
+#confession-modal .olymp-check-icon {
   fill: #1dd760;
   height: 15px;
   width: 15px;
   margin-right: 3px;
 }
 
-#song-dedication-modal .success-message {
+#song-dedication-modal .success-message,
+#confession-modal .olymp-check-icon {
   font-size: 15px;
 }
 
