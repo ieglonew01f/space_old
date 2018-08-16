@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :followers, foreign_key: "followed_id"
   has_many :dedications
+  has_many :confessions
 
   mount_uploader :profile_picture, AvatarUploader
   mount_uploader :banner, BannerUploader

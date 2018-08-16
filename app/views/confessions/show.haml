@@ -1,0 +1,25 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "home.css"
+= render "common/session_nav"
+= render "common/session_left_nav"
+= render "common/right_side_bar"
+
+.header-spacer
+#container.container
+  .row
+    .col.col-xl-6.order-xl-2.col-lg-12.order-lg-1.col-md-12.col-sm-12.col-12
+      .ui-block
+        / Post
+        %article.hentry.post.video
+          .post__author.author.vcard.inline-items
+            %img{:alt => "author", :src => "#{@confession.confession_by.profile_picture.thumb.url}"}
+            .author-date
+              %a.h6.post__author-name.fn{:href => "#{"/profile/" + @confession.confession_by.username}"}
+                = @confession.confession_by.first_name + " " + @confession.confession_by.last_name
+              shared a confession
+              .post__date
+                %time.published
+                  = @confession.timestamp
+          %p
+            = @confession.message
+        / .. end Post

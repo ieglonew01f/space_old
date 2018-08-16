@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get '/dedications' => 'dedications#index'
   get '/confessions' => 'confessions#index'
+  get '/confessions/:confession_id' => 'confessions#show'
 
   get '/users/:id/photos' => 'users#get_photos'
 
