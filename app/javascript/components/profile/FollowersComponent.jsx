@@ -2,12 +2,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import ActiveLoader from "../common/ActiveLoader";
+
 export default class FollowersComponent extends React.Component {
   render() {
-    const {  followers } = this.props;
+    const { followers } = this.props;
+    var elem = null;
 
-    return (
-      <div className="ui-block">
+    if (followers && followers.length != 0) {
+      elem = <div className="ui-block">
 				<div className="ui-block-title">
 					<h6 className="title">Followers</h6>
 				</div>
@@ -25,6 +28,12 @@ export default class FollowersComponent extends React.Component {
 					</ul>
 				</div>
 			</div>
+    }
+    return (
+      <div>
+        <ActiveLoader object={followers} type="side-widget"/>
+        {elem}
+      </div>
     )
   }
 }

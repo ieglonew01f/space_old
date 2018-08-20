@@ -1,5 +1,5 @@
 export default function reducer(state={
-    videos: [],
+    videos: null,
     fetching: false,
     posting: false,
     fetched: false,

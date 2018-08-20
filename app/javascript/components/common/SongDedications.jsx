@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import ActiveLoader from "./ActiveLoader";
+
 export default class SongDedications extends React.Component {
   render() {
     const { dedications } = this.props;
+    var elem = null;
 
-    return(
-      <div className={window.current_user.id == gon.id ? "ui-block song-dedication-ui" : "ui-block song-dedication-ui hidden"}>
+    if (dedications && dedications.length != 0 && window.current_user.id == gon.id) {
+      elem = <div className="ui-block song-dedication-ui">
         <div className="ui-block-title">
         	<h6 className="title">Dedicated to you</h6>
     			<span className="c-green">
@@ -36,6 +39,12 @@ export default class SongDedications extends React.Component {
             )
           }
         </ol>
+      </div>
+    }
+    return(
+      <div>
+        <ActiveLoader object={dedications} type="side-widget"/>
+        {elem}
       </div>
     )
   }

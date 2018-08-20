@@ -17,6 +17,7 @@ import ActivityFeed from "./common/ActivityFeed";
 import BirthdayAlert from "./common/BirthdayAlert";
 import FollowSuggestions from "./common/FollowSuggestions";
 import Weather from "./common/Weather";
+import ActiveLoader from "./common/ActiveLoader";
 
 @connect((store) => {
   return {
@@ -158,9 +159,9 @@ export default class LayoutComponent extends React.Component {
                 </div>
               </div>
               <div id="newsfeed-items-grid">
+                <ActiveLoader object={posts} type="posts"/>
                 <Posts posts={posts} />
               </div>
-              <LoadMoreButton/>
           </main>
           <aside className="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
             <ActivityFeed activities={activities}/>

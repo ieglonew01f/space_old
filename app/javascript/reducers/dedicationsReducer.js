@@ -4,7 +4,7 @@ export default function reducer(state={
     posting: false,
     fetched: false,
     error: null,
-    dedications: []
+    dedications: null
   }, action) {
     switch (action.type) {
       case "FETCH_DEDICATIONS": {

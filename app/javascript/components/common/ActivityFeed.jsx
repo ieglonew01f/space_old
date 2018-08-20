@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import ActiveLoader from "./ActiveLoader";
+
 export default class ActivityFeed extends React.Component {
   render() {
     const { activities } = this.props;
 
-    return(
-      <div className="ui-block">
+    var elem = null
+
+    if (activities && activities.length != 0) {
+      elem = <div className="ui-block">
         <div className="ui-block-title">
           <h6 className="title">Activity Feed</h6>
         </div>
@@ -25,6 +29,13 @@ export default class ActivityFeed extends React.Component {
             )
           }
         </ul>
+      </div>
+    }
+
+    return(
+      <div>
+        <ActiveLoader object={activities} type="side-widget"/>
+        {elem}
       </div>
     )
   }

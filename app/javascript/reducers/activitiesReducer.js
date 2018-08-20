@@ -1,5 +1,5 @@
 export default function reducer(state={
-    activities: [],
+    activities: null,
     fetching: false,
     posting: false,
     fetched: false,

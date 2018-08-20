@@ -18,6 +18,7 @@ import PhotosComponent from "./profile/PhotosComponent";
 import ActivityFeed from "./common/ActivityFeed";
 import SongDedications from "./common/SongDedications";
 import Confessions from "./common/Confessions";
+import ActiveLoader from "./common/ActiveLoader";
 
 @connect((store) => {
   return {
@@ -58,17 +59,17 @@ export default class LayoutComponent extends React.Component {
 
     switch(gon.page_component) {
         case 'followers':
-          profileElement = <div className="row">
+          profileElement = <div>
             <FollowersDetailComponent suggestions={suggestions}/>
           </div>
           break;
         case 'videos':
-          profileElement = <div className="row">
+          profileElement = <div>
             <VideosComponent videos={videos}/>
           </div>
           break;
           case 'photos':
-            profileElement = <div className="row">
+            profileElement = <div>
               <PhotosComponent photos={photos}/>
             </div>
             break;
@@ -80,9 +81,9 @@ export default class LayoutComponent extends React.Component {
             </div>
             <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
               <div id="newsfeed-items-grid">
+                <ActiveLoader object={posts} type="posts"/>
                 <Posts posts={posts} />
               </div>
-              <LoadMoreButton/>
             </div>
             <div className="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
               <ActivityFeed activities={activities}/>

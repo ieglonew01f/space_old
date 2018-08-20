@@ -2,7 +2,7 @@ export default function reducer(state={
     fetching: false,
     fetched: false,
     error: null,
-    photos: [],
+    photos: null,
   }, action) {
     switch (action.type) {
       case "FETCH_PHOTOS": {
