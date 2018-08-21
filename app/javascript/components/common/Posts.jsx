@@ -9,6 +9,7 @@ import PostMeta from "./PostMeta";
 import PostImage from "./PostImage"
 import PostAuthor from "./PostAuthor";
 import Comments from "./Comments";
+import PostLikesUserAvatar from "./PostLikesUserAvatar"
 
 @connect((store) => {
   return {
@@ -66,10 +67,13 @@ export default class Posts extends React.Component {
               <PostImage post={post}/>
               <PostMeta parsedLink={JSON.parse(post.post_link)}/>
               <div className="post-additional-info inline-items">
-                <span className="post-add-icon inline-items">
+                <a href="#" className="post-add-icon inline-items">
                   <svg className="olymp-heart-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
                   <span>{post.likes_count}</span>
-                </span>
+                </a>
+
+                <PostLikesUserAvatar post={post}/>
+
                 <div className="comments-shared">
                   <span className="post-add-icon inline-items">
                     <svg className="olymp-speech-balloon-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>

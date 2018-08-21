@@ -9,11 +9,38 @@ class PostsController < ApplicationController
     end
 
     posts.each do |post|
-      post.likes_count = post.likes.count
+      avatars = []
+
+      post_likes = post.likes
+
+      # post likes meta info
+      if (post_likes.count > 0)
+        # to optimize later
+        post_likes.first(5).each do |like|
+          user = User.find(like.user_id)
+          avatars << {
+            "id" => like.user_id,
+            "username" => user.username,
+            "profile_picture" => user.profile_picture.thumb.url,
+            "name" => user.first_name + " " + user.last_name
+          }
+        end
+
+        last_liker = User.find(post_likes.last.user_id)
+
+        post.last_liker = {
+          "id" => last_liker.id,
+          "username" => last_liker.username,
+          "name" => last_liker.first_name + " " + last_liker.last_name
+        }
+      end
+
+      post.likes_count = post_likes.count
       post.comments_count = post.comments.count
       post.user_details = post.user
       post.timestamp = time_ago_in_words(post.created_at) + " ago"
       post.post_image = post.post_meta[0].try(:post_meta).try(:url)
+      post.like_details = avatars
     end
 
     if posts
