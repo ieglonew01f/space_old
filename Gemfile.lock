@@ -269,6 +269,7 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (4.0.2)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (2.4.0)
@@ -354,6 +355,7 @@ DEPENDENCIES
   public_activity
   puma (~> 3.7)
   rails (~> 5.1.5)
+  redis
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
