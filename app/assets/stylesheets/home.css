@@ -4,6 +4,16 @@
   margin: 100px auto;
 }
 
+.background-dark-times {
+  background: #3f4257;
+  padding: 150px;
+}
+
+.landing-page .content-bg-wrap:before {
+  background-color: rgb(55, 169, 255);
+  opacity: 0.9;
+}
+
 .active-loader .sk-cube {
   width: 33%;
   height: 33%;

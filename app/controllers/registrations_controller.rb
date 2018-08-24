@@ -8,14 +8,6 @@ class RegistrationsController < Devise::RegistrationsController
 
       username = email.split('@')[0] + "_#{user.id}"
       user.username = username.gsub('.','_')
-
-      if params["user"]["gender"] === "0"
-        profile_picture = "/avatars/female_" + rand(1..2).to_s + ".jpg"
-      else
-        profile_picture = "/avatars/boy_" + rand(1..7).to_s + ".jpg"
-      end
-
-      user.profile_picture = profile_picture
       user.save!
     end
 

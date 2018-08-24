@@ -1,7 +1,11 @@
 .ui-block
   .top-header
     .top-header-thumb
-      %img{:alt => "nature", :src => "#{@user.banner}"}/
+      - if !@user.banner.url.nil?
+        %img{:alt => "nature", :src => "#{@user.banner.url}"}/
+      - else
+        .background-dark-times
+
     .profile-section
       .row
         .col.col-lg-5.col-md-5.col-sm-12.col-12

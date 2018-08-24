@@ -3,6 +3,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
+  def default_url(*args)
+    ActionController::Base.helpers.asset_path("/avatars/default.png")
+  end
+
   # Use file for local development
   if Rails.env.development?
     storage :file
