@@ -75,7 +75,7 @@ $(document).ready(function() {
         $.each(notifications, function(i, n) {
             notifications_html.push(template({
               activity_owner_name: n.activity_owner.first_name + " " + n.activity_owner.last_name,
-              activity_owner_picture: n.activity_owner.profile_picture.thumb.url,
+              activity_owner_picture: (n.activity_owner.profile_picture) ? n.activity_owner.profile_picture.thumb.url : "/avatars/default.png",
               activity_owner_username: n.activity_owner.username,
               message: n.message,
               object_id: n.object_id,

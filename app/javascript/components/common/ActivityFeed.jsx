@@ -19,7 +19,7 @@ export default class ActivityFeed extends React.Component {
             activities.map((activity, i) =>
               <li key={i}>
                 <div className="author-thumb">
-                  <img src={activity.activity_owner.profile_picture.thumb.url} alt="author"/>
+                  <img src={(activity.activity_owner.profile_picture) ? activity.activity_owner.profile_picture.thumb.url : "/avatars/default.png"} alt="author"/>
                 </div>
                 <div className="notification-event">
                   <a href={"/profile/" + activity.activity_owner.username} className="h6 notification-friend">{activity.activity_owner.first_name} {activity.activity_owner.last_name}</a> {activity.message} <a href={"/posts/" + activity.object_id} className="notification-link">{activity.object_type}</a>.

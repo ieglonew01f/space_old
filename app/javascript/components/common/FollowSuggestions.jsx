@@ -40,10 +40,10 @@ export default class FollowSuggestions extends React.Component {
             suggestions.map((suggestion, i) =>
       				<li key={i} className="inline-items">
       					<div className="author-thumb">
-      						<img src={"/uploads/user/profile_picture/"+suggestion.id+"/thumb_" + suggestion.profile_picture} alt="author"/>
+      						<img src={(suggestion.profile_picture) ? suggestion.profile_picture.thumb.url : "/avatars/default.png"} alt="author"/>
       					</div>
       					<div className="notification-event">
-      						<a href="#" className="h6 notification-friend">{suggestion.first_name} {suggestion.last_name}</a>
+      						<a href={"/profile/" + suggestion.username} className="h6 notification-friend">{suggestion.first_name} {suggestion.last_name}</a>
       						<span className="chat-message-item">{suggestion.location}</span>
       					</div>
       					<span className="notification-icon">

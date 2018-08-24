@@ -53,7 +53,7 @@ export default class Posts extends React.Component {
           <div key={i} data-post-id={post.id} className="ui-block">
             <article className="hentry post video">
               <div className="post__author author vcard inline-items">
-                <img src={post.user_details.profile_picture.thumb.url} alt="author"/>
+                <img src={(post.user_details.profile_picture) ? post.user_details.profile_picture.thumb.url : "/avatars/default.png"} alt="author"/>
                 <PostAuthor post={post}/>
                 <div className="more"><svg className="olymp-three-dots-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                   <ul className="more-dropdown">
