@@ -49,7 +49,7 @@
       %span.icon-status{:class => "{{chat_state}}"}
 
 %script#chat-pop-up{:type => "text/x-handlebars-template"}
-  .ui-block.popup-chat.popup-chat-responsive{"data-chat-id"=>"{{chat_id}}", "data-user-id"=>"{{user_id}}"}
+  .ui-block.popup-chat.popup-chat-responsive{"data-chat-id"=>"{{chat_id}}", "data-user-id"=>"{{user_id}}", "style" => "right:{{right}}px;"}
     .modal-content
       .modal-header
         %span.icon-status.online
@@ -80,7 +80,5 @@
 
 %script#chat-outgoing{:type => "text/x-handlebars-template"}
   %li.outgoing
-    .author-thumb
-      %img.mCS_img_loaded{:alt => "author", :src => "{{profile_picture}}"}/
     .notification-event
       %span.chat-message-item {{message}}
