@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  #mount ActionCable.server => '/cable'
+
+  if Rails.env.production?
+    mount ActionCable.server => '/cable'
+  end
 
   get 'home/index'
   get 'profile/:username' => 'profile#index'
