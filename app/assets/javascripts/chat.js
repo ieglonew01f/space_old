@@ -15,7 +15,7 @@ $(document).ready(function() {
   //make an api call to fetch previous messages
   //and open the chat dialog
 
-  $('#sidebar-right').on('click', '.open-chat', function() {
+  $('.fixed-sidebar.right').on('click', '.open-chat', function() {
     var user_id = $(this).attr('data-user-id'),
         name = $(this).attr('data-name');
 
@@ -55,6 +55,8 @@ $(document).ready(function() {
       user_id: user_id,
       chat_id: chat_id
     }));
+
+    $('.popup-chat-responsive').draggable();
   };
 
   function load_online_users() {
@@ -62,23 +64,35 @@ $(document).ready(function() {
       url: "/users/get_friends",
       cache: false,
       success: function(response) {
-        var source   = $('#chat-user-template').html(),
-            online_users_template = Handlebars.compile(source),
+          var online_users_template_sm = Handlebars.compile($('#chat-user-template').html()),
+            online_users_template_lg = Handlebars.compile($('#chat-user-template-lg').html()),
             users = response.data;
 
-          var online_users = [];
+          var online_users = [],
+              online_users_detail = [];
 
           $.each(users, function(i, user) {
             online_users.push(
-              online_users_template({
+              online_users_template_sm({
                 profile_picture: user.profile_picture.thumb.url,
                 user_id: user.id,
-                name: user.first_name + ' ' + user.last_name
+                name: user.first_name + ' ' + user.last_name,
+                chat_state: user.chat_state || "disconected"
+              })
+            );
+            online_users_detail.push(
+              online_users_template_lg({
+                profile_picture: user.profile_picture.thumb.url,
+                user_id: user.id,
+                name: user.first_name + ' ' + user.last_name,
+                chat_state: user.chat_state || "disconected",
+                username: user.username
               })
             )
           });
 
-          $('.chat-users').html(online_users.join(''));
+          $('#ul-chat-users-small').html(online_users.join(''));
+          $('#ul-chat-users-lg').html(online_users_detail.join(''));
       }
     });
   };

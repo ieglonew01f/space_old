@@ -2,7 +2,7 @@
 .fixed-sidebar.right
   #sidebar-right.fixed-sidebar-right.sidebar--small
     .mCustomScrollbar{"data-mcs-theme" => "dark"}
-      %ul.chat-users
+      %ul.chat-users#ul-chat-users-small
     .search-friend.inline-items
       %a.js-sidebar-open{:href => "#"}
         %svg.olymp-menu-icon
@@ -10,13 +10,43 @@
     %a.olympus-chat.inline-items.js-chat-open{:href => "#"}
       %svg.olymp-chat---messages-icon
         %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"}
+  #sidebar-right-1.fixed-sidebar-right.sidebar--large
+    .mCustomScrollbar{"data-mcs-theme" => "dark"}
+      .ui-block-title.ui-block-title-small
+        %a.title{:href => "javascript:;;"} Your connections
+        -# %a{:href => "#"} Settings
+      %ul.chat-users#ul-chat-users-lg
+
+
+    .search-friend.inline-items
+      %form.form-group
+        %input.form-control{:placeholder => "Search Friends...", :type => "text", :value => ""}/
+      %a.settings{:href => "/account/settings/profile"}
+        %svg.olymp-settings-icon
+          %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-settings-icon"}
+      %a.js-sidebar-open{:href => "javascript:;"}
+        %svg.olymp-close-icon
+          %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-close-icon"}
+    %a.olympus-chat.inline-items.js-chat-open{:href => "#"}
+      %h6.olympus-chat-title TRENDS CHAT
+      %svg.olymp-chat---messages-icon
+        %use{"xlink:href" => "svg-icons/sprites/icons.svg#olymp-chat---messages-icon"}
 
 /Templates
+%script#chat-user-template-lg{:type => "text/x-handlebars-template"}
+  %li.inline-items.js-chat-open.open-chat{"data-user-id" => "{{user_id}}", "data-name" => "{{name}}", :title => "{{name}}"}
+    .author-thumb
+      %img.avatar{:alt => "author", :src => "{{profile_picture}}"}
+      %span.icon-status{:class => "{{chat_state}}"}
+    .author-status
+      %a.h6.author-name{:href => "javascript:;;"} {{name}}
+      %span.status {{chat_state}}
+
 %script#chat-user-template{:type => "text/x-handlebars-template"}
   %li.inline-items.js-chat-open.open-chat{"data-user-id" => "{{user_id}}", "data-name" => "{{name}}", :title => "{{name}}"}
     .author-thumb
       %img.avatar{:alt => "author", :src => "{{profile_picture}}"}/
-      %span.icon-status.online
+      %span.icon-status{:class => "{{chat_state}}"}
 
 %script#chat-pop-up{:type => "text/x-handlebars-template"}
   .ui-block.popup-chat.popup-chat-responsive{"data-chat-id"=>"{{chat_id}}", "data-user-id"=>"{{user_id}}"}

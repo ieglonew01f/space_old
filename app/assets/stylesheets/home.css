@@ -159,8 +159,14 @@
 }
 
 .popup-chat-responsive {
-  bottom: -100px !important;
-  top: auto !important;
+  transform: none;
+  top: auto;
+  bottom: 5px;
+  max-height: 400px;
+}
+
+.fixed-sidebar.right .mCustomScrollbar {
+  max-height: calc(100vh - 240px);
 }
 
 .popup-chat .chat-message-field li.outgoing .author-thumb {

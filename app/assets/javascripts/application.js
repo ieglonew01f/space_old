@@ -46,13 +46,13 @@
 //= require js/jquery.gifplayer.js
 //= require js/mediaelement-and-player.js
 //= require js/mediaelement-playlist-plugin.min.js
-//= require js/base-init.js
 //= require js/ajax-pagination.js
 //= require fonts/fontawesome-all.js
 //= require jquery.form.min.js
 //= require dist/js/bootstrap.bundle.js
 //= require web.font.loader.js
 //= require handlebars.js
+//= require js/base-init.js
 //= require chat.js
 //= require global.script.js
 

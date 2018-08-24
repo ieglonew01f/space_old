@@ -18,6 +18,7 @@ import BirthdayAlert from "./common/BirthdayAlert";
 import FollowSuggestions from "./common/FollowSuggestions";
 import Weather from "./common/Weather";
 import ActiveLoader from "./common/ActiveLoader";
+import SetUpWizard from "./common/SetUpWizard";
 
 @connect((store) => {
   return {

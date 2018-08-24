@@ -60,7 +60,7 @@ $(document).ready(function () {
 //Global var to avoid any conflicts
 var CRUMINA = {};
 
-(function ($) {
+$(document).ready(function () {
 
 	// USE STRICT
 	"use strict";
@@ -373,7 +373,7 @@ var CRUMINA = {};
         $('.mCustomScrollbar').perfectScrollbar({wheelPropagation:false});
 
 	});
-})(jQuery);
+});
 /* -----------------------------
      * Material design js effects
      * Script file: material.min.js
