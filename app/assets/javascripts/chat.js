@@ -227,7 +227,7 @@ $(document).ready(function() {
             else {
               append_incomming_message(data.chat_id, data.message, data.profile_picture);
             }
-            
+            $.playSound('https://s3.ap-south-1.amazonaws.com/collegetrends/sounds/pop.mp3');
             set_is_typing(data.chat_id, false);
             break;
           case "is_typing":

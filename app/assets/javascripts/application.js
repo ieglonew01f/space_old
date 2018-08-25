@@ -49,6 +49,7 @@
 //= require js/ajax-pagination.js
 //= require fonts/fontawesome-all.js
 //= require jquery.form.min.js
+//= require jquery.playSound
 //= require dist/js/bootstrap.bundle.js
 //= require web.font.loader.js
 //= require handlebars.js
