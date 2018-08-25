@@ -27,12 +27,21 @@ $(document).ready(function() {
 
   //on keypress enter send message
   $('.fixed-sidebar.right').on('keyup', '.text-chat-message', function(e) {
-    if(e.which == 13) {
+    var chat_id = $(this).parents('.popup-chat-responsive').attr('data-chat-id');
+    var for_id = $(this).parents('.popup-chat-responsive').attr('data-user-id');
+
+    //send is typing
+    if ($(this).val() == '') {
+        App.messages.is_typing(chat_id, for_id, false);
+    }
+    else if ($(this).val() != '') {
+        App.messages.is_typing(chat_id, for_id, true);
+    }
+
+    //send message
+    if (e.which == 13) {
         var message = $(this).val();
         if (!message) return;
-
-        var chat_id = $(this).parents('.popup-chat-responsive').attr('data-chat-id');
-            for_id = $(this).parents('.popup-chat-responsive').attr('data-user-id');
 
         send_message(message, chat_id, for_id);
 
@@ -195,25 +204,58 @@ $(document).ready(function() {
       channel: 'MessagesChannel',
       for_user_id: parseInt(gon.id)
     },{
+      is_typing: function (chat_id, for_id, is_typing) {
+          return this.perform('is_typing', {
+              chat_id: chat_id,
+              for_id: for_id,
+              is_typing: is_typing
+          });
+      },
       received: function(data) {
-        console.log(data);
+        switch (data.action) {
+          case "recieve_message":
+            //do not render if current_user is the sender
+            if (parseInt(gon.id) === parseInt(data.by_id)) return;
 
-        //do not render if current_user is the sender
-        if (parseInt(gon.id) === parseInt(data.by_id)) return;
+            var chat_window = $('.popup-chat-responsive[data-chat-id="' + data.chat_id + '"]');
 
-        var chat_window = $('.popup-chat-responsive[data-chat-id="' + data.chat_id + '"]');
+            //check if chat window is already open
+            if (chat_window.length === 0) {
+              open_chat_window(data.by_id, data.name, data.chat_id);
+              append_incomming_message(data.chat_id, data.message, data.profile_picture);
+            }
+            else {
+              append_incomming_message(data.chat_id, data.message, data.profile_picture);
+            }
+            
+            set_is_typing(data.chat_id, false);
+            break;
+          case "is_typing":
+            set_is_typing(data.chat_id, data.is_typing)
+            break;
+          default:
 
-        //check if chat window is already open
-        if (chat_window.length === 0) {
-          open_chat_window(data.by_id, data.name, data.chat_id);
-          append_incomming_message(data.chat_id, data.message, data.profile_picture);
-        }
-        else {
-          append_incomming_message(data.chat_id, data.message, data.profile_picture);
         }
       }
     });
   }
+
+  function set_is_typing(chat_id, is_typing) {
+    var chat_window = $('.popup-chat-responsive[data-chat-id="' + chat_id + '"]');
+
+    if (is_typing) {
+      chat_window.find('.is-typing').show();
+    }
+    else {
+      chat_window.find('.is-typing').hide();
+    }
+
+    //set timeout
+    //hide after few seconds anyway
+    setTimeout(function(){
+      chat_window.find('.is-typing').hide();
+    }, 5000)
+  };
 
   function append_incomming_message(chat_id, message, profile_picture) {
     $('.popup-chat-responsive[data-chat-id="' + chat_id + '"]')
@@ -225,6 +267,6 @@ $(document).ready(function() {
         })
       );
 
-    scroll_chat();
+    scroll_chat(chat_id);
   }
 });

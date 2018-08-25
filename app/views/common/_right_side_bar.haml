@@ -53,7 +53,10 @@
     .modal-content
       .modal-header
         %span.icon-status.online
-        %h6.title {{name}}
+        %h6.title
+          {{name}}
+          %small.is-typing.hidden
+            is typing ...
         .more
           %svg.olymp-little-delete.js-chat-open.close-chat
             %use{"xlink:href" => "/svg-icons/sprites/icons.svg#olymp-little-delete"}

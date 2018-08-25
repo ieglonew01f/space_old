@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
     if message.save
       #broadcasting out to messages channel including the chat_id so messages are broadcasted to specific chat only
       ActionCable.server.broadcast( "messages_#{params[:for_id]}",
+        action: "recieve_message",
         message: message.content,
         chat_id: message.chat_id,
         by_id: current_user.id,

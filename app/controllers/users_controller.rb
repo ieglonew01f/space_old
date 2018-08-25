@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def get_suggestions
-    suggestions = User.connection.select_all("SELECT * FROM users where id NOT IN (SELECT followed_id FROM followers WHERE user_id = #{current_user.id}) AND id != #{current_user.id}").to_hash
+    suggestions = User.where.not(id: Follower.select("followed_id").where("user_id = ?", current_user.id).map(&:followed_id).push(current_user.id))
 
     if suggestions
       success_json(200, "Success", suggestions)
