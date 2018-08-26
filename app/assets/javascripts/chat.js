@@ -17,10 +17,11 @@ $(document).ready(function() {
 
   $('.fixed-sidebar.right').on('click', '.open-chat', function() {
     var user_id = $(this).attr('data-user-id'),
-        name = $(this).attr('data-name');
+        name = $(this).attr('data-name'),
+        chat_state = $(this).attr('data-chat-state');
 
     //open chat window
-    open_chat_window(user_id, name);
+    open_chat_window(user_id, name, null, chat_state);
     //and load all messages
     load_messages(user_id);
   });
@@ -55,7 +56,7 @@ $(document).ready(function() {
     $(this).parents('.ui-block.popup-chat.popup-chat-responsive').remove();
   });
 
-  function open_chat_window(user_id, name, chat_id) {
+  function open_chat_window(user_id, name, chat_id, chat_state) {
     var source = $('#chat-pop-up').html(),
         chat_window_template = Handlebars.compile(source);
 
@@ -68,10 +69,16 @@ $(document).ready(function() {
       name: name,
       user_id: user_id,
       chat_id: chat_id,
-      right: right
+      right: right,
+      chat_state: chat_state
     }));
 
     $('.popup-chat-responsive').draggable();
+
+    //reset seen messages count
+    $('.open-chat[data-user-id="'+user_id+'"]')
+      .find('.label-avatar.bg-blue')
+      .hide();
   };
 
   function load_online_users() {
@@ -89,19 +96,21 @@ $(document).ready(function() {
           $.each(users, function(i, user) {
             online_users.push(
               online_users_template_sm({
-                profile_picture: user.profile_picture.thumb.url,
-                user_id: user.id,
-                name: user.first_name + ' ' + user.last_name,
-                chat_state: user.chat_state || "disconected"
+                profile_picture: user.details.profile_picture.thumb.url,
+                user_id: user.details.id,
+                name: user.details.first_name + ' ' + user.details.last_name,
+                chat_state: user.details.chat_state || "disconected",
+                unread_count: user.unread_count
               })
             );
             online_users_detail.push(
               online_users_template_lg({
-                profile_picture: user.profile_picture.thumb.url,
-                user_id: user.id,
-                name: user.first_name + ' ' + user.last_name,
-                chat_state: user.chat_state || "disconected",
-                username: user.username
+                profile_picture: user.details.profile_picture.thumb.url,
+                user_id: user.details.id,
+                name: user.details.first_name + ' ' + user.details.last_name,
+                chat_state: user.details.chat_state || "disconected",
+                username: user.details.username,
+                unread_count: user.unread_count
               })
             )
           });
@@ -213,6 +222,16 @@ $(document).ready(function() {
       },
       received: function(data) {
         switch (data.action) {
+          case "set_chat_state":
+            $('.open-chat[data-user-id="'+data.user_id+'"]')
+              .find('.icon-status')
+              .attr('class', 'icon-status ' + data.chat_state)
+
+            if (window.current_user.id == data.user_id) {
+              $('#site-header .icon-chat-state.icon-status')
+                .attr('class', 'icon-chat-state icon-status ' + data.chat_state)
+            }
+            break;
           case "recieve_message":
             //do not render if current_user is the sender
             if (parseInt(gon.id) === parseInt(data.by_id)) return;
@@ -221,7 +240,7 @@ $(document).ready(function() {
 
             //check if chat window is already open
             if (chat_window.length === 0) {
-              open_chat_window(data.by_id, data.name, data.chat_id);
+              open_chat_window(data.by_id, data.name, data.chat_id, data.chat_state);
               append_incomming_message(data.chat_id, data.message, data.profile_picture);
             }
             else {

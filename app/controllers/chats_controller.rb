@@ -16,11 +16,16 @@ class ChatsController < ApplicationController
       chat.subscriptions.create(user_id: other_user.id)
     end
 
+    messages = Message.where("chat_id = ? ", chat.id)
+
     resp = {
       :chat => chat,
       :user => other_user,
-      :messages => Message.where("chat_id = ? ", chat.id)
+      :messages => messages
     }
+
+    # set seen to 1
+    messages.update_all(seen: 1)
 
     if chat
       success_json(200, "Success", resp)

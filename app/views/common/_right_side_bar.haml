@@ -34,8 +34,11 @@
 
 /Templates
 %script#chat-user-template-lg{:type => "text/x-handlebars-template"}
-  %li.inline-items.js-chat-open.open-chat{"data-user-id" => "{{user_id}}", "data-name" => "{{name}}", :title => "{{name}}"}
+  %li.inline-items.js-chat-open.open-chat{"data-user-id" => "{{user_id}}", "data-chat-state" => "{{chat_state}}", "data-name" => "{{name}}", :title => "{{name}}"}
     .author-thumb
+      {{#if unread_count}}
+      .label-avatar.bg-blue {{unread_count}}
+      {{/if}}
       %img.avatar{:alt => "author", :src => "{{profile_picture}}"}
       %span.icon-status{:class => "{{chat_state}}"}
     .author-status
@@ -43,8 +46,11 @@
       %span.status {{chat_state}}
 
 %script#chat-user-template{:type => "text/x-handlebars-template"}
-  %li.inline-items.js-chat-open.open-chat{"data-user-id" => "{{user_id}}", "data-name" => "{{name}}", :title => "{{name}}"}
+  %li.inline-items.js-chat-open.open-chat{"data-user-id" => "{{user_id}}", "data-chat-state" => "{{chat_state}}", "data-name" => "{{name}}", :title => "{{name}}"}
     .author-thumb
+      {{#if unread_count}}
+      .label-avatar.bg-blue {{unread_count}}
+      {{/if}}
       %img.avatar{:alt => "author", :src => "{{profile_picture}}"}/
       %span.icon-status{:class => "{{chat_state}}"}
 
@@ -52,7 +58,7 @@
   .ui-block.popup-chat.popup-chat-responsive{"data-chat-id"=>"{{chat_id}}", "data-user-id"=>"{{user_id}}", "style" => "right:{{right}}px;"}
     .modal-content
       .modal-header
-        %span.icon-status.online
+        %span.icon-status{:class => "{{chat_state}}"}
         %h6.title
           {{name}}
           %small.is-typing.hidden

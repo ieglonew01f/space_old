@@ -55,10 +55,26 @@ class UsersController < ApplicationController
   end
 
   def get_friends
-    u = User.where('id != ?', current_user.id)
+    friends = User.where('id != ?', current_user.id)
 
-    if u
-      success_json(200, "Success", u)
+    users = []
+
+    friends.each do |f|
+      other_user = User.find(f.id)
+      chat = find_chat(other_user)
+      unread_count = 0
+      if (!chat.nil?)
+        unread_count = Message.where("chat_id = ? AND seen IS NULL", chat.id).count
+      end
+
+      users << {
+        "details" => f,
+        "unread_count" => unread_count
+      }
+    end
+
+    if friends
+      success_json(200, "Success", users)
     else
       error_json(422, 422, I18n.t("errors.500"))
     end
@@ -71,5 +87,18 @@ class UsersController < ApplicationController
     user.save!
 
     redirect_back fallback_location: root_path
+  end
+
+  private
+  def find_chat(second_user)
+    chats = current_user.chats
+    chats.each do |chat|
+      chat.subscriptions.each do |s|
+        if s.user_id == second_user.id
+          return chat
+        end
+      end
+    end
+    nil
   end
 end

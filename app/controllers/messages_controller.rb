@@ -14,7 +14,8 @@ class MessagesController < ApplicationController
         by_id: current_user.id,
         for_id: params[:for_id].to_i,
         name: current_user.first_name + ' ' + current_user.last_name,
-        profile_picture: current_user.profile_picture.thumb.url
+        profile_picture: current_user.profile_picture.thumb.url,
+        chat_state: current_user.chat_state
       )
     else
       redirect_to chats_path
