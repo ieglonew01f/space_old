@@ -226,10 +226,11 @@ $(document).ready(function() {
             $('.open-chat[data-user-id="'+data.user_id+'"]')
               .find('.icon-status')
               .attr('class', 'icon-status ' + data.chat_state)
+              .attr('data-chat-state', data.chat_state);
 
             if (window.current_user.id == data.user_id) {
               $('#site-header .icon-chat-state.icon-status')
-                .attr('class', 'icon-chat-state icon-status ' + data.chat_state)
+                .attr('class', 'icon-chat-state icon-status ' + data.chat_state);
             }
             break;
           case "recieve_message":
