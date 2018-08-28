@@ -4,6 +4,74 @@
   margin: 100px auto;
 }
 
+#site-header {
+  background-color: #ffffff;
+  box-shadow: 0 1px 5px rgba(47, 91, 231, 0.1);
+}
+
+#site-header .search-bar .selectize-dropdown {
+  border: 0;
+}
+
+#site-header .control-block .author-title,
+.header .page-title > * {
+  color: #696969;
+}
+
+.fixed-sidebar .logo {
+  background-color: #123e7f;
+}
+
+.olympus-chat {
+  background-color: #38a9ff;
+}
+
+.btn-primary {
+  background-color: #38a9ff;
+  border-color: #38a9ff;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.post-control-button .btn-control:hover {
+    background-color: #34a1f5;
+    border-color: #34a1f5;
+}
+
+a:hover,
+a:active,
+a:focus,
+.more-dropdown a:hover,
+.more-dropdown a:focus,
+.more-dropdown a:active,
+.post-add-icon:hover span {
+  color: #34a1f5;
+}
+
+.news-feed-form .nav-tabs .nav-link.active,
+.left-menu a:hover svg,
+.fixed-sidebar .search-friend svg:hover,
+.post-add-icon:hover {
+  fill: #37a9ff;
+}
+
+.notification-list .notification-link {
+  color: #37a9ff;
+}
+
+.control-icon.has-items {
+  fill: #6a6d87;
+}
+
+.search-bar.w-search {
+  background-color: #fff;
+}
+
+.search-bar .form-group.with-button button {
+  background-color: #edf2f6;
+}
+
 .background-dark-times {
   background: #3f4257;
   padding: 150px;
