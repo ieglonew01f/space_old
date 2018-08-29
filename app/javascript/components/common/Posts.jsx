@@ -63,7 +63,7 @@ export default class Posts extends React.Component {
                   </ul>
                 </div>
               </div>
-              <p>{post.post_text}</p>
+              <p dangerouslySetInnerHTML={{__html: post.post_text}}></p>
               <PostImage post={post}/>
               <PostMeta parsedLink={JSON.parse(post.post_link)}/>
               <div className="post-additional-info inline-items">

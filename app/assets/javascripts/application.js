@@ -53,6 +53,7 @@
 //= require dist/js/bootstrap.bundle.js
 //= require web.font.loader.js
 //= require handlebars.js
+//= require summernote.js
 //= require js/base-init.js
 //= require chat.js
 //= require global.script.js

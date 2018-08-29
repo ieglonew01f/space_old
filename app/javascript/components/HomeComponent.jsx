@@ -72,6 +72,43 @@ export default class LayoutComponent extends React.Component {
     $('#authenticity_token').val(AUTH_TOKEN);
   }
 
+  blogPostUI(e) {
+    $('.blog-black-drop, #blog-editor').show();
+    $('.status-div').addClass('blog-post-div-transform');
+    $('body').addClass('overflow-hidden');
+
+    $('.status-div .tab-content').hide();
+
+    $('#blog-editor .editor').summernote({
+      height: 300
+    });
+  }
+
+  statusPostUI(e) {
+    $('.blog-black-drop, #blog-editor').hide();
+    $('.status-div').removeClass('blog-post-div-transform');
+    $('body').removeClass('overflow-hidden');
+
+    $('.status-div .tab-content').show();
+
+    $('#blog-editor .editor').summernote('destroy');
+
+    $('.blog-post-tab').removeClass('active');
+    $('.text-post-tab').addClass('active');
+  }
+
+  submitBlogPost(e) {
+    var blogText = $('#blog-editor .editor').summernote('code');
+
+    if (blogText == '') return;
+
+    this.props.dispatch(
+      addPost(blogText, 3)
+    );
+
+    this.statusPostUI(e);
+  }
+
   onChange (e) {
     this.setState({ postText: e.target.value });
   }
@@ -121,23 +158,31 @@ export default class LayoutComponent extends React.Component {
             <Weather forecast={forecast}/>
           </aside>
           <main className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-              <div className="ui-block">
+              <div className="ui-block status-div">
                 <div className="news-feed-form">
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item">
-                            <a className="nav-link active inline-items" data-toggle="tab" href="#home-1" role="tab" aria-expanded="true">
+                            <a onClick={event => this.statusPostUI(event)} className="nav-link active inline-items text-post-tab" data-toggle="tab" href="#home-1" role="tab" aria-expanded="true">
                                 <svg className="olymp-status-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-status-icon"></use></svg>
                                 <span>Status</span>
                             </a>
                         </li>
                         <li className="nav-item">
-            							<a className="nav-link inline-items" data-toggle="tab" href="#blog" role="tab" aria-expanded="false">
+            							<a onClick={event => this.blogPostUI(event)} className="nav-link inline-items blog-post-tab" data-toggle="tab" href="#blog" role="tab" aria-expanded="false">
             								<svg className="olymp-blog-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-blog-icon"></use></svg>
             								<span>Blog Post</span>
             							  <div className="ripple-container"></div>
                           </a>
             						</li>
                     </ul>
+                    <div id="blog-editor">
+                      <div className="editor">
+
+                      </div>
+                      <button onClick={event => this.submitBlogPost(event)} className="btn btn-primary btn-md-2 submit-blog">
+                        Submit
+                      </button>
+                    </div>
                     <div className="tab-content">
                         <div className="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
                             <form>
@@ -146,9 +191,6 @@ export default class LayoutComponent extends React.Component {
                                 </div>
                                 <div className="form-group with-icon label-floating is-empty">
                                     <textarea className="form-control" placeholder="Share what you are thinking here..." value={this.state.postText} onChange={event => this.onChange(event)} onPaste={event => this.onPasteLink(event)}></textarea>
-                                </div>
-                                <div id="post-text">
-
                                 </div>
                                 <PostMeta parsedLink={parsedLink}/>
                                 <div className="add-options-message">
