@@ -130,6 +130,13 @@ export default class LayoutComponent extends React.Component {
                                 <span>Status</span>
                             </a>
                         </li>
+                        <li className="nav-item">
+            							<a className="nav-link inline-items" data-toggle="tab" href="#blog" role="tab" aria-expanded="false">
+            								<svg className="olymp-blog-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-blog-icon"></use></svg>
+            								<span>Blog Post</span>
+            							  <div className="ripple-container"></div>
+                          </a>
+            						</li>
                     </ul>
                     <div className="tab-content">
                         <div className="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
@@ -139,6 +146,9 @@ export default class LayoutComponent extends React.Component {
                                 </div>
                                 <div className="form-group with-icon label-floating is-empty">
                                     <textarea className="form-control" placeholder="Share what you are thinking here..." value={this.state.postText} onChange={event => this.onChange(event)} onPaste={event => this.onPasteLink(event)}></textarea>
+                                </div>
+                                <div id="post-text">
+
                                 </div>
                                 <PostMeta parsedLink={parsedLink}/>
                                 <div className="add-options-message">
