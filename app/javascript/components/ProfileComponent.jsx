@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 //Functionals
 import { connect } from "react-redux";
 import { fetchPosts, addPost } from "../actions/postsActions";
-import { fetchActivities, fetchFollowers, fetchVideos, fetchPhotos, fetchDedications, fetchConfessions } from "../actions/pageActions";
+import { fetchActivities, fetchFollowers, fetchVideos, fetchPhotos, fetchDedications, fetchConfessions, fetchBlogs } from "../actions/pageActions";
 
 //UI
 import Posts from "./common/Posts";
@@ -19,6 +19,7 @@ import ActivityFeed from "./common/ActivityFeed";
 import SongDedications from "./common/SongDedications";
 import Confessions from "./common/Confessions";
 import ActiveLoader from "./common/ActiveLoader";
+import BlogWidget from "./common/BlogWidget";
 
 @connect((store) => {
   return {
@@ -29,7 +30,8 @@ import ActiveLoader from "./common/ActiveLoader";
     videos: store.videos.videos,
     photos: store.photos.photos,
     dedications: store.dedications.dedications,
-    confessions: store.confessions.confessions
+    confessions: store.confessions.confessions,
+    blogs: store.blogs.blogs
   };
 })
 
@@ -51,10 +53,11 @@ export default class LayoutComponent extends React.Component {
     this.props.dispatch(fetchPhotos(gon.id));
     this.props.dispatch(fetchDedications());
     this.props.dispatch(fetchConfessions());
+    this.props.dispatch(fetchBlogs(gon.id));
   }
 
   render() {
-    const { posts, posting, activities, suggestions, videos, photos, dedications, confessions } = this.props;
+    const { posts, posting, activities, suggestions, videos, photos, dedications, confessions, blogs } = this.props;
     var profileElement = null;
 
     switch(gon.page_component) {
@@ -86,6 +89,7 @@ export default class LayoutComponent extends React.Component {
               </div>
             </div>
             <div className="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
+              <BlogWidget blogs={blogs}/>
               <ActivityFeed activities={activities}/>
               <SongDedications dedications={dedications}/>
               <Confessions confessions={confessions}/>

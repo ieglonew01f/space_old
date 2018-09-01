@@ -82,6 +82,8 @@ export default class LayoutComponent extends React.Component {
     $('#blog-editor .editor').summernote({
       height: 300
     });
+
+    $('#blog-title').focus();
   }
 
   statusPostUI(e) {
@@ -92,20 +94,32 @@ export default class LayoutComponent extends React.Component {
     $('.status-div .tab-content').show();
 
     $('#blog-editor .editor').summernote('destroy');
+    $('#blog-title').val('');
 
     $('.blog-post-tab').removeClass('active');
     $('.text-post-tab').addClass('active');
   }
 
   submitBlogPost(e) {
-    var blogText = $('#blog-editor .editor').summernote('code');
+    var blogText = $('#blog-editor .editor').summernote('code'),
+        title = $('#blog-title').val();
 
-    if (blogText == '') return;
+    if (blogText == '' || title == '') return;
 
     this.props.dispatch(
-      addPost(blogText, 3)
+      addPost(
+        blogText,
+        3,
+        undefined,
+        undefined,
+        title
+      )
     );
 
+    this.statusPostUI(e);
+  }
+
+  closeBlogPost(e) {
     this.statusPostUI(e);
   }
 
@@ -176,11 +190,16 @@ export default class LayoutComponent extends React.Component {
             						</li>
                     </ul>
                     <div id="blog-editor">
+                      <div className="blog-title">
+                        <input type="text" class="form-control" placeholder="Title" id="blog-title"/>
+                      </div>
                       <div className="editor">
-
                       </div>
                       <button onClick={event => this.submitBlogPost(event)} className="btn btn-primary btn-md-2 submit-blog">
                         Submit
+                      </button>
+                      <button onClick={event => this.closeBlogPost(event)} className="btn btn-primary btn-md-2 close-blog-dialog">
+                        Close
                       </button>
                     </div>
                     <div className="tab-content">

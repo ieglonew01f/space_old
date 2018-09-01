@@ -27,6 +27,12 @@
   right: 10px;
 }
 
+.close-blog-dialog {
+  right: 20px;
+  float: right;
+  top: 7px;
+}
+
 .note-toolbar-wrapper {
   height: auto;
 }

@@ -12,11 +12,6 @@ export default class SongDedications extends React.Component {
       elem = <div className="ui-block song-dedication-ui">
         <div className="ui-block-title">
         	<h6 className="title">Dedicated to you</h6>
-    			<span className="c-green">
-    				<svg className="/olymp-remove-playlist-icon">
-              <use xlinkHref="/svg-icons/sprites/icons.svg#olymp-remove-playlist-icon"></use>
-            </svg>
-    			</span>
         </div>
         <ol className="widget w-playlist">
           {

@@ -46,6 +46,25 @@ export function fetchActivities(id) {
   }
 }
 
+export function fetchBlogs(id) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_BLOGS"});
+
+    axios
+      .get('/users/' + id + '/blogs', {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_BLOGS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_BLOGS_REJECTED", payload: err})
+      });
+  }
+}
+
 export function fetchDedications() {
   return function(dispatch) {
     dispatch({type: "FETCH_DEDICATIONS"});

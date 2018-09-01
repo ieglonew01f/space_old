@@ -30,7 +30,6 @@ export default class PostResults extends React.Component {
 
   render() {
     const { posts } = this.props;
-    console.log(posts)
 
     return (
       <div className="row">

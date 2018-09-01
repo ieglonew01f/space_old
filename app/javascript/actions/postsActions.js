@@ -28,7 +28,7 @@ export function fetchPosts(id) {
   }
 }
 
-export function addPost(post_text, post_type, post_link, post_meta_id) {
+export function addPost(post_text, post_type, post_link, post_meta_id, post_title) {
   return function(dispatch) {
     dispatch({type: "ADD_POST"});
 
@@ -38,7 +38,8 @@ export function addPost(post_text, post_type, post_link, post_meta_id) {
         post_type: post_type,
         post_link: JSON.stringify(post_link),
         post_meta_id: post_meta_id,
-        authenticity_token: AUTH_TOKEN
+        authenticity_token: AUTH_TOKEN,
+        post_title: post_title
       })
       .then((response) => {
         dispatch({type: "ADD_POST_FULFILLED", payload: response.data})

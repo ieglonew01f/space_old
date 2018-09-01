@@ -1,0 +1,10 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "home.css"
+- content_for :pagejs do
+  = javascript_pack_tag 'blog'
+= render "common/session_nav"
+= render "common/session_left_nav"
+= render "common/right_side_bar"
+
+.header-spacer
+#container.container

@@ -55,6 +55,7 @@ class PostsController < ApplicationController
     post_type = params[:post_type] || 1
     post_link = params[:post_link]
     post_meta_id = params[:post_meta_id]
+    post_title = params[:post_title]
 
     return if post_text.nil?
 
@@ -64,6 +65,7 @@ class PostsController < ApplicationController
     post.post_type = post_type
     post.post_link = post_link
     post.post_meta_id = post_meta_id
+    post.post_title = post_title
 
     if post.save
       post.likes_count = post.likes.count
@@ -91,7 +93,7 @@ class PostsController < ApplicationController
     post.likes_count = post.likes.count
     post.comments_count = post.comments.count
     post.user_details = post.user
-    post.created_at = time_ago_in_words(post.created_at)
+    post.timestamp = time_ago_in_words(post.created_at) + " ago"
     post.post_image = post.post_meta[0].try(:post_meta).try(:url)
 
     gon.push({:post => post.as_json})

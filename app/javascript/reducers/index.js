@@ -12,6 +12,7 @@ import birthdays from "./birthdaysReducer.js"
 import photos from "./photosReducer.js"
 import dedications from "./dedicationsReducer.js"
 import confessions from "./confessionsReducer.js"
+import blogs from "./blogsReducer.js"
 
 export default combineReducers({
   posts,
@@ -25,5 +26,6 @@ export default combineReducers({
   birthdays,
   photos,
   dedications,
-  confessions
+  confessions,
+  blogs
 })
