@@ -44,8 +44,9 @@ gem 'gon'
 
 gem 'public_activity'
 
-# Login stuff
+# Login and reg stuff
 gem 'devise'
+gem 'devise_invitable', '~> 1.7.0'
 gem 'omniauth-facebook'
 
 gem 'jquery-rails'

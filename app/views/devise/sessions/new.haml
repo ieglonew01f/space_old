@@ -1,9 +1,20 @@
+- content_for :pagecss do
+  - stylesheet_link_tag "index/index.css"
+
+%header#site-header.header
+  .header-content-wrapper.logo-left
+    %a.brand{:href => "/users/sign_in"}
+      %img.logo{:src => "/img/logo-round.jpg"}
+      CollegeTrends
 .container
   .row
-    .col.col-xl-4.offset-md-4
-      .ui-block.login-standalone{:style => "margin-top:100px;"}
-        .ui-block-content
-          %h3 Log in to your account
+    .col.col-xl-7
+      %img.login-image{:src => "/img/login-img.svg"}
+    .col.col-xl-5
+      .ui-block-r.login-standalone{:style => "margin-top:100px;"}
+        .ui-block-content.login-welcome-message
+          %h3 Hello! Welcome Back
+          %p Sign to your account
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
             .form-group.label-floating.is-empty
               %label.control-label Your Email
@@ -19,8 +30,14 @@
                   %label
                     = f.check_box :remember_me
                     Remember Me
+                %a.forgot{:href=>"/users/password/new"}
+                  Forgot my Password
             = f.submit "Login", :class => "btn btn-primary btn-lg full-width"
           .or
           %a.btn.btn-lg.bg-facebook.full-width.btn-icon-left{:href => user_facebook_omniauth_authorize_path}
             %i.fab.fa-facebook-f
             Login with Facebook
+
+      .mt-3.text-center.fs16
+        %span.mr-2 Need an account?
+        %a{:href => "/"} Request for an Invite

@@ -2,8 +2,95 @@
     background-color: rgba(123, 90, 195, 0.95);
 }
 
-.registration-login-form {
-    margin-top: 50px;
+.reg-form {
+    margin-top: 100px;
+}
+
+h2 {
+  margin-bottom: 0px !important;
+}
+
+.checkbox .checkbox-material .check {
+  background: #FFF;
+  border: 1px solid #37a9ff;
+}
+
+.header-content-wrapper {
+  text-align: center;
+}
+
+.logo-left {
+  text-align: left;
+  padding-left: 150px;
+}
+
+.login-welcome-message h3 {
+  font-weight: 400;
+}
+
+.fs16 {
+  font-size: 16px;
+}
+
+.brand {
+  font-size: 18px;
+  color: #515365;
+  font-weight: bold;
+  margin-top: 17px;
+  display: inline-block;
+}
+
+.login-image {
+  width: 500px;
+  margin-top: 150px;
+}
+
+.or:after {
+  background: transparent;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.brand:hover,
+.brand:focus,
+.brand:active {
+  color: #515365;
+}
+
+.brand img {
+  width: 25px;
+  height: 25px;
+  display: inline;
+  position: relative;
+  top: -2px;
+  right: 2px;
+}
+
+.header {
+  background: #FFF;
+}
+
+.form-control:focus,
+.form-control:hover
+.form-control:active {
+  background-color: #FFF;
+  border-color: #37a9ff;
+}
+
+.bootstrap-select > .dropdown-toggle {
+  margin-bottom: 0;
+}
+
+.ui-block-title-r {
+  margin-bottom: 20px;
+}
+
+.input, .form-control {
+  background: #FFF;
+}
+
+.form-group.date-time-picker {
+  background: #FFF;
 }
 
 select[name="user[college]"] {
@@ -12,4 +99,33 @@ select[name="user[college]"] {
 
 select[name="user[college_batch]"] {
   height: 58px !important;
+}
+
+.header--standard-landing .logo,
+.header--standard-landing .logo .logo-title {
+  color: #515365 !important;
+}
+
+.landing-content {
+  color: inherit;
+}
+
+.btn-primary {
+  background-color: #38a9ff;
+  border-color: #38a9ff;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.post-control-button .btn-control:hover {
+    background-color: #34a1f5;
+    border-color: #34a1f5;
+}
+
+a:hover,
+a:active,
+a:focus,
+a {
+  color: #34a1f5;
 }

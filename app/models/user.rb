@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :invitable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :invite_for => 2.weeks
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  devise :invitable, :omniauthable, :omniauth_providers => [:facebook]
 
   # validates_acceptance_of :terms
 
@@ -21,6 +21,10 @@ class User < ApplicationRecord
   has_many :messages
   has_many :subscriptions
   has_many :chats, through: :subscriptions
+
+  def active_for_authentication?
+    super && self.is_active?
+  end
 
   def existing_chats_users
     existing_chat_users = []

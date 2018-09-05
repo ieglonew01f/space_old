@@ -4,6 +4,10 @@
   margin: 100px auto;
 }
 
+.form-control:focus {
+  border-color: #37a9ff;
+}
+
 .note-btn {
   color: #525466;
   border: 1px solid #e6e6e6;

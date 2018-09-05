@@ -2,17 +2,14 @@
     <% stylesheet_link_tag "index/index.css" %>
 <% end %>
 
-<div class="content-bg-wrap"></div>
+<!-- <div class="content-bg-wrap"></div> -->
 
 <%= render "header" %>
 
 <div class="container">
 	<div class="row display-flex">
-		<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-      <%= render "welcome" %>
-		</div>
 
-		<div class="col col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12">
+		<div class="col col-xl-6 col-lg-7 col-md-12 col-sm-12 col-12 offset-md-3">
       <%= render "login_form" %>
     </div>
 	</div>
