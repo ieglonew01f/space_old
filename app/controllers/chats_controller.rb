@@ -25,7 +25,8 @@ class ChatsController < ApplicationController
     }
 
     # set seen to 1
-    messages.update_all(seen: 1)
+    # for recieved messages
+    Message.where("chat_id = ? AND user_id = ?", chat.id, other_user.id).update_all(seen: 1)
 
     if chat
       success_json(200, "Success", resp)

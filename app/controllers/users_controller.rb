@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       chat = find_chat(other_user)
       unread_count = 0
       if (!chat.nil?)
-        unread_count = Message.where("chat_id = ? AND seen IS NULL", chat.id).count
+        unread_count = Message.where("chat_id = ? AND seen IS NULL AND user_id != ?", chat.id, current_user.id).count
       end
 
       users << {
