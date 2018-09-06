@@ -55,10 +55,10 @@ export default class Posts extends React.Component {
               <div className="post__author author vcard inline-items">
                 <img src={(post.user_details.profile_picture) ? post.user_details.profile_picture.thumb.url : "/avatars/default.png"} alt="author"/>
                 <PostAuthor post={post}/>
-                <div className="more"><svg className="olymp-three-dots-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <div className={post.user_id != window.current_user.id ? "hidden hide more" : "more"} ><svg className="olymp-three-dots-icon"><use xlinkHref="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                   <ul className="more-dropdown">
                     <li>
-                      <a href="#" onClick={event => this.deletePost(event, post.id)}>Delete Post</a>
+                      <a href="javascript:;;" onClick={event => this.deletePost(event, post.id)}>Delete Post</a>
                     </li>
                   </ul>
                 </div>

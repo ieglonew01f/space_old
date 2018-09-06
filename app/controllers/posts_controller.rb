@@ -57,7 +57,15 @@ class PostsController < ApplicationController
     post_meta_id = params[:post_meta_id]
     post_title = params[:post_title]
 
-    return if post_text.nil?
+    if post_text.empty? && post_type == 1
+      error_json(422, 422, I18n.t("errors.500"))
+      return
+    end
+
+    if post_title.nil? && post_type == 3
+      error_json(422, 422, I18n.t("errors.500"))
+      return
+    end
 
     post = Post.new
     post.post_text = post_text
@@ -103,9 +111,16 @@ class PostsController < ApplicationController
     post_id = params[:post_id]
     return if post_id.nil?
 
-    post = Post.find(post_id).destroy
+    post = Post.find(post_id)
 
-    if post
+    # can only delete post belonging to current_user
+
+    if (post.user_id != current_user.id)
+      error_json(422, 422, I18n.t("errors.500"))
+      return
+    end
+
+    if post.delete
       success_json(200, "Deleted successfully", post)
     else
       error_json(422, 422, I18n.t("errors.500"))

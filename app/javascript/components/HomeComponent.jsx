@@ -61,7 +61,7 @@ export default class LayoutComponent extends React.Component {
               console.log(percentComplete);
           },
           complete: function(response) { // on complete
-            var data = JSON.parse(response.responseText).data
+            var data = JSON.parse(response.responseText).data;
             $('.post-image-upload-preview').html($('<img/>').attr('src', data.post_meta.thumb.url));
             $('.post-image-upload-preview').attr('data-post-image-id', data.id);
           }
@@ -135,6 +135,12 @@ export default class LayoutComponent extends React.Component {
       this.state.postType = 2;
     }
 
+    if ($('.post-image-upload-preview').attr('data-post-image-id') != '') {
+      this.state.postType = 22;
+    }
+
+    if (this.state.postText == '' && parseInt(this.state.postType, 10) == 1) return;
+
     this.props.dispatch(addPost(this.state.postText, this.state.postType, this.props.parsedLink, $('.post-image-upload-preview').attr('data-post-image-id')));
 
     //reset
@@ -191,7 +197,7 @@ export default class LayoutComponent extends React.Component {
                     </ul>
                     <div id="blog-editor">
                       <div className="blog-title">
-                        <input type="text" class="form-control" placeholder="Title" id="blog-title"/>
+                        <input type="text" className="form-control" placeholder="Title" id="blog-title"/>
                       </div>
                       <div className="editor">
                       </div>
