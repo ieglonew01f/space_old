@@ -32,10 +32,7 @@ $(document).ready(function() {
     var for_id = $(this).parents('.popup-chat-responsive').attr('data-user-id');
 
     //send is typing
-    if ($(this).val() == '') {
-        App.messages.is_typing(chat_id, for_id, false);
-    }
-    else if ($(this).val() != '') {
+    if ($(this).val() != '') {
         App.messages.is_typing(chat_id, for_id, true);
     }
 
@@ -153,7 +150,7 @@ $(document).ready(function() {
 
       //outgoing message
       //if message user is not current_user
-      if (parseInt(gon.id, 10) === parseInt(m.user_id, 10)) {
+      if (parseInt(window.current_user.id, 10) === parseInt(m.user_id, 10)) {
         template = chat_outgoing_template,
         this_profile_picture = gon.profile_picture.thumb.url;
       }
@@ -211,7 +208,7 @@ $(document).ready(function() {
     //open websocket subscription
     App.messages = App.cable.subscriptions.create({
       channel: 'MessagesChannel',
-      for_user_id: parseInt(gon.id)
+      for_user_id: parseInt(window.current_user.id)
     },{
       is_typing: function (chat_id, for_id, is_typing) {
           return this.perform('is_typing', {
@@ -235,20 +232,21 @@ $(document).ready(function() {
             break;
           case "recieve_message":
             //do not render if current_user is the sender
-            if (parseInt(gon.id) === parseInt(data.by_id)) return;
+            if (parseInt(window.current_user.id) === parseInt(data.by_id)) return;
 
             var chat_window = $('.popup-chat-responsive[data-chat-id="' + data.chat_id + '"]');
 
-            //check if chat window is already open
+            //check if chat window is not already open
+            //open it and load all messages
             if (chat_window.length === 0) {
               open_chat_window(data.by_id, data.name, data.chat_id, data.chat_state);
+              load_messages(data.by_id);
               append_incomming_message(data.chat_id, data.message, data.profile_picture);
             }
             else {
               append_incomming_message(data.chat_id, data.message, data.profile_picture);
             }
             $.playSound('https://s3.ap-south-1.amazonaws.com/collegetrends/sounds/pop.mp3');
-            set_is_typing(data.chat_id, false);
             break;
           case "is_typing":
             set_is_typing(data.chat_id, data.is_typing)
