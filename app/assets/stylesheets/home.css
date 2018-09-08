@@ -4,6 +4,66 @@
   margin: 100px auto;
 }
 
+.text-ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inbox-intro {
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.inbox-intro img {
+  width: 300px;
+}
+
+.inbox-main .notification-event.right {
+  width: 94%;
+  max-width: 100%
+}
+
+.inbox-main .chat-message-item {
+  width: 100%;
+  margin-top: 3px;
+}
+
+.inbox-main {
+  height: 670px;
+  max-height: 670px;
+}
+
+.inbox-main .notification-list {
+  overflow-y: scroll;
+  max-height: 611px;
+  height: 611px;
+  border-right: 1px solid #e6ecf5;
+}
+
+.inbox-main .chat-field {
+  border-left: 0;
+}
+
+.inbox-main .ul-chat-messages {
+  height: 300px;
+}
+
+.inbox-main .a {
+  background: #edf2f6;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.inbox-intro .intro {
+  font-size: 15px;
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
 .form-control:focus {
   border-color: #37a9ff;
 }

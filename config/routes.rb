@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  mount ActionCable.server => '/cable'
+  #mount ActionCable.server => '/cable'
 
   get 'home/index'
   get 'profile/:username' => 'profile#index'
@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   resources :blogs, only:[:index, :show]
 
+  resources :inbox, only:[:index]
+
   resources :users do
     collection do
       get 'get_suggestions'
@@ -55,7 +57,9 @@ Rails.application.routes.draw do
 
     resources :posts
     resources :activities
+
     resources :chats, only:[:index, :create, :show]
+
     resources :dedications, only:[:create]
     resources :confessions, only:[:create]
     resources :blogs, only:[:index, :show]
@@ -63,6 +67,13 @@ Rails.application.routes.draw do
     resource :follow
     resource :followers
     resource :videos
+  end
+
+  resources :chats do 
+    collection do
+      get 'get_conversations'
+      post 'get_messages'
+    end
   end
 
   resources :posts do

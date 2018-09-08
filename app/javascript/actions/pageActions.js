@@ -21,6 +21,43 @@ export function fetchSearchResults(q) {
   }
 }
 
+export function fetchConversations() {
+  return function(dispatch) {
+    dispatch({type: "FETCH_CONVERSATIONS"});
+
+    axios
+      .get('/chats/get_conversations', {
+        params: {
+          authenticity_token: AUTH_TOKEN
+        }
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_CONVERSATIONS_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_CONVERSATIONS_REJECTED", payload: err})
+      });
+  }
+}
+
+export function fetchMessages(id) {
+  return function(dispatch) {
+    dispatch({type: "FETCH_MESSAGES"});
+
+    axios
+      .post('/chats/get_messages', {
+        authenticity_token: AUTH_TOKEN,
+        user_id: id
+      })
+      .then((response) => {
+        dispatch({type: "FETCH_MESSAGES_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "FETCH_MESSAGES_REJECTED", payload: err})
+      });
+  }
+}
+
 export function fetchActivities(id) {
   return function(dispatch) {
     dispatch({type: "FETCH_ACTIVITIES"});
