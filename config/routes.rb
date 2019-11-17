@@ -29,7 +29,9 @@ Rails.application.routes.draw do
   post '/users/set_status' => 'users#set_status'
   post '/users/set_chat_state' => 'users#set_chat_state'
 
-  root to: 'index#index'
+  get '/about' => 'index#about'
+
+  root :to => redirect('/users/sign_in')
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
 
   devise_scope :user do
